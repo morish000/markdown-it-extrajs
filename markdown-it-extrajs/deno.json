@@ -12,7 +12,7 @@
   },
   "exports": {
     ".": "./src/index.ts",
-    "./create-tags": "./create-tags.ts"
+    "./create-tags": "./src/create-tags.ts"
   },
   "publish": {
     "include": [
@@ -22,5 +22,11 @@
       "import_map.json",
       "src/*.ts"
     ]
+  },
+  "lint": {
+    "include": ["./*.ts", "./*.mjs", "./*.json", "src/**/*.ts"]
+  },
+  "fmt": {
+    "include": ["./*.ts", "./*.mjs", "./*.md", "./*.json", "src/**/*.ts"]
   }
 }

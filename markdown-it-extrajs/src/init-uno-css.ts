@@ -1,18 +1,18 @@
 import type { UnoCSSConfig } from "./types.ts";
 
 export const initUnoCSS = (
-    url: string = "https://esm.sh/@unocss",
-    unoCSSPresetIconCDN: string = "https://esm.sh/",
-    conf: UnoCSSConfig = {},
+  url: string = "https://esm.sh/@unocss",
+  unoCSSPresetIconCDN: string = "https://esm.sh/",
+  conf: UnoCSSConfig = {},
 ) => {
-    const safeConf = {
-        ...conf,
-    };
-    if (safeConf.presetIcons) {
-        safeConf.presetIcons.cdn = unoCSSPresetIconCDN;
-    }
+  const safeConf = {
+    ...conf,
+  };
+  if (safeConf.presetIcons) {
+    safeConf.presetIcons.cdn = unoCSSPresetIconCDN;
+  }
 
-    return `
+  return `
 import initUnocssRuntime from "${url}/runtime";
 import initPresetIcons from "${url}/preset-icons/browser";
 import initPresetUno from "${url}/preset-uno";

@@ -1,3 +1,4 @@
+// @deno-types="@types/markdown-it"
 import MarkdownIt from "markdown-it";
 import extraJsPlugin from "./src/index.ts";
 

@@ -1,4 +1,4 @@
-import y from"markdown-it-front-matter";import h from"gray-matter";var S=(t="https://esm.sh/mermaid")=>`export default async () => {
+import w from"markdown-it-front-matter";import h from"gray-matter";var S=(t="https://esm.sh/mermaid")=>`export default async () => {
     const mermaid = await import("${t}");
     mermaid.default.init();
 };`,a=S;var g=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
@@ -35,7 +35,7 @@ export default async () => {
     } catch (error) {
         throw error;
     }
-};`,p=g;var l=(t="https://esm.sh/@unocss",r="https://esm.sh/",o={})=>{let e={...o};return e.presetIcons&&(e.presetIcons.cdn=r),`
+};`,m=g;var l=(t="https://esm.sh/@unocss",r="https://esm.sh/",o={})=>{let e={...o};return e.presetIcons&&(e.presetIcons.cdn=r),`
 import initUnocssRuntime from "${t}/runtime";
 import initPresetIcons from "${t}/preset-icons/browser";
 import initPresetUno from "${t}/preset-uno";
@@ -93,7 +93,7 @@ export default async () => {
         },
     });
 };
-`},m=l;var w=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+`},p=l;var y=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 export default async () => {
   const tasks = [];
 ${t.useMermaid?`
@@ -131,9 +131,9 @@ ${t.useUnoCSS?`
 <template
   id="extrajs"
 ${t.useMermaid?`data-extrajs-mermaid-js="${btoa(a(t.mermaidUrl))}"`:""}
-${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(p(t.fontAwesomeUrl))}"`:""}
-${t.useUnoCSS?`data-extrajs-uno-css="${btoa(m(t.unoCSSUrl,t.unoCSSPresetIconCDN,r))}"`:""}
-${`data-extrajs-init="${btoa(w(t))}"`}>
+${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(m(t.fontAwesomeUrl))}"`:""}
+${t.useUnoCSS?`data-extrajs-uno-css="${btoa(p(t.unoCSSUrl,t.unoCSSPresetIconCDN,r))}"`:""}
+${`data-extrajs-init="${btoa(y(t))}"`}>
 </template>`:"",f=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
@@ -141,5 +141,5 @@ ${`data-extrajs-init="${btoa(w(t))}"`}>
     const init = await import("data:text/javascript;base64," + initScript);
     await init.default();
   }
-<\/script>`:"";var x={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function C(t,r){r.discardFrontMatter&&t.use(y,e=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",e=>{e.env.extrajsConf=h(e.src).data.extrajs??{}});let o=t.renderer.render;t.renderer.render=function(e,u,i){let s=i.extrajsConf??{},n={...x,...r,...s.disableMermaid?{useMermaid:!1}:{},...s.disableFontAwesome?{useFontAwesome:!1}:{},...s.disableUnoCSS?{useUnoCSS:!1}:{}};return o.call(this,e,u,i)+c(n,s)+f(n)}}var d=C;var J=d;export{f as createScriptTag,c as createTemplateTag,J as default,w as initAll};
+<\/script>`:"";var x={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function C(t,r){r.discardFrontMatter&&t.use(w,e=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",e=>{e.env.extrajsConf=h(e.src).data.extrajs??{}});let o=t.renderer.render;t.renderer.render=function(e,d,i){let s=i.extrajsConf??{},n={...x,...r,...s.disableMermaid?{useMermaid:!1}:{},...s.disableFontAwesome?{useFontAwesome:!1}:{},...s.disableUnoCSS?{useUnoCSS:!1}:{}};return o.call(this,e,d,i)+c(n,s)+f(n)}}var u=C;var k=u;export{f as createScriptTag,c as createTemplateTag,k as default,y as initAll};
 //# sourceMappingURL=index.mjs.map

@@ -1,5 +1,5 @@
 export const initFontAsesome = (url: string = "https://esm.sh/@fortawesome") =>
-    `const extractIcons = (iconSet) => {
+  `const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key.startsWith("fa") && typeof value !== "function"
