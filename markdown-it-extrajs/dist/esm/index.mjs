@@ -1,4 +1,4 @@
-import w from"markdown-it-front-matter";import h from"gray-matter";var S=(t="https://esm.sh/mermaid")=>`export default async () => {
+import w from"markdown-it-front-matter";import x from"gray-matter";var S=(t="https://esm.sh/mermaid")=>`export default async () => {
     const mermaid = await import("${t}");
     mermaid.default.init();
 };`,a=S;var g=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
@@ -141,5 +141,5 @@ ${`data-extrajs-init="${btoa(y(t))}"`}>
     const init = await import("data:text/javascript;base64," + initScript);
     await init.default();
   }
-<\/script>`:"";var x={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function C(t,r){r.discardFrontMatter&&t.use(w,e=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",e=>{e.env.extrajsConf=h(e.src).data.extrajs??{}});let o=t.renderer.render;t.renderer.render=function(e,d,i){let s=i.extrajsConf??{},n={...x,...r,...s.disableMermaid?{useMermaid:!1}:{},...s.disableFontAwesome?{useFontAwesome:!1}:{},...s.disableUnoCSS?{useUnoCSS:!1}:{}};return o.call(this,e,d,i)+c(n,s)+f(n)}}var u=C;var k=u;export{f as createScriptTag,c as createTemplateTag,k as default,y as initAll};
+<\/script>`:"";var h={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function C(t,r){r.discardFrontMatter&&t.use(w,e=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",e=>{e.env.extrajsConf=x(e.src).data.extrajs??{}});let o=t.renderer.render;t.renderer.render=function(e,d,i){let s=i.extrajsConf??{},n={...h,...r,...s.disableMermaid?{useMermaid:!1}:{},...s.disableFontAwesome?{useFontAwesome:!1}:{},...s.disableUnoCSS?{useUnoCSS:!1}:{}};return o.call(this,e,d,i)+c(n,s)+f(n)}}var u=C;var k=u;export{f as createScriptTag,c as createTemplateTag,k as default,y as initAll};
 //# sourceMappingURL=index.mjs.map
