@@ -4,7 +4,7 @@
     "markdown-it": "npm:markdown-it@14.1.x",
     "markdown-it-front-matter": "npm:markdown-it-front-matter@0.2.x",
     "@unocss": "npm:unocss@0.64.x",
-    "@types/markdown-it": "npm:@types/markdown-it@12.2.x",
+    "@types/markdown-it": "npm:@types/markdown-it@14.1.x",
     "esbuild": "https://deno.land/x/esbuild@v0.24.0/mod.js"
   }
 }
