@@ -7,7 +7,7 @@ export const initAll = (
   extrajsOptions: ExtraJSOptions,
 ): string =>
   (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome ||
-      extrajsOptions.useUnoCSS) && extrajsOptions.outputScriptTag
+      extrajsOptions.useUnoCSS)
     ? `
 export default async () => {
   const tasks = [];
@@ -42,7 +42,7 @@ ${
 ${
       extrajsOptions.useUnoCSS
         ? `
-  const unoCSSScript = document.getElementById('extrajs').getAttribute('data-extrajs-uno-css');
+  const unoCSSScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-uno-css');
   if (unoCSSScript) {
     tasks.push(
       (async () => {

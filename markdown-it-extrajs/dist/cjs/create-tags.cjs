@@ -1,4 +1,4 @@
-var r=Object.defineProperty;var c=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var u=Object.prototype.hasOwnProperty;var S=(t,e)=>{for(var s in e)r(t,s,{get:e[s],enumerable:!0})},d=(t,e,s,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of f(e))!u.call(t,o)&&o!==s&&r(t,o,{get:()=>e[o],enumerable:!(i=c(e,o))||i.enumerable});return t};var g=t=>d(r({},"__esModule",{value:!0}),t);var $={};S($,{createScriptTag:()=>C,createTemplateTag:()=>h,initAll:()=>m});module.exports=g($);var y=(t="https://esm.sh/mermaid")=>`export default async () => {
+var r=Object.defineProperty;var c=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var d=Object.prototype.hasOwnProperty;var u=(t,e)=>{for(var s in e)r(t,s,{get:e[s],enumerable:!0})},S=(t,e,s,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of f(e))!d.call(t,o)&&o!==s&&r(t,o,{get:()=>e[o],enumerable:!(i=c(e,o))||i.enumerable});return t};var g=t=>S(r({},"__esModule",{value:!0}),t);var $={};u($,{createScriptTag:()=>C,createTemplateTag:()=>h,initAll:()=>m});module.exports=g($);var y=(t="https://esm.sh/mermaid")=>`export default async () => {
     const mermaid = await import("${t}");
     mermaid.default.init();
 };`,n=y;var l=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
@@ -93,7 +93,7 @@ export default async () => {
         },
     });
 };
-`},p=w;var m=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+`},p=w;var m=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 export default async () => {
   const tasks = [];
 ${t.useMermaid?`
@@ -117,7 +117,7 @@ ${t.useFontAwesome?`
     );
   }`:""}
 ${t.useUnoCSS?`
-  const unoCSSScript = document.getElementById('extrajs').getAttribute('data-extrajs-uno-css');
+  const unoCSSScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-uno-css');
   if (unoCSSScript) {
     tasks.push(
       (async () => {

@@ -93,7 +93,7 @@ export default async () => {
         },
     });
 };
-`},r=m;var c=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+`},r=m;var c=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 export default async () => {
   const tasks = [];
 ${t.useMermaid?`
@@ -117,7 +117,7 @@ ${t.useFontAwesome?`
     );
   }`:""}
 ${t.useUnoCSS?`
-  const unoCSSScript = document.getElementById('extrajs').getAttribute('data-extrajs-uno-css');
+  const unoCSSScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-uno-css');
   if (unoCSSScript) {
     tasks.push(
       (async () => {

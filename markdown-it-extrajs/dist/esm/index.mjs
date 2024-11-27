@@ -1,7 +1,7 @@
-import w from"markdown-it-front-matter";import x from"gray-matter";var S=(t="https://esm.sh/mermaid")=>`export default async () => {
+import y from"markdown-it-front-matter";import w from"gray-matter";var d=(t="https://esm.sh/mermaid")=>`export default async () => {
     const mermaid = await import("${t}");
     mermaid.default.init();
-};`,a=S;var g=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
+};`,a=d;var S=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key.startsWith("fa") && typeof value !== "function"
@@ -35,7 +35,7 @@ export default async () => {
     } catch (error) {
         throw error;
     }
-};`,m=g;var l=(t="https://esm.sh/@unocss",r="https://esm.sh/",o={})=>{let e={...o};return e.presetIcons&&(e.presetIcons.cdn=r),`
+};`,p=S;var g=(t="https://esm.sh/@unocss",e="https://esm.sh/",r={})=>{let s={...r};return s.presetIcons&&(s.presetIcons.cdn=e),`
 import initUnocssRuntime from "${t}/runtime";
 import initPresetIcons from "${t}/preset-icons/browser";
 import initPresetUno from "${t}/preset-uno";
@@ -47,7 +47,7 @@ import initPresetWebFonts from "${t}/preset-web-fonts";
 import initPresetTagify from "${t}/preset-tagify";
 import initPresetRemToPx from "${t}/preset-rem-to-px";
 
-const conf = ${JSON.stringify(e)};
+const conf = ${JSON.stringify(s)};
 
 export default async () => {
     const presets = [];
@@ -93,7 +93,7 @@ export default async () => {
         },
     });
 };
-`},p=l;var y=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+`},m=g;var l=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 export default async () => {
   const tasks = [];
 ${t.useMermaid?`
@@ -117,7 +117,7 @@ ${t.useFontAwesome?`
     );
   }`:""}
 ${t.useUnoCSS?`
-  const unoCSSScript = document.getElementById('extrajs').getAttribute('data-extrajs-uno-css');
+  const unoCSSScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-uno-css');
   if (unoCSSScript) {
     tasks.push(
       (async () => {
@@ -127,13 +127,13 @@ ${t.useUnoCSS?`
     );
   }`:""}
   tasks.length > 0 && await Promise.all(tasks);
-};`:"",c=(t,r)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+};`:"",c=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 <template
   id="extrajs"
 ${t.useMermaid?`data-extrajs-mermaid-js="${btoa(a(t.mermaidUrl))}"`:""}
-${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(m(t.fontAwesomeUrl))}"`:""}
-${t.useUnoCSS?`data-extrajs-uno-css="${btoa(p(t.unoCSSUrl,t.unoCSSPresetIconCDN,r))}"`:""}
-${`data-extrajs-init="${btoa(y(t))}"`}>
+${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(p(t.fontAwesomeUrl))}"`:""}
+${t.useUnoCSS?`data-extrajs-uno-css="${btoa(m(t.unoCSSUrl,t.unoCSSPresetIconCDN,e))}"`:""}
+${`data-extrajs-init="${btoa(l(t))}"`}>
 </template>`:"",f=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
@@ -141,5 +141,5 @@ ${`data-extrajs-init="${btoa(y(t))}"`}>
     const init = await import("data:text/javascript;base64," + initScript);
     await init.default();
   }
-<\/script>`:"";var h={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function C(t,r){r.discardFrontMatter&&t.use(w,e=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",e=>{e.env.extrajsConf=x(e.src).data.extrajs??{}});let o=t.renderer.render;t.renderer.render=function(e,d,i){let s=i.extrajsConf??{},n={...h,...r,...s.disableMermaid?{useMermaid:!1}:{},...s.disableFontAwesome?{useFontAwesome:!1}:{},...s.disableUnoCSS?{useUnoCSS:!1}:{}};return o.call(this,e,d,i)+c(n,s)+f(n)}}var u=C;var k=u;export{f as createScriptTag,c as createTemplateTag,k as default,y as initAll};
+<\/script>`:"";var x={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function h(t,e){let r={};e.discardFrontMatter&&t.use(y,o=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",o=>{r=w(o.src).data.extrajs??{}});let s=t.renderer.render;t.renderer.render=function(...o){let i=r?{...r}:{},n={...x,...e,...i.disableMermaid?{useMermaid:!1}:{},...i.disableFontAwesome?{useFontAwesome:!1}:{},...i.disableUnoCSS?{useUnoCSS:!1}:{}};return s.apply(t.renderer,o)+c(n,i)+f(n)}}var u=h;var J=u;export{f as createScriptTag,c as createTemplateTag,J as default,l as initAll};
 //# sourceMappingURL=index.mjs.map

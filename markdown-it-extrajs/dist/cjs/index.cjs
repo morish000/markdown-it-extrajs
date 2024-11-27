@@ -1,7 +1,7 @@
-var h=Object.create;var n=Object.defineProperty;var C=Object.getOwnPropertyDescriptor;var b=Object.getOwnPropertyNames;var P=Object.getPrototypeOf,$=Object.prototype.hasOwnProperty;var A=(t,e)=>{for(var r in e)n(t,r,{get:e[r],enumerable:!0})},f=(t,e,r,s)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of b(e))!$.call(t,o)&&o!==r&&n(t,o,{get:()=>e[o],enumerable:!(s=C(e,o))||s.enumerable});return t};var u=(t,e,r)=>(r=t!=null?h(P(t)):{},f(e||!t||!t.__esModule?n(r,"default",{value:t,enumerable:!0}):r,t)),U=t=>f(n({},"__esModule",{value:!0}),t);var J={};A(J,{createScriptTag:()=>m,createTemplateTag:()=>a,default:()=>E,initAll:()=>l});module.exports=U(J);var y=u(require("markdown-it-front-matter")),w=u(require("gray-matter"));var v=(t="https://esm.sh/mermaid")=>`export default async () => {
+var x=Object.create;var n=Object.defineProperty;var h=Object.getOwnPropertyDescriptor;var C=Object.getOwnPropertyNames;var b=Object.getPrototypeOf,P=Object.prototype.hasOwnProperty;var $=(t,e)=>{for(var r in e)n(t,r,{get:e[r],enumerable:!0})},c=(t,e,r,o)=>{if(e&&typeof e=="object"||typeof e=="function")for(let s of C(e))!P.call(t,s)&&s!==r&&n(t,s,{get:()=>e[s],enumerable:!(o=h(e,s))||o.enumerable});return t};var f=(t,e,r)=>(r=t!=null?x(b(t)):{},c(e||!t||!t.__esModule?n(r,"default",{value:t,enumerable:!0}):r,t)),A=t=>c(n({},"__esModule",{value:!0}),t);var E={};$(E,{createScriptTag:()=>p,createTemplateTag:()=>a,default:()=>T,initAll:()=>g});module.exports=A(E);var l=f(require("markdown-it-front-matter")),y=f(require("gray-matter"));var M=(t="https://esm.sh/mermaid")=>`export default async () => {
     const mermaid = await import("${t}");
     mermaid.default.init();
-};`,d=v;var I=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
+};`,u=M;var U=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key.startsWith("fa") && typeof value !== "function"
@@ -35,7 +35,7 @@ export default async () => {
     } catch (error) {
         throw error;
     }
-};`,S=I;var M=(t="https://esm.sh/@unocss",e="https://esm.sh/",r={})=>{let s={...r};return s.presetIcons&&(s.presetIcons.cdn=e),`
+};`,d=U;var v=(t="https://esm.sh/@unocss",e="https://esm.sh/",r={})=>{let o={...r};return o.presetIcons&&(o.presetIcons.cdn=e),`
 import initUnocssRuntime from "${t}/runtime";
 import initPresetIcons from "${t}/preset-icons/browser";
 import initPresetUno from "${t}/preset-uno";
@@ -47,7 +47,7 @@ import initPresetWebFonts from "${t}/preset-web-fonts";
 import initPresetTagify from "${t}/preset-tagify";
 import initPresetRemToPx from "${t}/preset-rem-to-px";
 
-const conf = ${JSON.stringify(s)};
+const conf = ${JSON.stringify(o)};
 
 export default async () => {
     const presets = [];
@@ -93,7 +93,7 @@ export default async () => {
         },
     });
 };
-`},g=M;var l=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+`},S=v;var g=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 export default async () => {
   const tasks = [];
 ${t.useMermaid?`
@@ -117,7 +117,7 @@ ${t.useFontAwesome?`
     );
   }`:""}
 ${t.useUnoCSS?`
-  const unoCSSScript = document.getElementById('extrajs').getAttribute('data-extrajs-uno-css');
+  const unoCSSScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-uno-css');
   if (unoCSSScript) {
     tasks.push(
       (async () => {
@@ -130,16 +130,16 @@ ${t.useUnoCSS?`
 };`:"",a=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 <template
   id="extrajs"
-${t.useMermaid?`data-extrajs-mermaid-js="${btoa(d(t.mermaidUrl))}"`:""}
-${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(S(t.fontAwesomeUrl))}"`:""}
-${t.useUnoCSS?`data-extrajs-uno-css="${btoa(g(t.unoCSSUrl,t.unoCSSPresetIconCDN,e))}"`:""}
-${`data-extrajs-init="${btoa(l(t))}"`}>
-</template>`:"",m=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+${t.useMermaid?`data-extrajs-mermaid-js="${btoa(u(t.mermaidUrl))}"`:""}
+${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(d(t.fontAwesomeUrl))}"`:""}
+${t.useUnoCSS?`data-extrajs-uno-css="${btoa(S(t.unoCSSUrl,t.unoCSSPresetIconCDN,e))}"`:""}
+${`data-extrajs-init="${btoa(g(t))}"`}>
+</template>`:"",p=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
     const init = await import("data:text/javascript;base64," + initScript);
     await init.default();
   }
-<\/script>`:"";var F={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function T(t,e){e.discardFrontMatter&&t.use(y.default,s=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",s=>{s.env.extrajsConf=(0,w.default)(s.src).data.extrajs??{}});let r=t.renderer.render;t.renderer.render=function(s,o,p){let i=p.extrajsConf??{},c={...F,...e,...i.disableMermaid?{useMermaid:!1}:{},...i.disableFontAwesome?{useFontAwesome:!1}:{},...i.disableUnoCSS?{useUnoCSS:!1}:{}};return r.call(this,s,o,p)+a(c,i)+m(c)}}var x=T;var E=x;
+<\/script>`:"";var I={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function F(t,e){let r={};e.discardFrontMatter&&t.use(l.default,s=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",s=>{r=(0,y.default)(s.src).data.extrajs??{}});let o=t.renderer.render;t.renderer.render=function(...s){let i=r?{...r}:{},m={...I,...e,...i.disableMermaid?{useMermaid:!1}:{},...i.disableFontAwesome?{useFontAwesome:!1}:{},...i.disableUnoCSS?{useUnoCSS:!1}:{}};return o.apply(t.renderer,s)+a(m,i)+p(m)}}var w=F;var T=w;
 //# sourceMappingURL=index.cjs.map
