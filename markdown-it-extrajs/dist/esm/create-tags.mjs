@@ -1,7 +1,7 @@
-var a=(t="https://esm.sh/mermaid")=>`export default async () => {
+var a=(t="https://esm.sh/mermaid")=>`export default async (_ = {}) => {
     const mermaid = await import("${t}");
     mermaid.default.init();
-};`,i=a;var p=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
+};`,o=a;var c=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key.startsWith("fa") && typeof value !== "function"
@@ -9,7 +9,7 @@ var a=(t="https://esm.sh/mermaid")=>`export default async () => {
         .map(([, value]) => value);
 };
 
-export default async () => {
+export default async (_ = {}) => {
     try {
         const [
             fontawesomeSvgCore,
@@ -35,7 +35,7 @@ export default async () => {
     } catch (error) {
         throw error;
     }
-};`,o=p;var m=(t="https://esm.sh/@unocss",e="https://esm.sh/",n={})=>{let s={...n};return s.presetIcons&&(s.presetIcons.cdn=e),`
+};`,i=c;var p=(t="https://esm.sh/@unocss",e="https://esm.sh/",n={})=>{let s={...n};return s.presetIcons&&(s.presetIcons.cdn=e),`
 import initUnocssRuntime from "${t}/runtime";
 import initPresetIcons from "${t}/preset-icons/browser";
 import initPresetUno from "${t}/preset-uno";
@@ -49,7 +49,7 @@ import initPresetRemToPx from "${t}/preset-rem-to-px";
 
 const conf = ${JSON.stringify(s)};
 
-export default async () => {
+export default async (_conf = {}) => {
     const presets = [];
 
     if (conf.presetWind) {
@@ -61,7 +61,12 @@ export default async () => {
     }
 
     if (conf.presetIcons) {
-        presets.push(initPresetIcons(conf.presetIcons));
+        const presetIcons = { ...conf.presetIcons };
+        if (_conf?.presetIcons?.collections) {
+            presetIcons.autoInstall = false;
+            presetIcons.collections = _conf.presetIcons.collections;
+        }
+        presets.push(initPresetIcons(presetIcons));
     }
 
     if (conf.presetAttributify) {
@@ -93,8 +98,8 @@ export default async () => {
         },
     });
 };
-`},r=m;var c=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
-export default async () => {
+`},r=p;var m=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+export default async (_conf = {}) => {
   const tasks = [];
 ${t.useMermaid?`
   const mermaidScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-mermaid-js');
@@ -102,7 +107,7 @@ ${t.useMermaid?`
     tasks.push(
       (async () => {
         const initMermaid = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid.default();
+        await initMermaid.default(_conf);
       })()
     );
   }`:""}
@@ -112,7 +117,7 @@ ${t.useFontAwesome?`
     tasks.push(
       (async () => {
         const initFontAwesome = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome.default();
+        await initFontAwesome.default(_conf);
       })()
     );
   }`:""}
@@ -122,18 +127,18 @@ ${t.useUnoCSS?`
     tasks.push(
       (async () => {
         const initUnoCSS = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS.default();
+        await initUnoCSS.default(_conf);
       })()
     );
   }`:""}
   tasks.length > 0 && await Promise.all(tasks);
-};`:"",l=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+};`:"",y=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 <template
   id="extrajs"
-${t.useMermaid?`data-extrajs-mermaid-js="${btoa(i(t.mermaidUrl))}"`:""}
-${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(o(t.fontAwesomeUrl))}"`:""}
+${t.useMermaid?`data-extrajs-mermaid-js="${btoa(o(t.mermaidUrl))}"`:""}
+${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(i(t.fontAwesomeUrl))}"`:""}
 ${t.useUnoCSS?`data-extrajs-uno-css="${btoa(r(t.unoCSSUrl,t.unoCSSPresetIconCDN,e))}"`:""}
-${`data-extrajs-init="${btoa(c(t))}"`}>
+${`data-extrajs-init="${btoa(m(t))}"`}>
 </template>`:"",w=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
@@ -141,5 +146,5 @@ ${`data-extrajs-init="${btoa(c(t))}"`}>
     const init = await import("data:text/javascript;base64," + initScript);
     await init.default();
   }
-<\/script>`:"";export{w as createScriptTag,l as createTemplateTag,c as initAll};
+<\/script>`:"";export{w as createScriptTag,y as createTemplateTag,m as initAll};
 //# sourceMappingURL=create-tags.mjs.map

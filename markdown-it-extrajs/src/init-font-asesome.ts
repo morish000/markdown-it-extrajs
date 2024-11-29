@@ -7,7 +7,7 @@ export const initFontAsesome = (url: string = "https://esm.sh/@fortawesome") =>
         .map(([, value]) => value);
 };
 
-export default async () => {
+export default async (_ = {}) => {
     try {
         const [
             fontawesomeSvgCore,

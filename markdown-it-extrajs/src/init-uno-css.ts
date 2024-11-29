@@ -26,7 +26,7 @@ import initPresetRemToPx from "${url}/preset-rem-to-px";
 
 const conf = ${JSON.stringify(safeConf)};
 
-export default async () => {
+export default async (_conf = {}) => {
     const presets = [];
 
     if (conf.presetWind) {
@@ -38,7 +38,12 @@ export default async () => {
     }
 
     if (conf.presetIcons) {
-        presets.push(initPresetIcons(conf.presetIcons));
+        const presetIcons = { ...conf.presetIcons };
+        if (_conf?.presetIcons?.collections) {
+            presetIcons.autoInstall = false;
+            presetIcons.collections = _conf.presetIcons.collections;
+        }
+        presets.push(initPresetIcons(presetIcons));
     }
 
     if (conf.presetAttributify) {

@@ -1,7 +1,7 @@
-import y from"markdown-it-front-matter";import w from"gray-matter";var d=(t="https://esm.sh/mermaid")=>`export default async () => {
+import w from"markdown-it-front-matter";import x from"gray-matter";var d=(t="https://esm.sh/mermaid")=>`export default async (_ = {}) => {
     const mermaid = await import("${t}");
     mermaid.default.init();
-};`,a=d;var S=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
+};`,p=d;var l=(t="https://esm.sh/@fortawesome")=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key.startsWith("fa") && typeof value !== "function"
@@ -9,7 +9,7 @@ import y from"markdown-it-front-matter";import w from"gray-matter";var d=(t="htt
         .map(([, value]) => value);
 };
 
-export default async () => {
+export default async (_ = {}) => {
     try {
         const [
             fontawesomeSvgCore,
@@ -35,7 +35,7 @@ export default async () => {
     } catch (error) {
         throw error;
     }
-};`,p=S;var g=(t="https://esm.sh/@unocss",e="https://esm.sh/",r={})=>{let s={...r};return s.presetIcons&&(s.presetIcons.cdn=e),`
+};`,c=l;var g=(t="https://esm.sh/@unocss",e="https://esm.sh/",i={})=>{let r={...i};return r.presetIcons&&(r.presetIcons.cdn=e),`
 import initUnocssRuntime from "${t}/runtime";
 import initPresetIcons from "${t}/preset-icons/browser";
 import initPresetUno from "${t}/preset-uno";
@@ -47,9 +47,9 @@ import initPresetWebFonts from "${t}/preset-web-fonts";
 import initPresetTagify from "${t}/preset-tagify";
 import initPresetRemToPx from "${t}/preset-rem-to-px";
 
-const conf = ${JSON.stringify(s)};
+const conf = ${JSON.stringify(r)};
 
-export default async () => {
+export default async (_conf = {}) => {
     const presets = [];
 
     if (conf.presetWind) {
@@ -61,7 +61,12 @@ export default async () => {
     }
 
     if (conf.presetIcons) {
-        presets.push(initPresetIcons(conf.presetIcons));
+        const presetIcons = { ...conf.presetIcons };
+        if (_conf?.presetIcons?.collections) {
+            presetIcons.autoInstall = false;
+            presetIcons.collections = _conf.presetIcons.collections;
+        }
+        presets.push(initPresetIcons(presetIcons));
     }
 
     if (conf.presetAttributify) {
@@ -93,8 +98,8 @@ export default async () => {
         },
     });
 };
-`},m=g;var l=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
-export default async () => {
+`},m=g;var y=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+export default async (_conf = {}) => {
   const tasks = [];
 ${t.useMermaid?`
   const mermaidScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-mermaid-js');
@@ -102,7 +107,7 @@ ${t.useMermaid?`
     tasks.push(
       (async () => {
         const initMermaid = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid.default();
+        await initMermaid.default(_conf);
       })()
     );
   }`:""}
@@ -112,7 +117,7 @@ ${t.useFontAwesome?`
     tasks.push(
       (async () => {
         const initFontAwesome = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome.default();
+        await initFontAwesome.default(_conf);
       })()
     );
   }`:""}
@@ -122,24 +127,24 @@ ${t.useUnoCSS?`
     tasks.push(
       (async () => {
         const initUnoCSS = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS.default();
+        await initUnoCSS.default(_conf);
       })()
     );
   }`:""}
   tasks.length > 0 && await Promise.all(tasks);
-};`:"",c=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+};`:"",f=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 <template
   id="extrajs"
-${t.useMermaid?`data-extrajs-mermaid-js="${btoa(a(t.mermaidUrl))}"`:""}
-${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(p(t.fontAwesomeUrl))}"`:""}
+${t.useMermaid?`data-extrajs-mermaid-js="${btoa(p(t.mermaidUrl))}"`:""}
+${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(c(t.fontAwesomeUrl))}"`:""}
 ${t.useUnoCSS?`data-extrajs-uno-css="${btoa(m(t.unoCSSUrl,t.unoCSSPresetIconCDN,e))}"`:""}
-${`data-extrajs-init="${btoa(l(t))}"`}>
-</template>`:"",f=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+${`data-extrajs-init="${btoa(y(t))}"`}>
+</template>`:"",u=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
     const init = await import("data:text/javascript;base64," + initScript);
     await init.default();
   }
-<\/script>`:"";var x={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function h(t,e){let r={};e.discardFrontMatter&&t.use(y,o=>{}),t.core.ruler.push("front_matter_to_env_for_estrajs",o=>{r=w(o.src).data.extrajs??{}});let s=t.renderer.render;t.renderer.render=function(...o){let i=r?{...r}:{},n={...x,...e,...i.disableMermaid?{useMermaid:!1}:{},...i.disableFontAwesome?{useFontAwesome:!1}:{},...i.disableUnoCSS?{useUnoCSS:!1}:{}};return s.apply(t.renderer,o)+c(n,i)+f(n)}}var u=h;var J=u;export{f as createScriptTag,c as createTemplateTag,J as default,l as initAll};
+<\/script>`:"";var h={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function C(t,e){let{renderer:{render:i},parse:r}=t,n={};e.discardFrontMatter&&t.use(w,o=>{}),t.parse=(o,s)=>(n=x(o).data.extrajs??{},r.call(t,o,s)),t.renderer.render=function(...o){let s=n?{...n}:{},a={...h,...e,...s.disableMermaid?{useMermaid:!1}:{},...s.disableFontAwesome?{useFontAwesome:!1}:{},...s.disableUnoCSS?{useUnoCSS:!1}:{}};return i.apply(t.renderer,o)+f(a,s)+u(a)}}var S=C;var k=S;export{u as createScriptTag,f as createTemplateTag,k as default,y as initAll};
 //# sourceMappingURL=index.mjs.map

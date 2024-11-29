@@ -9,7 +9,7 @@ export const initAll = (
   (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome ||
       extrajsOptions.useUnoCSS)
     ? `
-export default async () => {
+export default async (_conf = {}) => {
   const tasks = [];
 ${
       extrajsOptions.useMermaid
@@ -19,7 +19,7 @@ ${
     tasks.push(
       (async () => {
         const initMermaid = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid.default();
+        await initMermaid.default(_conf);
       })()
     );
   }`
@@ -33,7 +33,7 @@ ${
     tasks.push(
       (async () => {
         const initFontAwesome = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome.default();
+        await initFontAwesome.default(_conf);
       })()
     );
   }`
@@ -47,7 +47,7 @@ ${
     tasks.push(
       (async () => {
         const initUnoCSS = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS.default();
+        await initUnoCSS.default(_conf);
       })()
     );
   }`

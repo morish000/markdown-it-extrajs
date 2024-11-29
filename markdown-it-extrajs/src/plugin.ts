@@ -18,6 +18,8 @@ const defaultExtraJSOptions: ExtraJSOptions = {
 };
 
 export function extraJsPlugin(md: MarkdownIt, userOptions: ExtraJSOptions) {
+  const { renderer: { render }, parse } = md;
+
   let extraJsFrontMatter: ExtraJSFrontMatter = {};
 
   if (userOptions.discardFrontMatter) {
@@ -26,14 +28,11 @@ export function extraJsPlugin(md: MarkdownIt, userOptions: ExtraJSOptions) {
     });
   }
 
-  md.core.ruler.push(
-    "front_matter_to_env_for_estrajs",
-    (state) => {
-      extraJsFrontMatter = grayMatter(state.src).data.extrajs ?? {};
-    },
-  );
+  md.parse = (markdown: string, env) => {
+    extraJsFrontMatter = grayMatter(markdown).data.extrajs ?? {};
+    return parse.call(md, markdown, env);
+  };
 
-  const originalRender = md.renderer.render;
   md.renderer.render = function (
     ...args
   ) {
@@ -48,7 +47,7 @@ export function extraJsPlugin(md: MarkdownIt, userOptions: ExtraJSOptions) {
       ...(conf.disableUnoCSS ? { useUnoCSS: false } : {}),
     };
 
-    return originalRender.apply(md.renderer, args) +
+    return render.apply(md.renderer, args) +
       createTemplateTag(extrajsOptions, conf) +
       createScriptTag(extrajsOptions);
   };
