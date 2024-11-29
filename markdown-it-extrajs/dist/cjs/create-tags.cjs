@@ -79,7 +79,7 @@ export default async (_conf = {}) => {
 
     if (conf.presetIcons) {
         const presetIcons = { ...conf.presetIcons };
-        if (_conf?.presetIcons?.collections) {
+        if (_conf?.presetIcons?.collections && conf.useBundleIconifyJson) {
             presetIcons.autoInstall = false;
             presetIcons.collections = _conf.presetIcons.collections;
         }
