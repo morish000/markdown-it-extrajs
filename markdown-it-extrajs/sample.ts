@@ -13,6 +13,9 @@ md.use(extraJsPlugin, {
 
 const markdownContent = `---
 extrajs:
+  useMermaid: true
+  useFontAwesome: true
+  useUnoCSS: true
   rules: []
   presetWind: null
   presetMini: null

@@ -20,9 +20,9 @@ export type UnoCSSConfig<Theme extends object = object> = {
 };
 
 export type ExtraJSFrontMatter = UnoCSSConfig & {
-  disableMermaid?: boolean;
-  disableFontAwesome?: boolean;
-  disableUnoCSS?: boolean;
+  useMermaid?: boolean;
+  useFontAwesome?: boolean;
+  useUnoCSS?: boolean;
 };
 
 export type ExtraJSOptions = {
@@ -35,4 +35,5 @@ export type ExtraJSOptions = {
   unoCSSUrl?: string;
   unoCSSPresetIconCDN?: string;
   outputScriptTag?: boolean;
+  useBundleIconifyJson?: boolean;
 };

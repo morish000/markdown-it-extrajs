@@ -42,9 +42,9 @@ export function extraJsPlugin(md: MarkdownIt, userOptions: ExtraJSOptions) {
     const extrajsOptions: ExtraJSOptions = {
       ...defaultExtraJSOptions,
       ...userOptions,
-      ...(conf.disableMermaid ? { useMermaid: false } : {}),
-      ...(conf.disableFontAwesome ? { useFontAwesome: false } : {}),
-      ...(conf.disableUnoCSS ? { useUnoCSS: false } : {}),
+      ...(!conf.useMermaid ? { useMermaid: false } : {}),
+      ...(!conf.useFontAwesome ? { useFontAwesome: false } : {}),
+      ...(!conf.useUnoCSS ? { useUnoCSS: false } : {}),
     };
 
     return render.apply(md.renderer, args) +

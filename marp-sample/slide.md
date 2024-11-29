@@ -9,6 +9,9 @@ style: |
     max-width: 100% !important;
   }
 extrajs:
+  useMermaid: true
+  useFontAwesome: true
+  useUnoCSS: true
   presetIcons:
     autoInstall: true
     extraProperties:
