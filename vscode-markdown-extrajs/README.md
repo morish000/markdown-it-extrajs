@@ -6,5 +6,5 @@ release, and the functionality or API may change.
 ## License
 
 This project is licensed under the MIT License - see the
-[LICENSE](https://github.com/morish000/markdown-it-extrajs/blob/main/LICENSE)
+[LICENSE](https://github.com/morish000/markdown-it-extrajs/blob/main/vscode-markdown-extrajs/LICENSE)
 file for details.

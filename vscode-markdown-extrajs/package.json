@@ -4,6 +4,10 @@
   "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
   "private": true,
   "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/morish000/markdown-it-extrajs.git"
+  },
   "engines": {
     "vscode": "^1.54.0"
   },
