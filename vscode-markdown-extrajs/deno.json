@@ -1,0 +1,23 @@
+{
+  "name": "@morish000/vscode-markdown-extrajs",
+  "version": "0.0.1",
+  "tasks": {
+    "esbuild": "deno run --allow-all esbuild.ts",
+    "watch:esbuild": "deno run --allow-all esbuild.ts --watch",
+    "package": "deno run --allow-all esbuild.ts --production"
+  },
+  "importMap": "import_map.json",
+  "compilerOptions": {
+    "lib": ["dom", "deno.ns"]
+  },
+  "exports": {
+    ".": "./src/extension.ts"
+  },
+  "lint": {
+    "include": ["./*.ts", "./*.mjs", "./*.json", "src/**/*.ts"]
+  },
+  "fmt": {
+    "include": ["./*.ts", "./*.mjs", "./*.md", "./*.json", "src/**/*.ts"],
+    "exclude": ["./sample.md", "./dist/*.js", "./dist/*.jsp.map"]
+  }
+}

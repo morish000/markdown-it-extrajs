@@ -1,0 +1,84 @@
+{
+  "name": "vscode-markdown-extrajs",
+  "displayName": "Markdown Preview Extrajs",
+  "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
+  "private": true,
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "keywords": [
+    "markdown",
+    "preview",
+    "marp",
+    "mermaid",
+    "fontawesome",
+    "unoces"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "markdown.previewScripts": [
+      "./dist/preview.js"
+    ],
+    "markdown.markdownItPlugins": true,
+    "configuration": {
+      "title": "Markdown ExtraJS Settings",
+      "properties": {
+        "markdownExtraJS.discardFrontMatter": {
+          "type": "boolean",
+          "default": true,
+          "description": "Discard front matter from the markdown."
+        },
+        "markdownExtraJS.useMermaid": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Mermaid support for diagrams."
+        },
+        "markdownExtraJS.mermaidUrl": {
+          "type": "string",
+          "default": "https://esm.sh/mermaid",
+          "description": "URL to load Mermaid from."
+        },
+        "markdownExtraJS.useFontAwesome": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Font Awesome icons."
+        },
+        "markdownExtraJS.fontAwesomeUrl": {
+          "type": "string",
+          "default": "https://esm.sh/@fortawesome",
+          "description": "URL to load Font Awesome from."
+        },
+        "markdownExtraJS.useUnoCSS": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable UnoCSS support."
+        },
+        "markdownExtraJS.unoCSSUrl": {
+          "type": "string",
+          "default": "https://esm.sh/@unocss",
+          "description": "URL to load UnoCSS from."
+        },
+        "markdownExtraJS.unoCSSPresetIconCDN": {
+          "type": "string",
+          "default": "https://esm.sh/",
+          "description": "CDN URL for UnoCSS preset icons."
+        },
+        "markdownExtraJS.outputScriptTag": {
+          "type": "boolean",
+          "default": false,
+          "description": "Output script tag for additional JS."
+        },
+        "markdownExtraJS.useBundleIconifyJson": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use Bundled Iconfify JSON for additional JS."
+        }
+      }
+    }
+  }
+}
