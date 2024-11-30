@@ -1,4 +1,9 @@
-export const initFontAsesome = (url: string = "https://esm.sh/@fortawesome") =>
+import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
+
+export const initFontAsesome = (
+  options: ExtraJSOptions,
+  _frontMatter: ExtraJSFrontMatter,
+) =>
   `const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
@@ -15,10 +20,10 @@ export default async (_ = {}) => {
             freeRegularSvgIcons,
             freeBrandsSvgIcons,
         ] = await Promise.all([
-            import("${url}/fontawesome-svg-core"),
-            import("${url}/free-solid-svg-icons"),
-            import("${url}/free-regular-svg-icons"),
-            import("${url}/free-brands-svg-icons"),
+            import("${options.fontAwesomeUrl}/fontawesome-svg-core"),
+            import("${options.fontAwesomeUrl}/free-solid-svg-icons"),
+            import("${options.fontAwesomeUrl}/free-regular-svg-icons"),
+            import("${options.fontAwesomeUrl}/free-brands-svg-icons"),
         ]);
 
         const icons = [
@@ -32,21 +37,22 @@ export default async (_ = {}) => {
         fontawesomeSvgCore.dom.i2svg();
         fontawesomeSvgCore.dom.watch();
 
-        const styleElement = document.createElement("style");
-        styleElement.id = "extrajs-fontawesome";
-        styleElement.textContent = fontawesomeSvgCore.dom.css();
-        document.head.appendChild(styleElement);
-
-        const observer = new MutationObserver(() => {
-            if (styleElement && styleElement.textContent === "") {
-                styleElement.textContent = fontawesomeSvgCore.dom.css();
-            }
-        });
-        observer.observe(styleElement, {
-            characterData: true,
-            childList: true,
-            subtree: true,
-        });
+        if (!document.getElementById("extrajs-fontawesome")) {
+            const styleElement = document.createElement("style");
+            styleElement.id = "extrajs-fontawesome";
+            styleElement.textContent = fontawesomeSvgCore.dom.css();
+            document.head.appendChild(styleElement);
+            const observer = new MutationObserver(() => {
+                if (styleElement && styleElement.textContent === "") {
+                    styleElement.textContent = fontawesomeSvgCore.dom.css();
+                }
+            });
+            observer.observe(styleElement, {
+                characterData: true,
+                childList: true,
+                subtree: true,
+            });
+        }
     } catch (error) {
         throw error;
     }

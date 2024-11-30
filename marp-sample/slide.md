@@ -71,10 +71,10 @@ extrajs:
 
 - <i class="fas fa-alien"></i>
 - <i class="fas fa-check-circle" style="margin-right: 10px; color: red;"></i>
-- <i class="fas fa-user" style="margin-right: 10px; color: blue;"></i> Morish 000
-- <i class="fas fa-envelope" style="margin-right: 10px; color: blue;"></i> morish000&#64;example.com
-- <i class="fas fa-phone" style="margin-right: 10px; color: blue;"></i> 000-000-0000
-- <i class="fas fa-fax" style="margin-right: 10px; color: blue;"></i> 000-000-0000
+- <i class="fas fa-user" style="margin-right: 10px; color: blue;"></i>Morish 000
+- <i class="fas fa-envelope" style="margin-right: 10px; color: blue;"></i>morish000&#64;example.com
+- <i class="fas fa-phone" style="margin-right: 10px; color: blue;"></i>000-000-0000
+- <i class="fas fa-fax" style="margin-right: 10px; color: blue;"></i>000-000-0000
 
 ---
 

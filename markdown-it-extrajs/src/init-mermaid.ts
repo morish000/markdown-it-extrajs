@@ -1,8 +1,11 @@
+import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
+
 export const initMermaid = (
-  url: string = "https://esm.sh/mermaid",
+  options: ExtraJSOptions,
+  _frontMatter: ExtraJSFrontMatter,
 ) =>
   `export default async (_ = {}) => {
-    const mermaid = await import("${url}");
+    const mermaid = await import("${options.mermaidUrl}");
     mermaid.default.init();
 };`;
 

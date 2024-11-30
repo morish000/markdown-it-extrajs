@@ -1,30 +1,30 @@
-import type { UnoCSSConfig } from "./types.ts";
+import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
 
 export const initUnoCSS = (
-  url: string = "https://esm.sh/@unocss",
-  unoCSSPresetIconCDN: string = "https://esm.sh/",
-  conf: UnoCSSConfig = {},
+  options: ExtraJSOptions,
+  frontMatter: ExtraJSFrontMatter = {},
 ) => {
-  const safeConf = {
-    ...conf,
+  const conf = {
+    ...frontMatter,
   };
-  if (safeConf.presetIcons) {
-    safeConf.presetIcons.cdn = unoCSSPresetIconCDN;
+  if (conf.presetIcons) {
+    conf.presetIcons.cdn = options.unoCSSPresetIconCDN;
   }
 
   return `
-import initUnocssRuntime from "${url}/runtime";
-import initPresetIcons from "${url}/preset-icons/browser";
-import initPresetUno from "${url}/preset-uno";
-import initPresetWind from "${url}/preset-wind";
-import initPresetMini from "${url}/preset-mini";
-import initPresetAttributify from "${url}/preset-attributify";
-import initPresetTypography from "${url}/preset-typography";
-import initPresetWebFonts from "${url}/preset-web-fonts";
-import initPresetTagify from "${url}/preset-tagify";
-import initPresetRemToPx from "${url}/preset-rem-to-px";
+import initUnocssRuntime from "${options.unoCSSUrl}/runtime";
+import initPresetIcons from "${options.unoCSSUrl}/preset-icons/browser";
+import initPresetUno from "${options.unoCSSUrl}/preset-uno";
+import initPresetWind from "${options.unoCSSUrl}/preset-wind";
+import initPresetMini from "${options.unoCSSUrl}/preset-mini";
+import initPresetAttributify from "${options.unoCSSUrl}/preset-attributify";
+import initPresetTypography from "${options.unoCSSUrl}/preset-typography";
+import initPresetWebFonts from "${options.unoCSSUrl}/preset-web-fonts";
+import initPresetTagify from "${options.unoCSSUrl}/preset-tagify";
+import initPresetRemToPx from "${options.unoCSSUrl}/preset-rem-to-px";
 
-const conf = ${JSON.stringify(safeConf)};
+const options = ${JSON.stringify(options)};
+const conf = ${JSON.stringify(conf)};
 
 export default async (_conf = {}) => {
     const presets = [];
@@ -39,7 +39,7 @@ export default async (_conf = {}) => {
 
     if (conf.presetIcons) {
         const presetIcons = { ...conf.presetIcons };
-        if (_conf?.presetIcons?.collections && conf.useBundleIconifyJson) {
+        if (_conf?.presetIcons?.collections && options.useBundleIconifyJson) {
             presetIcons.autoInstall = false;
             presetIcons.collections = _conf.presetIcons.collections;
         }

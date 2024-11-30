@@ -1,7 +1,7 @@
 import initMermaid from "./init-mermaid.ts";
 import initFontAwesome from "./init-font-asesome.ts";
 import initUnoCSS from "./init-uno-css.ts";
-import type { ExtraJSOptions, UnoCSSConfig } from "./types.ts";
+import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
 
 export const initAll = (
   extrajsOptions: ExtraJSOptions,
@@ -59,7 +59,7 @@ ${
 
 export const createTemplateTag = (
   extrajsOptions: ExtraJSOptions,
-  conf: UnoCSSConfig,
+  frontMatter: ExtraJSFrontMatter,
 ): string =>
   (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome ||
       extrajsOptions.useUnoCSS)
@@ -69,14 +69,14 @@ export const createTemplateTag = (
 ${
       extrajsOptions.useMermaid
         ? `data-extrajs-mermaid-js="${
-          btoa(initMermaid(extrajsOptions.mermaidUrl))
+          btoa(initMermaid(extrajsOptions, frontMatter))
         }"`
         : ""
     }
 ${
       extrajsOptions.useFontAwesome
         ? `data-extrajs-font-awesome="${
-          btoa(initFontAwesome(extrajsOptions.fontAwesomeUrl))
+          btoa(initFontAwesome(extrajsOptions, frontMatter))
         }"`
         : ""
     }
@@ -85,9 +85,8 @@ ${
         ? `data-extrajs-uno-css="${
           btoa(
             initUnoCSS(
-              extrajsOptions.unoCSSUrl,
-              extrajsOptions.unoCSSPresetIconCDN,
-              conf,
+              extrajsOptions,
+              frontMatter,
             ),
           )
         }"`
