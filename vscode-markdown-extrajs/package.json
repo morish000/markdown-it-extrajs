@@ -11,6 +11,7 @@
   "engines": {
     "vscode": "^1.54.0"
   },
+  "icon": "morish000_128x128.png",
   "keywords": [
     "markdown",
     "preview",

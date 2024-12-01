@@ -93,7 +93,7 @@ style: |
 # Mermaid
 
 <div style="display: flex;">
-<pre class="mermaid" style="transform: translateX(0%) translateY(0%) scale(1.0); background-color: #ffffff">
+<pre class="mermaid" style="transform: translateX(0%) translateY(0%) scale(1.0); background-color: #ffffff;">
   graph TD
   A[Enter Chart Definition] --> B(Preview)
   B --> C{decide}

@@ -2,9 +2,23 @@
   "name": "@morish000/vscode-markdown-extrajs",
   "version": "0.0.1",
   "tasks": {
-    "esbuild": "deno run --allow-all esbuild.ts",
-    "watch:esbuild": "deno run --allow-all esbuild.ts --watch",
-    "package": "deno run --allow-all esbuild.ts --production"
+    "install": "deno install",
+    "esbuild": {
+      "command": "deno run --allow-all esbuild.ts",
+      "dependencies": ["install"]
+    },
+    "watch:esbuild": {
+      "command": "deno run --allow-all esbuild.ts --watch",
+      "dependencies": ["install"]
+    },
+    "production:esbuild": {
+      "command": "deno run --allow-all esbuild.ts --production",
+      "dependencies": ["install"]
+    },
+    "package": {
+      "command": "rm -rf node_modules && vsce package",
+      "dependencies": ["production:esbuild"]
+    }
   },
   "importMap": "import_map.json",
   "compilerOptions": {
