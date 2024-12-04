@@ -1,6 +1,7 @@
 var r=()=>`export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     const mermaid = await import(options.mermaidUrl);
-    mermaid.default.init();
+    mermaid.default.initialize();
+    mermaid.default.run();
 };`,o=r;var i=()=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
@@ -175,7 +176,7 @@ ${t.useUnoCSS?`data-extrajs-uno-css="${btoa(n())}"`:""}
 ${`data-extrajs-init="${btoa(c(t))}"`}
 ${`data-extrajs-options="${btoa("export default"+JSON.stringify(t))}"`}
 ${`data-extrajs-frontMatter="${btoa("export default"+JSON.stringify(e))}"`}>
-</template>`:"",g=(t,e)=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+</template>`:"",y=(t,e)=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
@@ -186,14 +187,5 @@ ${`data-extrajs-frontMatter="${btoa("export default"+JSON.stringify(e))}"`}>
       {}
     );
   }
-  const [
-    { default: attrOptions },
-    { default: attrFrontMatter },
-  ] = await Promise.all([
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
-  ]);
-  console.log(attrOptions);
-  console.log(attrFrontMatter);
-<\/script>`:"";export{g as createScriptTag,S as createTemplateTag,c as initAll};
+<\/script>`:"";export{y as createScriptTag,S as createTemplateTag,c as initAll};
 //# sourceMappingURL=create-tags.mjs.map

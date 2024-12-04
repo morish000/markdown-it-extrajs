@@ -108,14 +108,5 @@ export const createScriptTag = (
       {}
     );
   }
-  const [
-    { default: attrOptions },
-    { default: attrFrontMatter },
-  ] = await Promise.all([
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
-  ]);
-  console.log(attrOptions);
-  console.log(attrFrontMatter);
 </script>`
     : "";

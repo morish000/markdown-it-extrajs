@@ -1,7 +1,8 @@
-var n=Object.defineProperty;var f=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var u=Object.prototype.hasOwnProperty;var l=(t,e)=>{for(var s in e)n(t,s,{get:e[s],enumerable:!0})},d=(t,e,s,r)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of m(e))!u.call(t,o)&&o!==s&&n(t,o,{get:()=>e[o],enumerable:!(r=f(e,o))||r.enumerable});return t};var S=t=>d(n({},"__esModule",{value:!0}),t);var C={};l(C,{createScriptTag:()=>b,createTemplateTag:()=>x,initAll:()=>p});module.exports=S(C);var g=()=>`export default async (options = {}, _frontMatter = {}, _conf = {}) => {
+var n=Object.defineProperty;var f=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var u=Object.prototype.hasOwnProperty;var l=(t,e)=>{for(var s in e)n(t,s,{get:e[s],enumerable:!0})},d=(t,e,s,r)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of m(e))!u.call(t,o)&&o!==s&&n(t,o,{get:()=>e[o],enumerable:!(r=f(e,o))||r.enumerable});return t};var S=t=>d(n({},"__esModule",{value:!0}),t);var b={};l(b,{createScriptTag:()=>C,createTemplateTag:()=>x,initAll:()=>p});module.exports=S(b);var y=()=>`export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     const mermaid = await import(options.mermaidUrl);
-    mermaid.default.init();
-};`,i=g;var y=()=>`const extractIcons = (iconSet) => {
+    mermaid.default.initialize();
+    mermaid.default.run();
+};`,i=y;var g=()=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key !== "prefix" && key !== "default" && typeof value !== "string"
@@ -53,7 +54,7 @@ export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     } catch (error) {
         throw error;
     }
-};`,a=y;var w=()=>`export default async (options = {}, frontMatter = {}, _conf = {}) => {
+};`,a=g;var w=()=>`export default async (options = {}, frontMatter = {}, _conf = {}) => {
     const conf = {
         ...frontMatter,
     };
@@ -175,7 +176,7 @@ ${t.useUnoCSS?`data-extrajs-uno-css="${btoa(c())}"`:""}
 ${`data-extrajs-init="${btoa(p(t))}"`}
 ${`data-extrajs-options="${btoa("export default"+JSON.stringify(t))}"`}
 ${`data-extrajs-frontMatter="${btoa("export default"+JSON.stringify(e))}"`}>
-</template>`:"",b=(t,e)=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+</template>`:"",C=(t,e)=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
@@ -186,14 +187,5 @@ ${`data-extrajs-frontMatter="${btoa("export default"+JSON.stringify(e))}"`}>
       {}
     );
   }
-  const [
-    { default: attrOptions },
-    { default: attrFrontMatter },
-  ] = await Promise.all([
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
-  ]);
-  console.log(attrOptions);
-  console.log(attrFrontMatter);
 <\/script>`:"";
 //# sourceMappingURL=create-tags.cjs.map

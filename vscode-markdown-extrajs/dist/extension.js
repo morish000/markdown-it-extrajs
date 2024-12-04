@@ -3601,19 +3601,19 @@ __export(extension_exports, {
 });
 module.exports = __toCommonJS(extension_exports);
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.7/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/plugin.ts
 var import_npm_markdown_it_front_matter_0_2 = __toESM(require_markdown_it_front_matter());
 var import_npm_gray_matter_4_0 = __toESM(require_gray_matter());
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.7/src/init-mermaid.ts
-var initMermaid = (options2, _frontMatter) => `export default async (_ = {}) => {
-    const mermaid = await import("${options2.mermaidUrl}");
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/init-mermaid.ts
+var initMermaid = () => `export default async (options = {}, _frontMatter = {}, _conf = {}) => {
+    const mermaid = await import(options.mermaidUrl);
     mermaid.default.init();
 };`;
 var init_mermaid_default = initMermaid;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.7/src/init-font-asesome.ts
-var initFontAsesome = (options2, _frontMatter) => `const extractIcons = (iconSet) => {
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/init-font-asesome.ts
+var initFontAsesome = () => `const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key !== "prefix" && key !== "default" && typeof value !== "string"
@@ -3621,7 +3621,7 @@ var initFontAsesome = (options2, _frontMatter) => `const extractIcons = (iconSet
         .map(([, value]) => value);
 };
 
-export default async (_ = {}) => {
+export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     try {
         const [
             fontawesomeSvgCore,
@@ -3629,10 +3629,10 @@ export default async (_ = {}) => {
             freeRegularSvgIcons,
             freeBrandsSvgIcons,
         ] = await Promise.all([
-            import("${options2.fontAwesomeUrl}/fontawesome-svg-core"),
-            import("${options2.fontAwesomeUrl}/free-solid-svg-icons"),
-            import("${options2.fontAwesomeUrl}/free-regular-svg-icons"),
-            import("${options2.fontAwesomeUrl}/free-brands-svg-icons"),
+            import(options.fontAwesomeUrl + "/fontawesome-svg-core"),
+            import(options.fontAwesomeUrl + "/free-solid-svg-icons"),
+            import(options.fontAwesomeUrl + "/free-regular-svg-icons"),
+            import(options.fontAwesomeUrl + "/free-brands-svg-icons"),
         ]);
 
         const icons = [
@@ -3668,30 +3668,39 @@ export default async (_ = {}) => {
 };`;
 var init_font_asesome_default = initFontAsesome;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.7/src/init-uno-css.ts
-var initUnoCSS = (options2, frontMatter = {}) => {
-  const conf = {
-    ...frontMatter
-  };
-  if (conf.presetIcons) {
-    conf.presetIcons.cdn = options2.unoCSSPresetIconCDN;
-  }
-  return `
-import initUnocssRuntime from "${options2.unoCSSUrl}/runtime";
-import initPresetIcons from "${options2.unoCSSUrl}/preset-icons/browser";
-import initPresetUno from "${options2.unoCSSUrl}/preset-uno";
-import initPresetWind from "${options2.unoCSSUrl}/preset-wind";
-import initPresetMini from "${options2.unoCSSUrl}/preset-mini";
-import initPresetAttributify from "${options2.unoCSSUrl}/preset-attributify";
-import initPresetTypography from "${options2.unoCSSUrl}/preset-typography";
-import initPresetWebFonts from "${options2.unoCSSUrl}/preset-web-fonts";
-import initPresetTagify from "${options2.unoCSSUrl}/preset-tagify";
-import initPresetRemToPx from "${options2.unoCSSUrl}/preset-rem-to-px";
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/init-uno-css.ts
+var initUnoCSS = () => `export default async (options = {}, frontMatter = {}, _conf = {}) => {
+    const conf = {
+        ...frontMatter,
+    };
+    if (conf.presetIcons) {
+        conf.presetIcons.cdn = options.unoCSSPresetIconCDN;
+    }
 
-const options = ${JSON.stringify(options2)};
-const conf = ${JSON.stringify(conf)};
+    const [
+        { default: initUnocssRuntime },
+        { default: initPresetIcons },
+        { default: initPresetUno },
+        { default: initPresetWind },
+        { default: initPresetMini },
+        { default: initPresetAttributify },
+        { default: initPresetTypography },
+        { default: initPresetWebFonts },
+        { default: initPresetTagify },
+        { default: initPresetRemToPx },
+    ] = await Promise.all([
+        import(options.unoCSSUrl + "/runtime"),
+        import(options.unoCSSUrl + "/preset-icons/browser"),
+        import(options.unoCSSUrl + "/preset-uno"),
+        import(options.unoCSSUrl + "/preset-wind"),
+        import(options.unoCSSUrl + "/preset-mini"),
+        import(options.unoCSSUrl + "/preset-attributify"),
+        import(options.unoCSSUrl + "/preset-typography"),
+        import(options.unoCSSUrl + "/preset-web-fonts"),
+        import(options.unoCSSUrl + "/preset-tagify"),
+        import(options.unoCSSUrl + "/preset-rem-to-px"),
+    ]);
 
-export default async (_conf = {}) => {
     const presets = [];
 
     if (conf.presetWind) {
@@ -3739,14 +3748,12 @@ export default async (_conf = {}) => {
             presets,
         },
     });
-};
-`;
-};
+};`;
 var init_uno_css_default = initUnoCSS;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.7/src/create-tags.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/create-tags.ts
 var initAll = (extrajsOptions) => extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS ? `
-export default async (_conf = {}) => {
+export default async (options = {}, frontMatter = {}, _conf = {}) => {
   const tasks = [];
 ${extrajsOptions.useMermaid ? `
   const mermaidScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-mermaid-js');
@@ -3754,7 +3761,7 @@ ${extrajsOptions.useMermaid ? `
     tasks.push(
       (async () => {
         const initMermaid = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid.default(_conf);
+        await initMermaid.default(options, frontMatter, _conf);
       })()
     );
   }` : ""}
@@ -3764,7 +3771,7 @@ ${extrajsOptions.useFontAwesome ? `
     tasks.push(
       (async () => {
         const initFontAwesome = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome.default(_conf);
+        await initFontAwesome.default(options, frontMatter, _conf);
       })()
     );
   }` : ""}
@@ -3774,7 +3781,7 @@ ${extrajsOptions.useUnoCSS ? `
     tasks.push(
       (async () => {
         const initUnoCSS = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS.default(_conf);
+        await initUnoCSS.default(options, frontMatter, _conf);
       })()
     );
   }` : ""}
@@ -3783,28 +3790,36 @@ ${extrajsOptions.useUnoCSS ? `
 var createTemplateTag = (extrajsOptions, frontMatter) => extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS ? `
 <template
   id="extrajs"
-${extrajsOptions.useMermaid ? `data-extrajs-mermaid-js="${btoa(init_mermaid_default(extrajsOptions, frontMatter))}"` : ""}
-${extrajsOptions.useFontAwesome ? `data-extrajs-font-awesome="${btoa(init_font_asesome_default(extrajsOptions, frontMatter))}"` : ""}
-${extrajsOptions.useUnoCSS ? `data-extrajs-uno-css="${btoa(
-  init_uno_css_default(
-    extrajsOptions,
-    frontMatter
-  )
-)}"` : ""}
-${`data-extrajs-init="${btoa(
-  initAll(extrajsOptions)
-)}"`}>
+${extrajsOptions.useMermaid ? `data-extrajs-mermaid-js="${btoa(init_mermaid_default())}"` : ""}
+${extrajsOptions.useFontAwesome ? `data-extrajs-font-awesome="${btoa(init_font_asesome_default())}"` : ""}
+${extrajsOptions.useUnoCSS ? `data-extrajs-uno-css="${btoa(init_uno_css_default())}"` : ""}
+${`data-extrajs-init="${btoa(initAll(extrajsOptions))}"`}
+${`data-extrajs-options="${btoa("export default" + JSON.stringify(extrajsOptions))}"`}
+${`data-extrajs-frontMatter="${btoa("export default" + JSON.stringify(frontMatter))}"`}>
 </template>` : "";
-var createScriptTag = (extrajsOptions) => (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS) && extrajsOptions.outputScriptTag ? `
+var createScriptTag = (extrajsOptions, frontMatter) => (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS) && extrajsOptions.outputScriptTag ? `
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
     const init = await import("data:text/javascript;base64," + initScript);
-    await init.default();
+    await init.default(
+      ${JSON.stringify(extrajsOptions)},
+      ${JSON.stringify(frontMatter)},
+      {}
+    );
   }
+  const [
+    { default: attrOptions },
+    { default: attrFrontMatter },
+  ] = await Promise.all([
+    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
+    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
+  ]);
+  console.log(attrOptions);
+  console.log(attrFrontMatter);
 </script>` : "";
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.7/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/plugin.ts
 var defaultOptions = {
   discardFrontMatter: true,
   useMermaid: false,
@@ -3835,12 +3850,12 @@ function extraJsPlugin(md, userOptions) {
       ...!frontMatter.useFontAwesome ? { useFontAwesome: false } : {},
       ...!frontMatter.useUnoCSS ? { useUnoCSS: false } : {}
     };
-    return render.apply(md.renderer, args) + createTemplateTag(options2, frontMatter) + createScriptTag(options2);
+    return render.apply(md.renderer, args) + createTemplateTag(options2, frontMatter) + createScriptTag(options2, frontMatter);
   };
 }
 var plugin_default = extraJsPlugin;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.7/src/index.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/index.ts
 var src_default = plugin_default;
 
 // src/extension.ts

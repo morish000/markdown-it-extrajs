@@ -16,7 +16,7 @@ const iconCollections: () => Record<string, () => Promise<IconifyJSON>> =
     return collections;
   };
 
-const unoCSSIcons2 = () => ({
+const unoCSSIcons = () => ({
   presetIcons: {
     collections: {
       ...iconCollections(),
@@ -25,12 +25,26 @@ const unoCSSIcons2 = () => ({
 });
 
 const init = async () => {
-  const initScript = window.document.getElementById("extrajs")?.getAttribute(
+  const optionsScript = document.getElementById("extrajs")?.getAttribute(
+    "data-extrajs-options",
+  );
+  const frontMatterScript = document.getElementById("extrajs")?.getAttribute(
+    "data-extrajs-frontMatter",
+  );
+  const initScript = document.getElementById("extrajs")?.getAttribute(
     "data-extrajs-init",
   );
-  if (initScript) {
-    const init = await import("data:text/javascript;base64," + initScript);
-    await init.default(unoCSSIcons2());
+  if (optionsScript && frontMatterScript && initScript) {
+    const [
+      { default: init },
+      { default: options },
+      { default: frontMatter },
+    ] = await Promise.all([
+      import("data:text/javascript;base64," + initScript),
+      import("data:text/javascript;base64," + optionsScript),
+      import("data:text/javascript;base64," + frontMatterScript),
+    ]);
+    await init(options, frontMatter, unoCSSIcons());
   }
 };
 

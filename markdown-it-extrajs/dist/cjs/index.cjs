@@ -1,6 +1,7 @@
-var w=Object.create;var a=Object.defineProperty;var C=Object.getOwnPropertyDescriptor;var M=Object.getOwnPropertyNames;var b=Object.getPrototypeOf,I=Object.prototype.hasOwnProperty;var U=(t,e)=>{for(var r in e)a(t,r,{get:e[r],enumerable:!0})},f=(t,e,r,n)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of M(e))!I.call(t,o)&&o!==r&&a(t,o,{get:()=>e[o],enumerable:!(n=C(e,o))||n.enumerable});return t};var m=(t,e,r)=>(r=t!=null?w(b(t)):{},f(e||!t||!t.__esModule?a(r,"default",{value:t,enumerable:!0}):r,t)),h=t=>f(a({},"__esModule",{value:!0}),t);var T={};U(T,{createScriptTag:()=>c,createTemplateTag:()=>p,default:()=>J,initAll:()=>S});module.exports=h(T);var g=m(require("markdown-it-front-matter")),y=m(require("gray-matter"));var v=()=>`export default async (options = {}, _frontMatter = {}, _conf = {}) => {
+var x=Object.create;var a=Object.defineProperty;var C=Object.getOwnPropertyDescriptor;var M=Object.getOwnPropertyNames;var I=Object.getPrototypeOf,U=Object.prototype.hasOwnProperty;var b=(t,e)=>{for(var r in e)a(t,r,{get:e[r],enumerable:!0})},f=(t,e,r,n)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of M(e))!U.call(t,o)&&o!==r&&a(t,o,{get:()=>e[o],enumerable:!(n=C(e,o))||n.enumerable});return t};var m=(t,e,r)=>(r=t!=null?x(I(t)):{},f(e||!t||!t.__esModule?a(r,"default",{value:t,enumerable:!0}):r,t)),h=t=>f(a({},"__esModule",{value:!0}),t);var T={};b(T,{createScriptTag:()=>c,createTemplateTag:()=>p,default:()=>J,initAll:()=>S});module.exports=h(T);var g=m(require("markdown-it-front-matter")),y=m(require("gray-matter"));var v=()=>`export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     const mermaid = await import(options.mermaidUrl);
-    mermaid.default.init();
+    mermaid.default.initialize();
+    mermaid.default.run();
 };`,u=v;var A=()=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
@@ -53,7 +54,7 @@ export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     } catch (error) {
         throw error;
     }
-};`,l=A;var E=()=>`export default async (options = {}, frontMatter = {}, _conf = {}) => {
+};`,l=A;var P=()=>`export default async (options = {}, frontMatter = {}, _conf = {}) => {
     const conf = {
         ...frontMatter,
     };
@@ -132,7 +133,7 @@ export default async (options = {}, _frontMatter = {}, _conf = {}) => {
             presets,
         },
     });
-};`,d=E;var S=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+};`,d=P;var S=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 export default async (options = {}, frontMatter = {}, _conf = {}) => {
   const tasks = [];
 ${t.useMermaid?`
@@ -186,14 +187,5 @@ ${`data-extrajs-frontMatter="${btoa("export default"+JSON.stringify(e))}"`}>
       {}
     );
   }
-  const [
-    { default: attrOptions },
-    { default: attrFrontMatter },
-  ] = await Promise.all([
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
-  ]);
-  console.log(attrOptions);
-  console.log(attrFrontMatter);
-<\/script>`:"";var P={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function F(t,e){let{renderer:{render:r},parse:n}=t,o={};e.discardFrontMatter&&t.use(g.default,s=>{}),t.parse=(s,i)=>(o=(0,y.default)(s).data.extrajs??{},n.call(t,s,i)),t.renderer.render=function(...s){let i={...P,...e,...o.useMermaid?{}:{useMermaid:!1},...o.useFontAwesome?{}:{useFontAwesome:!1},...o.useUnoCSS?{}:{useUnoCSS:!1}};return r.apply(t.renderer,s)+p(i,o)+c(i,o)}}var x=F;var J=x;
+<\/script>`:"";var E={discardFrontMatter:!0,useMermaid:!1,mermaidUrl:"https://esm.sh/mermaid",useFontAwesome:!1,fontAwesomeUrl:"https://esm.sh/@fortawesome",useUnoCSS:!1,unoCSSUrl:"https://esm.sh/@unocss",unoCSSPresetIconCDN:"https://esm.sh/",outputScriptTag:!0};function F(t,e){let{renderer:{render:r},parse:n}=t,o={};e.discardFrontMatter&&t.use(g.default,s=>{}),t.parse=(s,i)=>(o=(0,y.default)(s).data.extrajs??{},n.call(t,s,i)),t.renderer.render=function(...s){let i={...E,...e,...o.useMermaid?{}:{useMermaid:!1},...o.useFontAwesome?{}:{useFontAwesome:!1},...o.useUnoCSS?{}:{useUnoCSS:!1}};return r.apply(t.renderer,s)+p(i,o)+c(i,o)}}var w=F;var J=w;
 //# sourceMappingURL=index.cjs.map
