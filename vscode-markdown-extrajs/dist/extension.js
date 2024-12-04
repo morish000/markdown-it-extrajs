@@ -3601,18 +3601,19 @@ __export(extension_exports, {
 });
 module.exports = __toCommonJS(extension_exports);
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/plugin.ts
 var import_npm_markdown_it_front_matter_0_2 = __toESM(require_markdown_it_front_matter());
 var import_npm_gray_matter_4_0 = __toESM(require_gray_matter());
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/init-mermaid.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/init-mermaid.ts
 var initMermaid = () => `export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     const mermaid = await import(options.mermaidUrl);
-    mermaid.default.init();
+    mermaid.default.initialize();
+    mermaid.default.run();
 };`;
 var init_mermaid_default = initMermaid;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/init-font-asesome.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/init-font-asesome.ts
 var initFontAsesome = () => `const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
@@ -3668,7 +3669,7 @@ export default async (options = {}, _frontMatter = {}, _conf = {}) => {
 };`;
 var init_font_asesome_default = initFontAsesome;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/init-uno-css.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/init-uno-css.ts
 var initUnoCSS = () => `export default async (options = {}, frontMatter = {}, _conf = {}) => {
     const conf = {
         ...frontMatter,
@@ -3751,7 +3752,7 @@ var initUnoCSS = () => `export default async (options = {}, frontMatter = {}, _c
 };`;
 var init_uno_css_default = initUnoCSS;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/create-tags.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/create-tags.ts
 var initAll = (extrajsOptions) => extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS ? `
 export default async (options = {}, frontMatter = {}, _conf = {}) => {
   const tasks = [];
@@ -3808,18 +3809,9 @@ var createScriptTag = (extrajsOptions, frontMatter) => (extrajsOptions.useMermai
       {}
     );
   }
-  const [
-    { default: attrOptions },
-    { default: attrFrontMatter },
-  ] = await Promise.all([
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
-    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
-  ]);
-  console.log(attrOptions);
-  console.log(attrFrontMatter);
 </script>` : "";
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/plugin.ts
 var defaultOptions = {
   discardFrontMatter: true,
   useMermaid: false,
@@ -3855,7 +3847,7 @@ function extraJsPlugin(md, userOptions) {
 }
 var plugin_default = extraJsPlugin;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.8/src/index.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/index.ts
 var src_default = plugin_default;
 
 // src/extension.ts

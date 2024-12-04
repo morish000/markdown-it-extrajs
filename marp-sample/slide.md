@@ -3,6 +3,8 @@ marp: true
 style: |
   pre.mermaid {
     all: unset;
+    max-height: 100% !important;
+    max-width: 100% !important;
   },
   .mermaid svg {
     max-height: 100% !important;
@@ -90,6 +92,7 @@ extrajs:
 
 # Mermaid
 
+<div style="display: flex;">
 <pre class="mermaid" style="background-color: #ffffff;">
 graph TD
   A[Enter Chart Definition] --> B(Preview)
@@ -100,3 +103,4 @@ graph TD
   D --> F[Save Image and Code]
   F --> B
 </pre>
+</div>
