@@ -34,7 +34,6 @@ extrajs:
   presetRemToPx: false
 ---
 
-<h1>h1 tag escape.</h1>
 # Title
 `;
 

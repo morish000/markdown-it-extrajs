@@ -1,26 +1,25 @@
 // deno-lint-ignore-file no-window no-window-prefix
-const unoCSSIcons = () => ({
+import { icons } from "@unocss/preset-icons/core";
+import type { IconifyJSON } from "@iconify/types";
+
+const iconLoader = (key: string) => () =>
+  import(`https://esm.sh/@iconify-json/${key}/index.mjs`).then((i) => i.icons);
+
+const iconCollections: () => Record<string, () => Promise<IconifyJSON>> =
+  () => {
+    const collections: Record<string, () => Promise<IconifyJSON>> = {};
+
+    icons.forEach((key: string) => {
+      collections[key] = iconLoader(key);
+    });
+
+    return collections;
+  };
+
+const unoCSSIcons2 = () => ({
   presetIcons: {
     collections: {
-      "carbon": () =>
-        import("@iconify-json/carbon/icons.json").then((i) => i.default),
-      "fa6-brands": () =>
-        import("@iconify-json/fa6-brands/icons.json").then((i) => i.default),
-      "fa6-regular": () =>
-        import("@iconify-json/fa6-regular/icons.json").then((i) => i.default),
-      "fa6-solid": () =>
-        import("@iconify-json/fa6-solid/icons.json").then((i) => i.default),
-      "flagpack": () =>
-        import("@iconify-json/flagpack/icons.json").then((i) => i.default),
-      "logos": () =>
-        import("@iconify-json/logos/icons.json").then((i) => i.default),
-      "mdi": () =>
-        import("@iconify-json/mdi/icons.json").then((i) => i.default),
-      "ph": () => import("@iconify-json/ph/icons.json").then((i) => i.default),
-      "tdesign": () =>
-        import("@iconify-json/tdesign/icons.json").then((i) => i.default),
-      "twemoji": () =>
-        import("@iconify-json/twemoji/icons.json").then((i) => i.default),
+      ...iconCollections(),
     },
   },
 });
@@ -31,7 +30,7 @@ const init = async () => {
   );
   if (initScript) {
     const init = await import("data:text/javascript;base64," + initScript);
-    await init.default(unoCSSIcons());
+    await init.default(unoCSSIcons2());
   }
 };
 

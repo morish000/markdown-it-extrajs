@@ -46,7 +46,7 @@ export function extraJsPlugin(md: MarkdownIt, userOptions: ExtraJSOptions) {
 
     return render.apply(md.renderer, args) +
       createTemplateTag(options, frontMatter) +
-      createScriptTag(options);
+      createScriptTag(options, frontMatter);
   };
 }
 

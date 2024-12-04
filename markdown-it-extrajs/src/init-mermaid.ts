@@ -1,11 +1,6 @@
-import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
-
-export const initMermaid = (
-  options: ExtraJSOptions,
-  _frontMatter: ExtraJSFrontMatter,
-) =>
-  `export default async (_ = {}) => {
-    const mermaid = await import("${options.mermaidUrl}");
+export const initMermaid = () =>
+  `export default async (options = {}, _frontMatter = {}, _conf = {}) => {
+    const mermaid = await import(options.mermaidUrl);
     mermaid.default.init();
 };`;
 

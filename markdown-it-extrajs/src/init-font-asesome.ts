@@ -1,9 +1,4 @@
-import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
-
-export const initFontAsesome = (
-  options: ExtraJSOptions,
-  _frontMatter: ExtraJSFrontMatter,
-) =>
+export const initFontAsesome = () =>
   `const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
@@ -12,7 +7,7 @@ export const initFontAsesome = (
         .map(([, value]) => value);
 };
 
-export default async (_ = {}) => {
+export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     try {
         const [
             fontawesomeSvgCore,
@@ -20,10 +15,10 @@ export default async (_ = {}) => {
             freeRegularSvgIcons,
             freeBrandsSvgIcons,
         ] = await Promise.all([
-            import("${options.fontAwesomeUrl}/fontawesome-svg-core"),
-            import("${options.fontAwesomeUrl}/free-solid-svg-icons"),
-            import("${options.fontAwesomeUrl}/free-regular-svg-icons"),
-            import("${options.fontAwesomeUrl}/free-brands-svg-icons"),
+            import(options.fontAwesomeUrl + "/fontawesome-svg-core"),
+            import(options.fontAwesomeUrl + "/free-solid-svg-icons"),
+            import(options.fontAwesomeUrl + "/free-regular-svg-icons"),
+            import(options.fontAwesomeUrl + "/free-brands-svg-icons"),
         ]);
 
         const icons = [

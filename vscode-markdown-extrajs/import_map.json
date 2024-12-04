@@ -16,6 +16,8 @@
     "@iconify-json/tdesign": "npm:@iconify-json/tdesign",
     "@iconify-json/twemoji": "npm:@iconify-json/twemoji",
     "esbuild": "https://deno.land/x/esbuild@v0.24.0/mod.js",
-    "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.x"
+    "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.x",
+    "@unocss/preset-icons": "npm:@unocss/preset-icons",
+    "@iconify/types": "npm:@iconify/types"
   }
 }

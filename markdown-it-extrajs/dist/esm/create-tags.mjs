@@ -1,7 +1,7 @@
-var i=(t,e)=>`export default async (_ = {}) => {
-    const mermaid = await import("${t.mermaidUrl}");
+var r=()=>`export default async (options = {}, _frontMatter = {}, _conf = {}) => {
+    const mermaid = await import(options.mermaidUrl);
     mermaid.default.init();
-};`,o=i;var a=(t,e)=>`const extractIcons = (iconSet) => {
+};`,o=r;var i=()=>`const extractIcons = (iconSet) => {
     return Object.entries(iconSet)
         .filter(([key, value]) =>
             key !== "prefix" && key !== "default" && typeof value !== "string"
@@ -9,7 +9,7 @@ var i=(t,e)=>`export default async (_ = {}) => {
         .map(([, value]) => value);
 };
 
-export default async (_ = {}) => {
+export default async (options = {}, _frontMatter = {}, _conf = {}) => {
     try {
         const [
             fontawesomeSvgCore,
@@ -17,10 +17,10 @@ export default async (_ = {}) => {
             freeRegularSvgIcons,
             freeBrandsSvgIcons,
         ] = await Promise.all([
-            import("${t.fontAwesomeUrl}/fontawesome-svg-core"),
-            import("${t.fontAwesomeUrl}/free-solid-svg-icons"),
-            import("${t.fontAwesomeUrl}/free-regular-svg-icons"),
-            import("${t.fontAwesomeUrl}/free-brands-svg-icons"),
+            import(options.fontAwesomeUrl + "/fontawesome-svg-core"),
+            import(options.fontAwesomeUrl + "/free-solid-svg-icons"),
+            import(options.fontAwesomeUrl + "/free-regular-svg-icons"),
+            import(options.fontAwesomeUrl + "/free-brands-svg-icons"),
         ]);
 
         const icons = [
@@ -53,22 +53,38 @@ export default async (_ = {}) => {
     } catch (error) {
         throw error;
     }
-};`,s=a;var c=(t,e={})=>{let r={...e};return r.presetIcons&&(r.presetIcons.cdn=t.unoCSSPresetIconCDN),`
-import initUnocssRuntime from "${t.unoCSSUrl}/runtime";
-import initPresetIcons from "${t.unoCSSUrl}/preset-icons/browser";
-import initPresetUno from "${t.unoCSSUrl}/preset-uno";
-import initPresetWind from "${t.unoCSSUrl}/preset-wind";
-import initPresetMini from "${t.unoCSSUrl}/preset-mini";
-import initPresetAttributify from "${t.unoCSSUrl}/preset-attributify";
-import initPresetTypography from "${t.unoCSSUrl}/preset-typography";
-import initPresetWebFonts from "${t.unoCSSUrl}/preset-web-fonts";
-import initPresetTagify from "${t.unoCSSUrl}/preset-tagify";
-import initPresetRemToPx from "${t.unoCSSUrl}/preset-rem-to-px";
+};`,s=i;var a=()=>`export default async (options = {}, frontMatter = {}, _conf = {}) => {
+    const conf = {
+        ...frontMatter,
+    };
+    if (conf.presetIcons) {
+        conf.presetIcons.cdn = options.unoCSSPresetIconCDN;
+    }
 
-const options = ${JSON.stringify(t)};
-const conf = ${JSON.stringify(r)};
+    const [
+        { default: initUnocssRuntime },
+        { default: initPresetIcons },
+        { default: initPresetUno },
+        { default: initPresetWind },
+        { default: initPresetMini },
+        { default: initPresetAttributify },
+        { default: initPresetTypography },
+        { default: initPresetWebFonts },
+        { default: initPresetTagify },
+        { default: initPresetRemToPx },
+    ] = await Promise.all([
+        import(options.unoCSSUrl + "/runtime"),
+        import(options.unoCSSUrl + "/preset-icons/browser"),
+        import(options.unoCSSUrl + "/preset-uno"),
+        import(options.unoCSSUrl + "/preset-wind"),
+        import(options.unoCSSUrl + "/preset-mini"),
+        import(options.unoCSSUrl + "/preset-attributify"),
+        import(options.unoCSSUrl + "/preset-typography"),
+        import(options.unoCSSUrl + "/preset-web-fonts"),
+        import(options.unoCSSUrl + "/preset-tagify"),
+        import(options.unoCSSUrl + "/preset-rem-to-px"),
+    ]);
 
-export default async (_conf = {}) => {
     const presets = [];
 
     if (conf.presetWind) {
@@ -116,9 +132,8 @@ export default async (_conf = {}) => {
             presets,
         },
     });
-};
-`},n=c;var m=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
-export default async (_conf = {}) => {
+};`,n=a;var c=t=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+export default async (options = {}, frontMatter = {}, _conf = {}) => {
   const tasks = [];
 ${t.useMermaid?`
   const mermaidScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-mermaid-js');
@@ -126,7 +141,7 @@ ${t.useMermaid?`
     tasks.push(
       (async () => {
         const initMermaid = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid.default(_conf);
+        await initMermaid.default(options, frontMatter, _conf);
       })()
     );
   }`:""}
@@ -136,7 +151,7 @@ ${t.useFontAwesome?`
     tasks.push(
       (async () => {
         const initFontAwesome = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome.default(_conf);
+        await initFontAwesome.default(options, frontMatter, _conf);
       })()
     );
   }`:""}
@@ -146,24 +161,39 @@ ${t.useUnoCSS?`
     tasks.push(
       (async () => {
         const initUnoCSS = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS.default(_conf);
+        await initUnoCSS.default(options, frontMatter, _conf);
       })()
     );
   }`:""}
   tasks.length > 0 && await Promise.all(tasks);
-};`:"",y=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
+};`:"",S=(t,e)=>t.useMermaid||t.useFontAwesome||t.useUnoCSS?`
 <template
   id="extrajs"
-${t.useMermaid?`data-extrajs-mermaid-js="${btoa(o(t,e))}"`:""}
-${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(s(t,e))}"`:""}
-${t.useUnoCSS?`data-extrajs-uno-css="${btoa(n(t,e))}"`:""}
-${`data-extrajs-init="${btoa(m(t))}"`}>
-</template>`:"",g=t=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
+${t.useMermaid?`data-extrajs-mermaid-js="${btoa(o())}"`:""}
+${t.useFontAwesome?`data-extrajs-font-awesome="${btoa(s())}"`:""}
+${t.useUnoCSS?`data-extrajs-uno-css="${btoa(n())}"`:""}
+${`data-extrajs-init="${btoa(c(t))}"`}
+${`data-extrajs-options="${btoa("export default"+JSON.stringify(t))}"`}
+${`data-extrajs-frontMatter="${btoa("export default"+JSON.stringify(e))}"`}>
+</template>`:"",g=(t,e)=>(t.useMermaid||t.useFontAwesome||t.useUnoCSS)&&t.outputScriptTag?`
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
     const init = await import("data:text/javascript;base64," + initScript);
-    await init.default();
+    await init.default(
+      ${JSON.stringify(t)},
+      ${JSON.stringify(e)},
+      {}
+    );
   }
-<\/script>`:"";export{g as createScriptTag,y as createTemplateTag,m as initAll};
+  const [
+    { default: attrOptions },
+    { default: attrFrontMatter },
+  ] = await Promise.all([
+    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
+    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
+  ]);
+  console.log(attrOptions);
+  console.log(attrFrontMatter);
+<\/script>`:"";export{g as createScriptTag,S as createTemplateTag,c as initAll};
 //# sourceMappingURL=create-tags.mjs.map

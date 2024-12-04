@@ -9,7 +9,7 @@ export const initAll = (
   (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome ||
       extrajsOptions.useUnoCSS)
     ? `
-export default async (_conf = {}) => {
+export default async (options = {}, frontMatter = {}, _conf = {}) => {
   const tasks = [];
 ${
       extrajsOptions.useMermaid
@@ -19,7 +19,7 @@ ${
     tasks.push(
       (async () => {
         const initMermaid = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid.default(_conf);
+        await initMermaid.default(options, frontMatter, _conf);
       })()
     );
   }`
@@ -33,7 +33,7 @@ ${
     tasks.push(
       (async () => {
         const initFontAwesome = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome.default(_conf);
+        await initFontAwesome.default(options, frontMatter, _conf);
       })()
     );
   }`
@@ -47,7 +47,7 @@ ${
     tasks.push(
       (async () => {
         const initUnoCSS = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS.default(_conf);
+        await initUnoCSS.default(options, frontMatter, _conf);
       })()
     );
   }`
@@ -68,40 +68,32 @@ export const createTemplateTag = (
   id="extrajs"
 ${
       extrajsOptions.useMermaid
-        ? `data-extrajs-mermaid-js="${
-          btoa(initMermaid(extrajsOptions, frontMatter))
-        }"`
+        ? `data-extrajs-mermaid-js="${btoa(initMermaid())}"`
         : ""
     }
 ${
       extrajsOptions.useFontAwesome
-        ? `data-extrajs-font-awesome="${
-          btoa(initFontAwesome(extrajsOptions, frontMatter))
-        }"`
+        ? `data-extrajs-font-awesome="${btoa(initFontAwesome())}"`
         : ""
     }
 ${
       extrajsOptions.useUnoCSS
-        ? `data-extrajs-uno-css="${
-          btoa(
-            initUnoCSS(
-              extrajsOptions,
-              frontMatter,
-            ),
-          )
-        }"`
+        ? `data-extrajs-uno-css="${btoa(initUnoCSS())}"`
         : ""
     }
-${`data-extrajs-init="${
-      btoa(
-        initAll(extrajsOptions),
-      )
+${`data-extrajs-init="${btoa(initAll(extrajsOptions))}"`}
+${`data-extrajs-options="${
+      btoa("export default" + JSON.stringify(extrajsOptions))
+    }"`}
+${`data-extrajs-frontMatter="${
+      btoa("export default" + JSON.stringify(frontMatter))
     }"`}>
 </template>`
     : "";
 
 export const createScriptTag = (
   extrajsOptions: ExtraJSOptions,
+  frontMatter: ExtraJSFrontMatter,
 ): string =>
   (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome ||
       extrajsOptions.useUnoCSS) && extrajsOptions.outputScriptTag
@@ -110,7 +102,20 @@ export const createScriptTag = (
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
     const init = await import("data:text/javascript;base64," + initScript);
-    await init.default();
+    await init.default(
+      ${JSON.stringify(extrajsOptions)},
+      ${JSON.stringify(frontMatter)},
+      {}
+    );
   }
+  const [
+    { default: attrOptions },
+    { default: attrFrontMatter },
+  ] = await Promise.all([
+    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-options')),
+    import("data:text/javascript;base64," + document.getElementById('extrajs')?.getAttribute('data-extrajs-frontMatter')),
+  ]);
+  console.log(attrOptions);
+  console.log(attrFrontMatter);
 </script>`
     : "";

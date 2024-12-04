@@ -23,8 +23,6 @@ extrajs:
       - style
 ---
 
-<h1>h1 tag escape.</h1>
-
 # Title
 
 ---
@@ -48,14 +46,16 @@ extrajs:
 
 # UnoCSS icons
 
-<div class="i-ph-anchor-simple-thin"></div>
-<div class="i-mdi-alarm text-orange-400"></div>
-<div class="i-logos-vue text-3xl"></div>
-<div class="i-carbon-sun dark:i-carbon-moon" un-cloak></div>
-<div class="i-twemoji-grinning-face-with-smiling-eyes hover:i-twemoji-face-with-tears-of-joy"></div>
-<div class="i-flagpack:jp"></div>
-<div class="i-flagpack:us"></div>
-<div class="i-tdesign:arrow-right-circle-filled"></div>
+<div>
+  <div class="i-ph-anchor-simple-thin"></div>
+  <div class="i-mdi-alarm text-orange-400"></div>
+  <div class="i-logos-vue text-3xl"></div>
+  <div class="i-carbon-sun dark:i-carbon-moon" un-cloak></div>
+  <div class="i-twemoji-grinning-face-with-smiling-eyes hover:i-twemoji-face-with-tears-of-joy"></div>
+  <div class="i-flagpack:jp"></div>
+  <div class="i-flagpack:us"></div>
+  <div class="i-tdesign:arrow-right-circle-filled"></div>
+</div>
 <div style="color: red;">
   <div class="i-fa6-solid:user"></div>
   <i class="i-fa6-solid:user"></i>
@@ -90,9 +90,8 @@ extrajs:
 
 # Mermaid
 
-<div style="display: flex;">
-<pre class="mermaid" style="transform: translateX(0%) translateY(0%) scale(1.0);">
-  graph TD
+<pre class="mermaid" style="background-color: #ffffff;">
+graph TD
   A[Enter Chart Definition] --> B(Preview)
   B --> C{decide}
   C --> D[Keep]
@@ -101,4 +100,3 @@ extrajs:
   D --> F[Save Image and Code]
   F --> B
 </pre>
-</div>

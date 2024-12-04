@@ -1,32 +1,36 @@
-import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
+export const initUnoCSS = () =>
+  `export default async (options = {}, frontMatter = {}, _conf = {}) => {
+    const conf = {
+        ...frontMatter,
+    };
+    if (conf.presetIcons) {
+        conf.presetIcons.cdn = options.unoCSSPresetIconCDN;
+    }
 
-export const initUnoCSS = (
-  options: ExtraJSOptions,
-  frontMatter: ExtraJSFrontMatter = {},
-) => {
-  const conf = {
-    ...frontMatter,
-  };
-  if (conf.presetIcons) {
-    conf.presetIcons.cdn = options.unoCSSPresetIconCDN;
-  }
+    const [
+        { default: initUnocssRuntime },
+        { default: initPresetIcons },
+        { default: initPresetUno },
+        { default: initPresetWind },
+        { default: initPresetMini },
+        { default: initPresetAttributify },
+        { default: initPresetTypography },
+        { default: initPresetWebFonts },
+        { default: initPresetTagify },
+        { default: initPresetRemToPx },
+    ] = await Promise.all([
+        import(options.unoCSSUrl + "/runtime"),
+        import(options.unoCSSUrl + "/preset-icons/browser"),
+        import(options.unoCSSUrl + "/preset-uno"),
+        import(options.unoCSSUrl + "/preset-wind"),
+        import(options.unoCSSUrl + "/preset-mini"),
+        import(options.unoCSSUrl + "/preset-attributify"),
+        import(options.unoCSSUrl + "/preset-typography"),
+        import(options.unoCSSUrl + "/preset-web-fonts"),
+        import(options.unoCSSUrl + "/preset-tagify"),
+        import(options.unoCSSUrl + "/preset-rem-to-px"),
+    ]);
 
-  return `
-import initUnocssRuntime from "${options.unoCSSUrl}/runtime";
-import initPresetIcons from "${options.unoCSSUrl}/preset-icons/browser";
-import initPresetUno from "${options.unoCSSUrl}/preset-uno";
-import initPresetWind from "${options.unoCSSUrl}/preset-wind";
-import initPresetMini from "${options.unoCSSUrl}/preset-mini";
-import initPresetAttributify from "${options.unoCSSUrl}/preset-attributify";
-import initPresetTypography from "${options.unoCSSUrl}/preset-typography";
-import initPresetWebFonts from "${options.unoCSSUrl}/preset-web-fonts";
-import initPresetTagify from "${options.unoCSSUrl}/preset-tagify";
-import initPresetRemToPx from "${options.unoCSSUrl}/preset-rem-to-px";
-
-const options = ${JSON.stringify(options)};
-const conf = ${JSON.stringify(conf)};
-
-export default async (_conf = {}) => {
     const presets = [];
 
     if (conf.presetWind) {
@@ -74,8 +78,6 @@ export default async (_conf = {}) => {
             presets,
         },
     });
-};
-`;
-};
+};`;
 
 export default initUnoCSS;

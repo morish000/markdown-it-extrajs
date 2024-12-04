@@ -1,5 +1,13 @@
 ---
 marp: true
+style: |
+  pre.mermaid {
+    all: unset;
+  },
+  .mermaid svg {
+    max-height: 100% !important;
+    max-width: 100% !important;
+  }
 extrajs:
   useMermaid: true
   useFontAwesome: true
@@ -13,17 +21,7 @@ extrajs:
     prefixedOnly: true
     ignoreAttributes:
       - style
-style: |
-  pre.mermaid {
-    all: unset;
-  },
-  .mermaid svg {
-    max-height: 100% !important;
-    max-width: 100% !important;
-  }
 ---
-
-<h1>h1 tag escape.</h1>
 
 # Title
 
@@ -92,9 +90,8 @@ style: |
 
 # Mermaid
 
-<div style="display: flex;">
-<pre class="mermaid" style="transform: translateX(0%) translateY(0%) scale(1.0); background-color: #ffffff;">
-  graph TD
+<pre class="mermaid" style="background-color: #ffffff;">
+graph TD
   A[Enter Chart Definition] --> B(Preview)
   B --> C{decide}
   C --> D[Keep]
@@ -103,4 +100,3 @@ style: |
   D --> F[Save Image and Code]
   F --> B
 </pre>
-</div>
