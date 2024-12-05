@@ -2,7 +2,7 @@
   "imports": {
     "gray-matter": "npm:gray-matter@4.0.x",
     "markdown-it": "npm:markdown-it@14.1.x",
-    "@morish000/markdown-it-extrajs": "jsr:@morish000/markdown-it-extrajs@0.0.9",
+    "@morish000/markdown-it-extrajs": "jsr:@morish000/markdown-it-extrajs@0.0.10",
     "@types/markdown-it": "npm:@types/markdown-it@14.1.x",
     "@types/vscode": "npm:@types/vscode@1.95.x",
     "@iconify-json/carbon": "npm:@iconify-json/carbon",

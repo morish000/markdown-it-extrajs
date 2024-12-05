@@ -3601,158 +3601,18 @@ __export(extension_exports, {
 });
 module.exports = __toCommonJS(extension_exports);
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.10/src/plugin.ts
 var import_npm_markdown_it_front_matter_0_2 = __toESM(require_markdown_it_front_matter());
 var import_npm_gray_matter_4_0 = __toESM(require_gray_matter());
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/init-mermaid.ts
-var initMermaid = () => `export default async (options = {}, _frontMatter = {}, _conf = {}) => {
-    const mermaid = await import(options.mermaidUrl);
-    mermaid.default.initialize();
-    mermaid.default.run();
-};`;
-var init_mermaid_default = initMermaid;
-
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/init-font-asesome.ts
-var initFontAsesome = () => `const extractIcons = (iconSet) => {
-    return Object.entries(iconSet)
-        .filter(([key, value]) =>
-            key !== "prefix" && key !== "default" && typeof value !== "string"
-        )
-        .map(([, value]) => value);
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.10/src/base64js.ts
+var base64js_default = {
+  INIT_MERMAID: "dmFyIGk9YXN5bmModD17fSxhPXt9LGU9e30pPT57aWYodC5tZXJtYWlkVXJsKXtsZXQgcj1hd2FpdCBpbXBvcnQodC5tZXJtYWlkVXJsKTtyLmRlZmF1bHQuaW5pdGlhbGl6ZSgpLHIuZGVmYXVsdC5ydW4oKX19O2V4cG9ydHtpIGFzIGRlZmF1bHR9OwovLyMgc291cmNlTWFwcGluZ1VSTD1pbml0LW1lcm1haWQubWpzLm1hcAo=",
+  INIT_FONT_AWESOME: "dmFyIG49bz0+T2JqZWN0LmVudHJpZXMobykuZmlsdGVyKChbcixzXSk9PnIhPT0icHJlZml4IiYmciE9PSJkZWZhdWx0IiYmdHlwZW9mIHMhPSJzdHJpbmciKS5tYXAoKFsscl0pPT5yKSxkPWFzeW5jKG89e30scj17fSxzPXt9KT0+e3RyeXtsZXRbZSxhLGMsaV09YXdhaXQgUHJvbWlzZS5hbGwoW2ltcG9ydChvLmZvbnRBd2Vzb21lVXJsKyIvZm9udGF3ZXNvbWUtc3ZnLWNvcmUiKSxpbXBvcnQoby5mb250QXdlc29tZVVybCsiL2ZyZWUtc29saWQtc3ZnLWljb25zIiksaW1wb3J0KG8uZm9udEF3ZXNvbWVVcmwrIi9mcmVlLXJlZ3VsYXItc3ZnLWljb25zIiksaW1wb3J0KG8uZm9udEF3ZXNvbWVVcmwrIi9mcmVlLWJyYW5kcy1zdmctaWNvbnMiKV0pLGY9Wy4uLm4oYSksLi4ubihjKSwuLi5uKGkpXTtpZihlLmNvbmZpZy5hdXRvQWRkQ3NzPSExLGUubGlicmFyeS5hZGQoLi4uZiksZS5kb20uaTJzdmcoKSxlLmRvbS53YXRjaCgpLCFkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiZXh0cmFqcy1mb250YXdlc29tZSIpKXtsZXQgdD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzdHlsZSIpO3QuaWQ9ImV4dHJhanMtZm9udGF3ZXNvbWUiLHQudGV4dENvbnRlbnQ9ZS5kb20uY3NzKCksZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZCh0KSxuZXcgTXV0YXRpb25PYnNlcnZlcigoKT0+e3QmJnQudGV4dENvbnRlbnQ9PT0iIiYmKHQudGV4dENvbnRlbnQ9ZS5kb20uY3NzKCkpfSkub2JzZXJ2ZSh0LHtjaGFyYWN0ZXJEYXRhOiEwLGNoaWxkTGlzdDohMCxzdWJ0cmVlOiEwfSl9fWNhdGNoKGUpe3Rocm93IGV9fTtleHBvcnR7ZCBhcyBkZWZhdWx0fTsKLy8jIHNvdXJjZU1hcHBpbmdVUkw9aW5pdC1mb250LWF3ZXNvbWUubWpzLm1hcAo=",
+  INIT_UNO_CSS: "dmFyIGg9YXN5bmModD17fSxuPXt9LGk9e30pPT57bGV0IGU9ey4uLm59O2UucHJlc2V0SWNvbnMmJihlLnByZXNldEljb25zLmNkbj10LnVub0NTU1ByZXNldEljb25DRE4pO2xldFt7ZGVmYXVsdDpwfSx7ZGVmYXVsdDpvfSx7ZGVmYXVsdDp1fSx7ZGVmYXVsdDphfSx7ZGVmYXVsdDpsfSx7ZGVmYXVsdDpmfSx7ZGVmYXVsdDpTfSx7ZGVmYXVsdDpjfSx7ZGVmYXVsdDp5fSx7ZGVmYXVsdDptfV09YXdhaXQgUHJvbWlzZS5hbGwoW2ltcG9ydCh0LnVub0NTU1VybCsiL3J1bnRpbWUiKSxpbXBvcnQodC51bm9DU1NVcmwrIi9wcmVzZXQtaWNvbnMvYnJvd3NlciIpLGltcG9ydCh0LnVub0NTU1VybCsiL3ByZXNldC11bm8iKSxpbXBvcnQodC51bm9DU1NVcmwrIi9wcmVzZXQtd2luZCIpLGltcG9ydCh0LnVub0NTU1VybCsiL3ByZXNldC1taW5pIiksaW1wb3J0KHQudW5vQ1NTVXJsKyIvcHJlc2V0LWF0dHJpYnV0aWZ5IiksaW1wb3J0KHQudW5vQ1NTVXJsKyIvcHJlc2V0LXR5cG9ncmFwaHkiKSxpbXBvcnQodC51bm9DU1NVcmwrIi9wcmVzZXQtd2ViLWZvbnRzIiksaW1wb3J0KHQudW5vQ1NTVXJsKyIvcHJlc2V0LXRhZ2lmeSIpLGltcG9ydCh0LnVub0NTU1VybCsiL3ByZXNldC1yZW0tdG8tcHgiKV0pLHI9W107aWYoZS5wcmVzZXRXaW5kP3IucHVzaChhKGUucHJlc2V0V2luZCkpOmUucHJlc2V0TWluaT9yLnB1c2gobChlLnByZXNldE1pbmkpKTpyLnB1c2godSgpKSxlLnByZXNldEljb25zKXtsZXQgcz17Li4uZS5wcmVzZXRJY29uc307aT8ucHJlc2V0SWNvbnM/LmNvbGxlY3Rpb25zJiZ0LnVzZUJ1bmRsZUljb25pZnlKc29uJiYocy5hdXRvSW5zdGFsbD0hMSxzLmNvbGxlY3Rpb25zPWkucHJlc2V0SWNvbnMuY29sbGVjdGlvbnMpLHIucHVzaChvKHMpKX1lLnByZXNldEF0dHJpYnV0aWZ5JiZyLnB1c2goZihlLnByZXNldEF0dHJpYnV0aWZ5KSksZS5wcmVzZXRUeXBvZ3JhcGh5JiZyLnB1c2goUyhlLnByZXNldFR5cG9ncmFwaHkpKSxlLnByZXNldFdlYkZvbnRzJiZyLnB1c2goYyhlLnByZXNldFdlYkZvbnRzKSksZS5wcmVzZXRUYWdpZnkmJnIucHVzaCh5KGUucHJlc2V0VGFnaWZ5KSksZS5wcmVzZXRSZW1Ub1B4JiZyLnB1c2gobSgpKTtsZXQgZD1lLnJ1bGVzPz9bXTtwKHtkZWZhdWx0czp7cnVsZXM6ZCxwcmVzZXRzOnJ9fSl9O2V4cG9ydHtoIGFzIGRlZmF1bHR9OwovLyMgc291cmNlTWFwcGluZ1VSTD1pbml0LXVuby1jc3MubWpzLm1hcAo="
 };
 
-export default async (options = {}, _frontMatter = {}, _conf = {}) => {
-    try {
-        const [
-            fontawesomeSvgCore,
-            freeSolidSvgIcons,
-            freeRegularSvgIcons,
-            freeBrandsSvgIcons,
-        ] = await Promise.all([
-            import(options.fontAwesomeUrl + "/fontawesome-svg-core"),
-            import(options.fontAwesomeUrl + "/free-solid-svg-icons"),
-            import(options.fontAwesomeUrl + "/free-regular-svg-icons"),
-            import(options.fontAwesomeUrl + "/free-brands-svg-icons"),
-        ]);
-
-        const icons = [
-            ...extractIcons(freeSolidSvgIcons),
-            ...extractIcons(freeRegularSvgIcons),
-            ...extractIcons(freeBrandsSvgIcons),
-        ];
-
-        fontawesomeSvgCore.config.autoAddCss = false;
-        fontawesomeSvgCore.library.add(...icons);
-        fontawesomeSvgCore.dom.i2svg();
-        fontawesomeSvgCore.dom.watch();
-
-        if (!document.getElementById("extrajs-fontawesome")) {
-            const styleElement = document.createElement("style");
-            styleElement.id = "extrajs-fontawesome";
-            styleElement.textContent = fontawesomeSvgCore.dom.css();
-            document.head.appendChild(styleElement);
-            const observer = new MutationObserver(() => {
-                if (styleElement && styleElement.textContent === "") {
-                    styleElement.textContent = fontawesomeSvgCore.dom.css();
-                }
-            });
-            observer.observe(styleElement, {
-                characterData: true,
-                childList: true,
-                subtree: true,
-            });
-        }
-    } catch (error) {
-        throw error;
-    }
-};`;
-var init_font_asesome_default = initFontAsesome;
-
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/init-uno-css.ts
-var initUnoCSS = () => `export default async (options = {}, frontMatter = {}, _conf = {}) => {
-    const conf = {
-        ...frontMatter,
-    };
-    if (conf.presetIcons) {
-        conf.presetIcons.cdn = options.unoCSSPresetIconCDN;
-    }
-
-    const [
-        { default: initUnocssRuntime },
-        { default: initPresetIcons },
-        { default: initPresetUno },
-        { default: initPresetWind },
-        { default: initPresetMini },
-        { default: initPresetAttributify },
-        { default: initPresetTypography },
-        { default: initPresetWebFonts },
-        { default: initPresetTagify },
-        { default: initPresetRemToPx },
-    ] = await Promise.all([
-        import(options.unoCSSUrl + "/runtime"),
-        import(options.unoCSSUrl + "/preset-icons/browser"),
-        import(options.unoCSSUrl + "/preset-uno"),
-        import(options.unoCSSUrl + "/preset-wind"),
-        import(options.unoCSSUrl + "/preset-mini"),
-        import(options.unoCSSUrl + "/preset-attributify"),
-        import(options.unoCSSUrl + "/preset-typography"),
-        import(options.unoCSSUrl + "/preset-web-fonts"),
-        import(options.unoCSSUrl + "/preset-tagify"),
-        import(options.unoCSSUrl + "/preset-rem-to-px"),
-    ]);
-
-    const presets = [];
-
-    if (conf.presetWind) {
-        presets.push(initPresetWind(conf.presetWind));
-    } else if (conf.presetMini) {
-        presets.push(initPresetMini(conf.presetMini));
-    } else {
-        presets.push(initPresetUno());
-    }
-
-    if (conf.presetIcons) {
-        const presetIcons = { ...conf.presetIcons };
-        if (_conf?.presetIcons?.collections && options.useBundleIconifyJson) {
-            presetIcons.autoInstall = false;
-            presetIcons.collections = _conf.presetIcons.collections;
-        }
-        presets.push(initPresetIcons(presetIcons));
-    }
-
-    if (conf.presetAttributify) {
-        presets.push(initPresetAttributify(conf.presetAttributify));
-    }
-
-    if (conf.presetTypography) {
-        presets.push(initPresetTypography(conf.presetTypography));
-    }
-
-    if (conf.presetWebFonts) {
-        presets.push(initPresetWebFonts(conf.presetWebFonts));
-    }
-
-    if (conf.presetTagify) {
-        presets.push(initPresetTagify(conf.presetTagify));
-    }
-
-    if (conf.presetRemToPx) {
-        presets.push(initPresetRemToPx());
-    }
-
-    const rules = conf.rules ?? [];
-
-    initUnocssRuntime({
-        defaults: {
-            rules,
-            presets,
-        },
-    });
-};`;
-var init_uno_css_default = initUnoCSS;
-
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/create-tags.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.10/src/create-tags.ts
 var initAll = (extrajsOptions) => extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS ? `
 export default async (options = {}, frontMatter = {}, _conf = {}) => {
   const tasks = [];
@@ -3791,9 +3651,9 @@ ${extrajsOptions.useUnoCSS ? `
 var createTemplateTag = (extrajsOptions, frontMatter) => extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS ? `
 <template
   id="extrajs"
-${extrajsOptions.useMermaid ? `data-extrajs-mermaid-js="${btoa(init_mermaid_default())}"` : ""}
-${extrajsOptions.useFontAwesome ? `data-extrajs-font-awesome="${btoa(init_font_asesome_default())}"` : ""}
-${extrajsOptions.useUnoCSS ? `data-extrajs-uno-css="${btoa(init_uno_css_default())}"` : ""}
+${extrajsOptions.useMermaid ? `data-extrajs-mermaid-js="${base64js_default.INIT_MERMAID}"` : ""}
+${extrajsOptions.useFontAwesome ? `data-extrajs-font-awesome="${base64js_default.INIT_FONT_AWESOME}"` : ""}
+${extrajsOptions.useUnoCSS ? `data-extrajs-uno-css="${base64js_default.INIT_UNO_CSS}"` : ""}
 ${`data-extrajs-init="${btoa(initAll(extrajsOptions))}"`}
 ${`data-extrajs-options="${btoa("export default" + JSON.stringify(extrajsOptions))}"`}
 ${`data-extrajs-frontMatter="${btoa("export default" + JSON.stringify(frontMatter))}"`}>
@@ -3811,7 +3671,7 @@ var createScriptTag = (extrajsOptions, frontMatter) => (extrajsOptions.useMermai
   }
 </script>` : "";
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.10/src/plugin.ts
 var defaultOptions = {
   discardFrontMatter: true,
   useMermaid: false,
@@ -3847,7 +3707,7 @@ function extraJsPlugin(md, userOptions) {
 }
 var plugin_default = extraJsPlugin;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.9/src/index.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.10/src/index.ts
 var src_default = plugin_default;
 
 // src/extension.ts

@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
+    "jsr:@morish000/markdown-it-extrajs@0.0.10": "0.0.10",
     "jsr:@morish000/markdown-it-extrajs@0.0.9": "0.0.9",
     "jsr:@std/bytes@^1.0.2": "1.0.4",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
@@ -36,6 +37,15 @@
     },
     "@morish000/markdown-it-extrajs@0.0.9": {
       "integrity": "75277b06d1ec8ce28203b1255f5eba743fb513fcfe96d33318e379dd88cb15f6",
+      "dependencies": [
+        "npm:@types/markdown-it",
+        "npm:gray-matter",
+        "npm:markdown-it-front-matter",
+        "npm:unocss"
+      ]
+    },
+    "@morish000/markdown-it-extrajs@0.0.10": {
+      "integrity": "3034a15114a3a652d06122d2f3114d09f46b86943c435942c87f68024c5fff9a",
       "dependencies": [
         "npm:@types/markdown-it",
         "npm:gray-matter",
