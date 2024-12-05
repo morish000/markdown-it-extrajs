@@ -1,14 +1,5 @@
 import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
-
-declare const SRC_BASE64: {
-  INIT_MERMAID: string;
-  INIT_FONT_AWESOME: string;
-  INIT_UNO_CSS: string;
-};
-
-if (typeof SRC_BASE64 === "undefined") {
-  await import("../define.ts");
-}
+import SRC_BASE64 from "./base64js.ts";
 
 export const initAll = (
   extrajsOptions: ExtraJSOptions,

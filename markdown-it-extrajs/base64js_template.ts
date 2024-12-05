@@ -1,0 +1,5 @@
+export default {
+  INIT_MERMAID: "${INIT_MERMAID}",
+  INIT_FONT_AWESOME: "${INIT_FONT_AWESOME}",
+  INIT_UNO_CSS: "${INIT_UNO_CSS}",
+};

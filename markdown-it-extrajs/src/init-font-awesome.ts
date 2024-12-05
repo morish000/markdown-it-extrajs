@@ -21,10 +21,10 @@ export default async (
 ) => {
   try {
     const [
-      { default: fontawesomeSvgCore },
-      { default: freeSolidSvgIcons },
-      { default: freeRegularSvgIcons },
-      { default: freeBrandsSvgIcons },
+      fontawesomeSvgCore,
+      freeSolidSvgIcons,
+      freeRegularSvgIcons,
+      freeBrandsSvgIcons,
     ] = await Promise.all([
       import(options.fontAwesomeUrl + "/fontawesome-svg-core"),
       import(options.fontAwesomeUrl + "/free-solid-svg-icons"),

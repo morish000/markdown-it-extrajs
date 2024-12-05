@@ -1,7 +1,7 @@
 {
   "version": "4",
   "specifiers": {
-    "npm:@fortawesome/fontawesome-svg-core@*": "6.7.1",
+    "npm:@fortawesome/fontawesome-svg-core@6.7": "6.7.1",
     "npm:@types/markdown-it@14.1": "14.1.2",
     "npm:gray-matter@4.0": "4.0.3",
     "npm:markdown-it-front-matter@0.2": "0.2.4",

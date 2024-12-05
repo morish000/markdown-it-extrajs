@@ -1,5 +1,5 @@
 import { build, stop } from "esbuild";
-import defines from "./define.ts";
+import replacePlaceholdersInFile from "./embedjs.ts";
 
 await build({
   entryPoints: [
@@ -19,27 +19,29 @@ await build({
   },
 });
 
+replacePlaceholdersInFile(
+  "./base64js_template.ts",
+  {
+    "INIT_MERMAID": "./dist/init-mermaid.mjs",
+    "INIT_FONT_AWESOME": "./dist/init-font-awesome.mjs",
+    "INIT_UNO_CSS": "./dist/init-uno-css.mjs",
+  },
+  "./src/base64js.ts",
+);
+
 await build({
   entryPoints: ["src/index.ts"],
   outdir: "dist",
   format: "esm",
   bundle: true,
-  define: defines,
   minify: true,
   sourcemap: true,
   external: [
-    "@fortawesome/fontawesome-svg-core",
+    "gray-matter",
     "markdown-it",
     "markdown-it-front-matter",
-    "gray-matter",
+    "@fortawesome/fontawesome-svg-core",
     "@unocss",
-    "@unocss/preset-icons",
-    "@unocss/preset-wind",
-    "@unocss/preset-mini",
-    "@unocss/preset-attributify",
-    "@unocss/preset-typography",
-    "@unocss/preset-web-fonts",
-    "@unocss/preset-tagify",
   ],
   resolveExtensions: [".ts", ".mjs", ".js"],
   outExtension: {
