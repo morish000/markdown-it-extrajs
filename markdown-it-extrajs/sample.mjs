@@ -1,5 +1,5 @@
 import MarkdownIt from "markdown-it";
-import extraJsPlugin from "./dist/esm/index.mjs";
+import extraJsPlugin from "./dist/index.mjs";
 
 const md = new MarkdownIt();
 md.use(extraJsPlugin, {

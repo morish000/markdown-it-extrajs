@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "npm:@fortawesome/fontawesome-svg-core@*": "6.7.1",
     "npm:@types/markdown-it@14.1": "14.1.2",
     "npm:gray-matter@4.0": "4.0.3",
     "npm:markdown-it-front-matter@0.2": "0.2.4",
@@ -184,6 +185,15 @@
     },
     "@esbuild/win32-x64@0.23.1": {
       "integrity": "sha512-BHpFFeslkWrXWyUPnbKm+xYYVYruCinGcftSBaa8zoF9hZO4BcSCFUvHVTtzpIY6YzUnYtuEhZ+C9iEXjxnasg=="
+    },
+    "@fortawesome/fontawesome-common-types@6.7.1": {
+      "integrity": "sha512-gbDz3TwRrIPT3i0cDfujhshnXO9z03IT1UKRIVi/VEjpNHtSBIP2o5XSm+e816FzzCFEzAxPw09Z13n20PaQJQ=="
+    },
+    "@fortawesome/fontawesome-svg-core@6.7.1": {
+      "integrity": "sha512-8dBIHbfsKlCk2jHQ9PoRBg2Z+4TwyE3vZICSnoDlnsHA6SiMlTwfmW6yX0lHsRmWJugkeb92sA0hZdkXJhuz+g==",
+      "dependencies": [
+        "@fortawesome/fontawesome-common-types"
+      ]
     },
     "@iconify/types@2.0.0": {
       "integrity": "sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg=="

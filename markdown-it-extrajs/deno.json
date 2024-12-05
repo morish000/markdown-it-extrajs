@@ -1,6 +1,6 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.9",
+  "version": "0.0.9-1",
   "tasks": {
     "sample-ts": "deno run --allow-all sample.ts",
     "sample-mjs": "deno run --allow-all sample.mjs",
@@ -12,7 +12,7 @@
   },
   "exports": {
     ".": "./src/index.ts",
-    "./create-tags": "./src/create-tags.ts"
+    "./mjs": "./dist/index.mjs"
   },
   "publish": {
     "include": [
@@ -20,7 +20,9 @@
       "README.md",
       "deno.json",
       "import_map.json",
-      "src/*.ts"
+      "define.ts",
+      "src/*.ts",
+      "dist/*.mjs"
     ]
   },
   "lint": {

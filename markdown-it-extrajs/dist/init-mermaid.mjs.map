@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/init-mermaid.ts"],
+  "sourcesContent": ["import type { ExtraJSFrontMatter, ExtraJSOptions } from \"./types.ts\";\n\nexport default async (\n  options: ExtraJSOptions = {},\n  _frontMatter: ExtraJSFrontMatter = {},\n  _conf: ExtraJSFrontMatter = {},\n) => {\n  if (options.mermaidUrl) {\n    const mermaid = await import(options.mermaidUrl);\n    mermaid.default.initialize();\n    mermaid.default.run();\n  }\n};\n"],
+  "mappings": "AAEA,IAAOA,EAAQ,MACbC,EAA0B,CAAC,EAC3BC,EAAmC,CAAC,EACpCC,EAA4B,CAAC,IAC1B,CACH,GAAIF,EAAQ,WAAY,CACtB,IAAMG,EAAU,MAAM,OAAOH,EAAQ,YACrCG,EAAQ,QAAQ,WAAW,EAC3BA,EAAQ,QAAQ,IAAI,CACtB,CACF",
+  "names": ["init_mermaid_default", "options", "_frontMatter", "_conf", "mermaid"]
+}

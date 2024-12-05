@@ -1,7 +1,14 @@
-import initMermaid from "./init-mermaid.ts";
-import initFontAwesome from "./init-font-asesome.ts";
-import initUnoCSS from "./init-uno-css.ts";
 import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
+
+declare const SRC_BASE64: {
+  INIT_MERMAID: string;
+  INIT_FONT_AWESOME: string;
+  INIT_UNO_CSS: string;
+};
+
+if (typeof SRC_BASE64 === "undefined") {
+  await import("../define.ts");
+}
 
 export const initAll = (
   extrajsOptions: ExtraJSOptions,
@@ -68,17 +75,17 @@ export const createTemplateTag = (
   id="extrajs"
 ${
       extrajsOptions.useMermaid
-        ? `data-extrajs-mermaid-js="${btoa(initMermaid())}"`
+        ? `data-extrajs-mermaid-js="${SRC_BASE64.INIT_MERMAID}"`
         : ""
     }
 ${
       extrajsOptions.useFontAwesome
-        ? `data-extrajs-font-awesome="${btoa(initFontAwesome())}"`
+        ? `data-extrajs-font-awesome="${SRC_BASE64.INIT_FONT_AWESOME}"`
         : ""
     }
 ${
       extrajsOptions.useUnoCSS
-        ? `data-extrajs-uno-css="${btoa(initUnoCSS())}"`
+        ? `data-extrajs-uno-css="${SRC_BASE64.INIT_UNO_CSS}"`
         : ""
     }
 ${`data-extrajs-init="${btoa(initAll(extrajsOptions))}"`}
