@@ -2,22 +2,11 @@
   "imports": {
     "gray-matter": "npm:gray-matter@4.0.x",
     "markdown-it": "npm:markdown-it@14.1.x",
-    "@morish000/markdown-it-extrajs": "jsr:@morish000/markdown-it-extrajs@0.0.10",
+    "@morish000/markdown-it-extrajs": "jsr:@morish000/markdown-it-extrajs@0.0.11",
     "@types/markdown-it": "npm:@types/markdown-it@14.1.x",
     "@types/vscode": "npm:@types/vscode@1.95.x",
-    "@iconify-json/carbon": "npm:@iconify-json/carbon",
-    "@iconify-json/fa6-brands": "npm:@iconify-json/fa6-brands",
-    "@iconify-json/fa6-regular": "npm:@iconify-json/fa6-regular",
-    "@iconify-json/fa6-solid": "npm:@iconify-json/fa6-solid",
-    "@iconify-json/flagpack": "npm:@iconify-json/flagpack",
-    "@iconify-json/logos": "npm:@iconify-json/logos",
-    "@iconify-json/mdi": "npm:@iconify-json/mdi",
-    "@iconify-json/ph": "npm:@iconify-json/ph",
-    "@iconify-json/tdesign": "npm:@iconify-json/tdesign",
-    "@iconify-json/twemoji": "npm:@iconify-json/twemoji",
     "esbuild": "https://deno.land/x/esbuild@v0.24.0/mod.js",
     "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.x",
-    "@unocss/preset-icons": "npm:@unocss/preset-icons",
-    "@iconify/types": "npm:@iconify/types"
+    "@fortawesome/fontawesome-svg-core": "npm:@fortawesome/fontawesome-svg-core@6.7.x"
   }
 }

@@ -24,21 +24,24 @@ export function activate(_context: ExtensionContext) {
           "discardFrontMatter",
           true,
         ),
+        outputScriptTag: config.get<boolean>("outputScriptTag", false),
         useMermaid: config.get<boolean>("useMermaid", true),
-        mermaidUrl: config.get<string>("mermaidUrl", "https://esm.sh/mermaid"),
         useFontAwesome: config.get<boolean>("useFontAwesome", true),
+        useUnoCSS: config.get<boolean>("useUnoCSS", true),
+        mermaidUrl: config.get<string>("mermaidUrl", "https://esm.sh/mermaid"),
+        mermaidElkUrl: config.get<string>(
+          "mermaidElkUrl",
+          "https://esm.sh/@mermaid-js/layout-elk",
+        ),
         fontAwesomeUrl: config.get<string>(
           "fontAwesomeUrl",
           "https://esm.sh/@fortawesome",
         ),
-        useUnoCSS: config.get<boolean>("useUnoCSS", true),
         unoCSSUrl: config.get<string>("unoCSSUrl", "https://esm.sh/@unocss"),
-        unoCSSPresetIconCDN: config.get<string>(
-          "unoCSSPresetIconCDN",
-          "https://esm.sh/",
+        iconifyJsonCDN: config.get<string>(
+          "iconifyJsonCDN",
+          "https://esm.sh",
         ),
-        outputScriptTag: config.get<boolean>("outputScriptTag", false),
-        useBundleIconifyJson: config.get<boolean>("useBundleIconifyJson", true),
       };
 
       return md.use(extraJsPlugin, options);

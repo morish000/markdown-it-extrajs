@@ -1,13 +1,13 @@
 import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
 import SRC_BASE64 from "./base64js.ts";
 
-export const initAll = (
+export const initScript = (
   extrajsOptions: ExtraJSOptions,
 ): string =>
   (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome ||
       extrajsOptions.useUnoCSS)
     ? `
-export default async (options = {}, frontMatter = {}, additionalSettings = {}) => {
+export default async (options = {}, frontMatter = {}) => {
   const tasks = [];
 ${
       extrajsOptions.useMermaid
@@ -17,7 +17,7 @@ ${
     tasks.push(
       (async () => {
         const { default: initMermaid } = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid(options, frontMatter, additionalSettings);
+        await initMermaid(options, frontMatter);
       })()
     );
   }`
@@ -31,7 +31,7 @@ ${
     tasks.push(
       (async () => {
         const { default: initFontAwesome } = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome(options, frontMatter, additionalSettings);
+        await initFontAwesome(options, frontMatter);
       })()
     );
   }`
@@ -45,7 +45,7 @@ ${
     tasks.push(
       (async () => {
         const { default: initUnoCSS } = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS(options, frontMatter, additionalSettings);
+        await initUnoCSS(options, frontMatter);
       })()
     );
   }`
@@ -79,7 +79,7 @@ ${
         ? `data-extrajs-uno-css="${SRC_BASE64.INIT_UNO_CSS}"`
         : ""
     }
-${`data-extrajs-init="${btoa(initAll(extrajsOptions))}"`}
+${`data-extrajs-init="${btoa(initScript(extrajsOptions))}"`}
 ${`data-extrajs-options="${
       btoa("export default" + JSON.stringify(extrajsOptions))
     }"`}
@@ -102,8 +102,7 @@ export const createScriptTag = (
     const { default: init } = await import("data:text/javascript;base64," + initScript);
     await init(
       ${JSON.stringify(extrajsOptions)},
-      ${JSON.stringify(frontMatter)},
-      {}
+      ${JSON.stringify(frontMatter)}
     );
   }
 </script>`
