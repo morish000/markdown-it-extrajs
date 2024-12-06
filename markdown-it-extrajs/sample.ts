@@ -20,14 +20,11 @@ extrajs:
   presetWind: null
   presetMini: null
   presetIcons:
-    autoInstall: true
     extraProperties:
       display: inline-block
   presetAttributify:
     prefix: "un-"
     prefixedOnly: true
-    ignoreAttributes:
-      - style
   presetTypography: null
   presetWebFonts: null
   presetTagify: null

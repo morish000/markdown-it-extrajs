@@ -6,6 +6,8 @@ import type { AttributifyOptions } from "@unocss/preset-attributify";
 import type { TypographyOptions } from "@unocss/preset-typography";
 import type { WebFontsOptions } from "@unocss/preset-web-fonts";
 import type { TagifyOptions } from "@unocss/preset-tagify";
+import type { MermaidConfig } from "mermaid";
+import type { Config } from "@fortawesome/fontawesome-svg-core";
 
 export type UnoCSSConfig<Theme extends object = object> = {
   rules?: Rule<Theme>[];
@@ -19,21 +21,47 @@ export type UnoCSSConfig<Theme extends object = object> = {
   presetRemToPx?: boolean;
 };
 
-export type ExtraJSFrontMatter = UnoCSSConfig & {
+export type MermaidJSConfig = {
+  mermaidConfig?: MermaidConfig;
+};
+
+export type FontAwesomeConfig = {
+  fontAwesomeConfig?: Config;
+};
+
+export type ExtraJSUseOptions = {
   useMermaid?: boolean;
   useFontAwesome?: boolean;
   useUnoCSS?: boolean;
 };
 
-export type ExtraJSOptions = {
+export type ExtraJSFrontMatter =
+  & UnoCSSConfig
+  & MermaidJSConfig
+  & FontAwesomeConfig
+  & ExtraJSUseOptions;
+
+export type ExtraJSOptions = ExtraJSUseOptions & {
   discardFrontMatter?: boolean;
-  useMermaid?: boolean;
-  mermaidUrl?: string;
-  useFontAwesome?: boolean;
-  fontAwesomeUrl?: string;
-  useUnoCSS?: boolean;
-  unoCSSUrl?: string;
-  unoCSSPresetIconCDN?: string;
   outputScriptTag?: boolean;
-  useBundleIconifyJson?: boolean;
+  mermaidUrl?: string;
+  mermaidElkUrl?: string;
+  fontAwesomeUrl?: string;
+  unoCSSUrl?: string;
+  iconifyJsonCDN?: string;
+};
+
+export const defaultOptions: {
+  [K in keyof ExtraJSOptions]-?: ExtraJSOptions[K];
+} = {
+  discardFrontMatter: true,
+  outputScriptTag: true,
+  useMermaid: false,
+  useFontAwesome: false,
+  useUnoCSS: false,
+  mermaidUrl: "https://esm.sh/mermaid",
+  mermaidElkUrl: "https://esm.sh/@mermaid-js/layout-elk",
+  fontAwesomeUrl: "https://esm.sh/@fortawesome",
+  unoCSSUrl: "https://esm.sh/@unocss",
+  iconifyJsonCDN: "https://esm.sh",
 };

@@ -1,23 +1,13 @@
 import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
 import type {
+  Config,
   IconDefinition,
   IconPack,
 } from "@fortawesome/fontawesome-svg-core";
 
-const extractIcons = (
-  iconSet: Record<string, IconPack | IconDefinition | string>,
-) => {
-  return Object.entries(iconSet)
-    .filter(([key, value]) =>
-      key !== "prefix" && key !== "default" && typeof value !== "string"
-    )
-    .map(([, value]) => value);
-};
-
 export default async (
   options: ExtraJSOptions = {},
-  _frontMatter: ExtraJSFrontMatter = {},
-  _conf: ExtraJSFrontMatter = {},
+  frontMatter: ExtraJSFrontMatter = {},
 ) => {
   try {
     const [
@@ -32,16 +22,44 @@ export default async (
       import(options.fontAwesomeUrl + "/free-brands-svg-icons"),
     ]);
 
+    const extractIcons = (
+      iconSet: Record<string, IconPack | IconDefinition | string>,
+    ) => {
+      return Object.entries(iconSet)
+        .filter(([key, value]) =>
+          key !== "prefix" && key !== "default" && typeof value !== "string"
+        )
+        .map(([, value]) => value);
+    };
+
     const icons = [
       ...extractIcons(freeSolidSvgIcons),
       ...extractIcons(freeRegularSvgIcons),
       ...extractIcons(freeBrandsSvgIcons),
     ];
 
+    ([
+      "familyPrefix",
+      "cssPrefix",
+      "styleDefault",
+      "familyDefault",
+      "replacementClass",
+      "autoReplaceSvg",
+      "autoA11y",
+      "searchPseudoElements",
+      "keepOriginalSource",
+      "measurePerformance",
+      "mutateApproach",
+      "showMissingIcons",
+    ] as (keyof Config)[]).forEach((key) =>
+      frontMatter.fontAwesomeConfig?.[key] &&
+      (fontawesomeSvgCore.config[key] = frontMatter.fontAwesomeConfig[key])
+    );
+
+    fontawesomeSvgCore.config.observeMutations = false;
     fontawesomeSvgCore.config.autoAddCss = false;
     fontawesomeSvgCore.library.add(...icons);
     fontawesomeSvgCore.dom.i2svg();
-    fontawesomeSvgCore.dom.watch();
 
     if (!document.getElementById("extrajs-fontawesome")) {
       const styleElement = document.createElement("style");

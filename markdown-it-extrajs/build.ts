@@ -12,7 +12,7 @@ await build({
   bundle: true,
   minify: true,
   sourcemap: true,
-  external: ["@fortawesome/fontawesome-svg-core"],
+  external: ["@fortawesome/fontawesome-svg-core", "mermaid", "@unocss"],
   resolveExtensions: [".ts", ".mjs", ".js"],
   outExtension: {
     ".js": ".mjs",
@@ -28,25 +28,5 @@ replacePlaceholdersInFile(
   },
   "./src/base64js.ts",
 );
-
-await build({
-  entryPoints: ["src/index.ts"],
-  outdir: "dist",
-  format: "esm",
-  bundle: true,
-  minify: true,
-  sourcemap: true,
-  external: [
-    "gray-matter",
-    "markdown-it",
-    "markdown-it-front-matter",
-    "@fortawesome/fontawesome-svg-core",
-    "@unocss",
-  ],
-  resolveExtensions: [".ts", ".mjs", ".js"],
-  outExtension: {
-    ".js": ".mjs",
-  },
-});
 
 stop();

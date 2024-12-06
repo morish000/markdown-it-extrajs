@@ -7,7 +7,7 @@ export const initAll = (
   (extrajsOptions.useMermaid || extrajsOptions.useFontAwesome ||
       extrajsOptions.useUnoCSS)
     ? `
-export default async (options = {}, frontMatter = {}, _conf = {}) => {
+export default async (options = {}, frontMatter = {}, additionalSettings = {}) => {
   const tasks = [];
 ${
       extrajsOptions.useMermaid
@@ -16,8 +16,8 @@ ${
   if (mermaidScript) {
     tasks.push(
       (async () => {
-        const initMermaid = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid.default(options, frontMatter, _conf);
+        const { default: initMermaid } = await import("data:text/javascript;base64," + mermaidScript);
+        await initMermaid(options, frontMatter, additionalSettings);
       })()
     );
   }`
@@ -30,8 +30,8 @@ ${
   if (fontAwesomeScript) {
     tasks.push(
       (async () => {
-        const initFontAwesome = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome.default(options, frontMatter, _conf);
+        const { default: initFontAwesome } = await import("data:text/javascript;base64," + fontAwesomeScript);
+        await initFontAwesome(options, frontMatter, additionalSettings);
       })()
     );
   }`
@@ -44,8 +44,8 @@ ${
   if (unoCSSScript) {
     tasks.push(
       (async () => {
-        const initUnoCSS = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS.default(options, frontMatter, _conf);
+        const { default: initUnoCSS } = await import("data:text/javascript;base64," + unoCSSScript);
+        await initUnoCSS(options, frontMatter, additionalSettings);
       })()
     );
   }`
@@ -99,8 +99,8 @@ export const createScriptTag = (
 <script type="module">
   const initScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-init');
   if (initScript) {
-    const init = await import("data:text/javascript;base64," + initScript);
-    await init.default(
+    const { default: init } = await import("data:text/javascript;base64," + initScript);
+    await init(
       ${JSON.stringify(extrajsOptions)},
       ${JSON.stringify(frontMatter)},
       {}

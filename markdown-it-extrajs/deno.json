@@ -1,9 +1,8 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "tasks": {
-    "sample-ts": "deno run --allow-all sample.ts",
-    "sample-mjs": "deno run --allow-all sample.mjs",
+    "sample": "deno run --allow-all sample.ts",
     "build": "deno run --allow-all build.ts"
   },
   "importMap": "import_map.json",

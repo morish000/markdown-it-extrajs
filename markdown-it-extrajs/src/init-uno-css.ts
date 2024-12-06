@@ -1,23 +1,17 @@
 import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
+import { createIconLoader, getIcons } from "./iconify-json.ts";
+import type { IconifyJSON } from "@iconify/types";
 
 export default async (
   options: ExtraJSOptions = {},
   frontMatter: ExtraJSFrontMatter = {},
-  _conf: ExtraJSFrontMatter = {},
 ) => {
-  const conf: ExtraJSFrontMatter = {
-    ...frontMatter,
-  };
-  if (conf.presetIcons) {
-    conf.presetIcons.cdn = options.unoCSSPresetIconCDN;
-  }
-
   const [
     { default: initUnocssRuntime },
-    { default: initPresetIcons },
-    { default: initPresetUno },
     { default: initPresetWind },
     { default: initPresetMini },
+    { default: initPresetUno },
+    { default: initPresetIcons },
     { default: initPresetAttributify },
     { default: initPresetTypography },
     { default: initPresetWebFonts },
@@ -25,57 +19,89 @@ export default async (
     { default: initPresetRemToPx },
   ] = await Promise.all([
     import(options.unoCSSUrl + "/runtime"),
-    import(options.unoCSSUrl + "/preset-icons/browser"),
-    import(options.unoCSSUrl + "/preset-uno"),
-    import(options.unoCSSUrl + "/preset-wind"),
-    import(options.unoCSSUrl + "/preset-mini"),
-    import(options.unoCSSUrl + "/preset-attributify"),
-    import(options.unoCSSUrl + "/preset-typography"),
-    import(options.unoCSSUrl + "/preset-web-fonts"),
-    import(options.unoCSSUrl + "/preset-tagify"),
-    import(options.unoCSSUrl + "/preset-rem-to-px"),
+    frontMatter.presetWind
+      ? import(options.unoCSSUrl + "/preset-wind")
+      : Promise.resolve({}),
+    (!frontMatter.presetWind && frontMatter.presetMini)
+      ? import(options.unoCSSUrl + "/preset-mini")
+      : Promise.resolve({}),
+    (!frontMatter.presetWind && !frontMatter.presetMini)
+      ? import(options.unoCSSUrl + "/preset-uno")
+      : Promise.resolve({}),
+    frontMatter.presetIcons
+      ? import(options.unoCSSUrl + "/preset-icons/browser")
+      : Promise.resolve({}),
+    frontMatter.presetAttributify
+      ? import(options.unoCSSUrl + "/preset-attributify")
+      : Promise.resolve({}),
+    frontMatter.presetTypography
+      ? import(options.unoCSSUrl + "/preset-typography")
+      : Promise.resolve({}),
+    frontMatter.presetWebFonts
+      ? import(options.unoCSSUrl + "/preset-web-fonts")
+      : Promise.resolve({}),
+    frontMatter.presetTagify
+      ? import(options.unoCSSUrl + "/preset-tagify")
+      : Promise.resolve({}),
+    frontMatter.presetRemToPx
+      ? import(options.unoCSSUrl + "/preset-rem-to-px")
+      : Promise.resolve({}),
   ]);
 
   const presets = [];
 
-  if (conf.presetWind) {
-    presets.push(initPresetWind(conf.presetWind));
-  } else if (conf.presetMini) {
-    presets.push(initPresetMini(conf.presetMini));
+  if (frontMatter.presetWind) {
+    presets.push(initPresetWind(frontMatter.presetWind));
+  } else if (frontMatter.presetMini) {
+    presets.push(initPresetMini(frontMatter.presetMini));
   } else {
     presets.push(initPresetUno());
   }
 
-  if (conf.presetIcons) {
-    const presetIcons = { ...conf.presetIcons };
-    if (_conf?.presetIcons?.collections && options.useBundleIconifyJson) {
-      presetIcons.autoInstall = false;
-      presetIcons.collections = _conf.presetIcons.collections;
-    }
+  if (frontMatter.presetIcons) {
+    const presetIcons = { ...frontMatter.presetIcons };
+
+    const iconLoader = createIconLoader(options.iconifyJsonCDN);
+    const icons = await getIcons(options.unoCSSUrl);
+
+    const iconCollections: () => Record<string, () => Promise<IconifyJSON>> =
+      () => {
+        const collections: Record<string, () => Promise<IconifyJSON>> = {};
+        icons.forEach((key: string) => {
+          collections[key] = iconLoader(key);
+        });
+
+        return collections;
+      };
+
+    presetIcons.autoInstall = false;
+    presetIcons.collections = {
+      ...iconCollections(),
+    };
     presets.push(initPresetIcons(presetIcons));
   }
 
-  if (conf.presetAttributify) {
-    presets.push(initPresetAttributify(conf.presetAttributify));
+  if (frontMatter.presetAttributify) {
+    presets.push(initPresetAttributify(frontMatter.presetAttributify));
   }
 
-  if (conf.presetTypography) {
-    presets.push(initPresetTypography(conf.presetTypography));
+  if (frontMatter.presetTypography) {
+    presets.push(initPresetTypography(frontMatter.presetTypography));
   }
 
-  if (conf.presetWebFonts) {
-    presets.push(initPresetWebFonts(conf.presetWebFonts));
+  if (frontMatter.presetWebFonts) {
+    presets.push(initPresetWebFonts(frontMatter.presetWebFonts));
   }
 
-  if (conf.presetTagify) {
-    presets.push(initPresetTagify(conf.presetTagify));
+  if (frontMatter.presetTagify) {
+    presets.push(initPresetTagify(frontMatter.presetTagify));
   }
 
-  if (conf.presetRemToPx) {
+  if (frontMatter.presetRemToPx) {
     presets.push(initPresetRemToPx());
   }
 
-  const rules = conf.rules ?? [];
+  const rules = frontMatter.rules ?? [];
 
   initUnocssRuntime({
     defaults: {

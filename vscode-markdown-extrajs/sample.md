@@ -11,18 +11,15 @@ style: |
     max-width: 100% !important;
   }
 extrajs:
-  useMermaid: true
+  useMermaid: false
   useFontAwesome: true
   useUnoCSS: true
   presetIcons:
-    autoInstall: true
     extraProperties:
       display: inline-block
   presetAttributify:
     prefix: "un-"
     prefixedOnly: true
-    ignoreAttributes:
-      - style
 ---
 
 # Title
@@ -92,8 +89,7 @@ extrajs:
 
 # Mermaid
 
-<div style="display: flex;">
-<pre class="mermaid" style="background-color: #ffffff;">
+<pre class="mermaid" style="background-color: white;">
 graph TD
   A[Enter Chart Definition] --> B(Preview)
   B --> C{decide}
@@ -103,4 +99,32 @@ graph TD
   D --> F[Save Image and Code]
   F --> B
 </pre>
-</div>
+
+---
+
+# Mermaid(アーキテクチャ図)
+
+<pre class="mermaid" style="background-color: white;">
+architecture-beta
+    group api(cloud)[API]
+
+    service db(database)[Database] in api
+    service disk1(disk)[Storage] in api
+    service disk2(disk)[Storage] in api
+    service server(server)[Server] in api
+
+    db:L -- R:server
+    disk1:T -- B:server
+    disk2:T -- B:db
+</pre>
+
+---
+
+# Mermaid(シーケンス)
+
+<pre class="mermaid" style="background-color: white;">
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+</pre>
