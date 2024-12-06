@@ -11,7 +11,7 @@ style: |
     max-width: 100% !important;
   }
 extrajs:
-  useMermaid: false
+  useMermaid: true
   useFontAwesome: true
   useUnoCSS: true
   presetIcons:
@@ -71,7 +71,7 @@ extrajs:
 - <i class="fas fa-alien"></i>
 - <i class="fas fa-check-circle" style="margin-right: 10px; color: red;"></i>
 - <i class="fas fa-user" style="margin-right: 10px; color: blue;"></i>Morish 000
-- <i class="fas fa-envelope" style="margin-right: 10px; color: blue;"></i>morish000&#64;example.com
+- <i class="fas fa-envelope" style="margin-right: 10px; color: blue;"></i>morish000@example.com
 - <i class="fas fa-phone" style="margin-right: 10px; color: blue;"></i>000-000-0000
 - <i class="fas fa-fax" style="margin-right: 10px; color: blue;"></i>000-000-0000
 
@@ -102,7 +102,7 @@ graph TD
 
 ---
 
-# Mermaid(アーキテクチャ図)
+# Mermaid(architecture)
 
 <pre class="mermaid" style="background-color: white;">
 architecture-beta
@@ -120,7 +120,7 @@ architecture-beta
 
 ---
 
-# Mermaid(シーケンス)
+# Mermaid(sequence)
 
 <pre class="mermaid" style="background-color: white;">
 sequenceDiagram
