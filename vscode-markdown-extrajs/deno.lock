@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
     "jsr:@morish000/markdown-it-extrajs@0.0.11": "0.0.11",
+    "jsr:@morish000/markdown-it-extrajs@0.0.12": "0.0.12",
     "jsr:@std/bytes@^1.0.2": "1.0.4",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.6": "1.0.8",
@@ -26,6 +27,17 @@
     },
     "@morish000/markdown-it-extrajs@0.0.11": {
       "integrity": "77c7a1e4930854d354a57a928f638d235374bc88f43ed1ac877f848b822828f0",
+      "dependencies": [
+        "npm:@fortawesome/fontawesome-svg-core",
+        "npm:@types/markdown-it",
+        "npm:gray-matter",
+        "npm:markdown-it-front-matter",
+        "npm:mermaid",
+        "npm:unocss"
+      ]
+    },
+    "@morish000/markdown-it-extrajs@0.0.12": {
+      "integrity": "55e26a14a6abab5a5ab84f942fec43716ae8cb2b5b81cbe8b5f3f0f72a6a55f7",
       "dependencies": [
         "npm:@fortawesome/fontawesome-svg-core",
         "npm:@types/markdown-it",

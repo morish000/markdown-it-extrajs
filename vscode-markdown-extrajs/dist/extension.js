@@ -3601,20 +3601,20 @@ __export(extension_exports, {
 });
 module.exports = __toCommonJS(extension_exports);
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.11/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.12/src/plugin.ts
 var import_npm_markdown_it_front_matter_0_2 = __toESM(require_markdown_it_front_matter());
 var import_npm_gray_matter_4_0 = __toESM(require_gray_matter());
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.11/src/base64js.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.12/src/base64js.ts
 var base64js_default = {
   INIT_MERMAID: "dmFyIGQ9e2Rpc2NhcmRGcm9udE1hdHRlcjohMCxvdXRwdXRTY3JpcHRUYWc6ITAsdXNlTWVybWFpZDohMSx1c2VGb250QXdlc29tZTohMSx1c2VVbm9DU1M6ITEsbWVybWFpZFVybDoiaHR0cHM6Ly9lc20uc2gvbWVybWFpZCIsbWVybWFpZEVsa1VybDoiaHR0cHM6Ly9lc20uc2gvQG1lcm1haWQtanMvbGF5b3V0LWVsayIsZm9udEF3ZXNvbWVVcmw6Imh0dHBzOi8vZXNtLnNoL0Bmb3J0YXdlc29tZSIsdW5vQ1NTVXJsOiJodHRwczovL2VzbS5zaC9AdW5vY3NzIixpY29uaWZ5SnNvbkNETjoiaHR0cHM6Ly9lc20uc2gifTt2YXIgbD1hc3luYyhyPWQudW5vQ1NTVXJsKT0+YXdhaXQgaW1wb3J0KGAke3J9L3ByZXNldC1pY29ucy9jb3JlYCkudGhlbihzPT5zLmljb25zKSxnPShyPWQuaWNvbmlmeUpzb25DRE4pPT5zPT4oKT0+aW1wb3J0KGAke3J9L0BpY29uaWZ5LWpzb24vJHtzfWApLnRoZW4oaT0+aS5pY29ucyk7ZnVuY3Rpb24geShyKXtmb3IodmFyIHM9W10saT0xO2k8YXJndW1lbnRzLmxlbmd0aDtpKyspc1tpLTFdPWFyZ3VtZW50c1tpXTt2YXIgdD1BcnJheS5mcm9tKHR5cGVvZiByPT0ic3RyaW5nIj9bcl06cik7dFt0Lmxlbmd0aC0xXT10W3QubGVuZ3RoLTFdLnJlcGxhY2UoL1xyP1xuKFtcdCBdKikkLywiIik7dmFyIHA9dC5yZWR1Y2UoZnVuY3Rpb24obixlKXt2YXIgbz1lLm1hdGNoKC9cbihbXHQgXSt8KD8hXHMpLikvZyk7cmV0dXJuIG8/bi5jb25jYXQoby5tYXAoZnVuY3Rpb24oYSl7dmFyIG0sYztyZXR1cm4oYz0obT1hLm1hdGNoKC9bXHQgXS9nKSk9PT1udWxsfHxtPT09dm9pZCAwP3ZvaWQgMDptLmxlbmd0aCkhPT1udWxsJiZjIT09dm9pZCAwP2M6MH0pKTpufSxbXSk7aWYocC5sZW5ndGgpe3ZhciB1PW5ldyBSZWdFeHAoYApbCSBde2ArTWF0aC5taW4uYXBwbHkoTWF0aCxwKSsifSIsImciKTt0PXQubWFwKGZ1bmN0aW9uKG4pe3JldHVybiBuLnJlcGxhY2UodSxgCmApfSl9dFswXT10WzBdLnJlcGxhY2UoL15ccj9cbi8sIiIpO3ZhciBmPXRbMF07cmV0dXJuIHMuZm9yRWFjaChmdW5jdGlvbihuLGUpe3ZhciBvPWYubWF0Y2goLyg/Ol58XG4pKCAqKSQvKSxhPW8/b1sxXToiIixtPW47dHlwZW9mIG49PSJzdHJpbmciJiZuLmluY2x1ZGVzKGAKYCkmJihtPVN0cmluZyhuKS5zcGxpdChgCmApLm1hcChmdW5jdGlvbihjLFMpe3JldHVybiBTPT09MD9jOiIiK2ErY30pLmpvaW4oYApgKSksZis9bSt0W2UrMV19KSxmfXZhciBFPWFzeW5jKHI9e30scz17fSk9PntsZXQgaT1mdW5jdGlvbih0KXtsZXQgcD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTtyZXR1cm4gdD1lbmNvZGVVUklDb21wb25lbnQodCkucmVwbGFjZSgvJTI2L2csIiYiKS5yZXBsYWNlKC8lMjMvZywiIyIpLnJlcGxhY2UoLyUzQi9nLCI7IikscC5pbm5lckhUTUw9dCxkZWNvZGVVUklDb21wb25lbnQocC50ZXh0Q29udGVudCl9O2lmKHIubWVybWFpZFVybCl7bGV0e2RlZmF1bHQ6dH09YXdhaXQgaW1wb3J0KHIubWVybWFpZFVybCk7aWYoci5tZXJtYWlkRWxrVXJsKXtsZXR7ZGVmYXVsdDplfT1hd2FpdCBpbXBvcnQoci5tZXJtYWlkRWxrVXJsKTt0LnJlZ2lzdGVyTGF5b3V0TG9hZGVycyhlKX1sZXQgcD1nKHIuaWNvbmlmeUpzb25DRE4pLHU9YXdhaXQgbChyLnVub0NTU1VybCksZj0oKT0+e2xldCBlPVtdO3JldHVybiB1LmZvckVhY2gobz0+e2UucHVzaCh7bmFtZTpvLGxvYWRlcjpwKG8pfSl9KSxlfTt0LnJlZ2lzdGVySWNvblBhY2tzKGYoKSksdC5pbml0aWFsaXplKHsuLi5zLm1lcm1haWRDb25maWc/P3t9LHN0YXJ0T25Mb2FkOiExLHN1cHByZXNzRXJyb3JSZW5kZXJpbmc6ITB9KSxkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCIubWVybWFpZCIpLmZvckVhY2goYXN5bmMgZT0+e2lmKGUuZ2V0QXR0cmlidXRlKCJkYXRhLXByb2Nlc3NlZCIpKXJldHVybjtlLnNldEF0dHJpYnV0ZSgiZGF0YS1wcm9jZXNzZWQiLCJ0cnVlIik7bGV0IG89ZS50ZXh0Q29udGVudDtpZihlLnF1ZXJ5U2VsZWN0b3JBbGwoInN2ZyIpLmZvckVhY2goYT0+YS5yZW1vdmUoKSksbyl7bGV0IGE9YXdhaXQgdC5yZW5kZXIoYG1lcm1haWQtJHtjcnlwdG8ucmFuZG9tVVVJRCgpfWAseShpKG8pKS50cmltKCkucmVwbGFjZSgvPGJyXHMqXC8/Pi9naSwiPGJyLz4iKSk7ZS5pbm5lckhUTUw9YS5zdmcsYS5iaW5kRnVuY3Rpb25zPy4oZSl9fSl9fTtleHBvcnR7RSBhcyBkZWZhdWx0fTsKLy8jIHNvdXJjZU1hcHBpbmdVUkw9aW5pdC1tZXJtYWlkLm1qcy5tYXAK",
   INIT_FONT_AWESOME: "dmFyIGw9YXN5bmMocj17fSxuPXt9KT0+e3RyeXtsZXRbdCxhLGksY109YXdhaXQgUHJvbWlzZS5hbGwoW2ltcG9ydChyLmZvbnRBd2Vzb21lVXJsKyIvZm9udGF3ZXNvbWUtc3ZnLWNvcmUiKSxpbXBvcnQoci5mb250QXdlc29tZVVybCsiL2ZyZWUtc29saWQtc3ZnLWljb25zIiksaW1wb3J0KHIuZm9udEF3ZXNvbWVVcmwrIi9mcmVlLXJlZ3VsYXItc3ZnLWljb25zIiksaW1wb3J0KHIuZm9udEF3ZXNvbWVVcmwrIi9mcmVlLWJyYW5kcy1zdmctaWNvbnMiKV0pLHM9ZT0+T2JqZWN0LmVudHJpZXMoZSkuZmlsdGVyKChbbyxtXSk9Pm8hPT0icHJlZml4IiYmbyE9PSJkZWZhdWx0IiYmdHlwZW9mIG0hPSJzdHJpbmciKS5tYXAoKFssb10pPT5vKSxmPVsuLi5zKGEpLC4uLnMoaSksLi4ucyhjKV07aWYoWyJmYW1pbHlQcmVmaXgiLCJjc3NQcmVmaXgiLCJzdHlsZURlZmF1bHQiLCJmYW1pbHlEZWZhdWx0IiwicmVwbGFjZW1lbnRDbGFzcyIsImF1dG9SZXBsYWNlU3ZnIiwiYXV0b0ExMXkiLCJzZWFyY2hQc2V1ZG9FbGVtZW50cyIsImtlZXBPcmlnaW5hbFNvdXJjZSIsIm1lYXN1cmVQZXJmb3JtYW5jZSIsIm11dGF0ZUFwcHJvYWNoIiwic2hvd01pc3NpbmdJY29ucyJdLmZvckVhY2goZT0+bi5mb250QXdlc29tZUNvbmZpZz8uW2VdJiYodC5jb25maWdbZV09bi5mb250QXdlc29tZUNvbmZpZ1tlXSkpLHQuY29uZmlnLm9ic2VydmVNdXRhdGlvbnM9ITEsdC5jb25maWcuYXV0b0FkZENzcz0hMSx0LmxpYnJhcnkuYWRkKC4uLmYpLHQuZG9tLmkyc3ZnKCksIWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJleHRyYWpzLWZvbnRhd2Vzb21lIikpe2xldCBlPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInN0eWxlIik7ZS5pZD0iZXh0cmFqcy1mb250YXdlc29tZSIsZS50ZXh0Q29udGVudD10LmRvbS5jc3MoKSxkb2N1bWVudC5oZWFkLmFwcGVuZENoaWxkKGUpLG5ldyBNdXRhdGlvbk9ic2VydmVyKCgpPT57ZSYmZS50ZXh0Q29udGVudD09PSIiJiYoZS50ZXh0Q29udGVudD10LmRvbS5jc3MoKSl9KS5vYnNlcnZlKGUse2NoYXJhY3RlckRhdGE6ITAsY2hpbGRMaXN0OiEwLHN1YnRyZWU6ITB9KX19Y2F0Y2godCl7dGhyb3cgdH19O2V4cG9ydHtsIGFzIGRlZmF1bHR9OwovLyMgc291cmNlTWFwcGluZ1VSTD1pbml0LWZvbnQtYXdlc29tZS5tanMubWFwCg==",
   INIT_UNO_CSS: "dmFyIHI9e2Rpc2NhcmRGcm9udE1hdHRlcjohMCxvdXRwdXRTY3JpcHRUYWc6ITAsdXNlTWVybWFpZDohMSx1c2VGb250QXdlc29tZTohMSx1c2VVbm9DU1M6ITEsbWVybWFpZFVybDoiaHR0cHM6Ly9lc20uc2gvbWVybWFpZCIsbWVybWFpZEVsa1VybDoiaHR0cHM6Ly9lc20uc2gvQG1lcm1haWQtanMvbGF5b3V0LWVsayIsZm9udEF3ZXNvbWVVcmw6Imh0dHBzOi8vZXNtLnNoL0Bmb3J0YXdlc29tZSIsdW5vQ1NTVXJsOiJodHRwczovL2VzbS5zaC9AdW5vY3NzIixpY29uaWZ5SnNvbkNETjoiaHR0cHM6Ly9lc20uc2gifTt2YXIgbT1hc3luYyhzPXIudW5vQ1NTVXJsKT0+YXdhaXQgaW1wb3J0KGAke3N9L3ByZXNldC1pY29ucy9jb3JlYCkudGhlbihlPT5lLmljb25zKSxsPShzPXIuaWNvbmlmeUpzb25DRE4pPT5lPT4oKT0+aW1wb3J0KGAke3N9L0BpY29uaWZ5LWpzb24vJHtlfWApLnRoZW4obz0+by5pY29ucyk7dmFyIHc9YXN5bmMocz17fSxlPXt9KT0+e2xldFt7ZGVmYXVsdDpvfSx7ZGVmYXVsdDp1fSx7ZGVmYXVsdDphfSx7ZGVmYXVsdDpjfSx7ZGVmYXVsdDp5fSx7ZGVmYXVsdDpmfSx7ZGVmYXVsdDpTfSx7ZGVmYXVsdDpkfSx7ZGVmYXVsdDpnfSx7ZGVmYXVsdDpDfV09YXdhaXQgUHJvbWlzZS5hbGwoW2ltcG9ydChzLnVub0NTU1VybCsiL3J1bnRpbWUiKSxlLnByZXNldFdpbmQ/aW1wb3J0KHMudW5vQ1NTVXJsKyIvcHJlc2V0LXdpbmQiKTpQcm9taXNlLnJlc29sdmUoe30pLCFlLnByZXNldFdpbmQmJmUucHJlc2V0TWluaT9pbXBvcnQocy51bm9DU1NVcmwrIi9wcmVzZXQtbWluaSIpOlByb21pc2UucmVzb2x2ZSh7fSksIWUucHJlc2V0V2luZCYmIWUucHJlc2V0TWluaT9pbXBvcnQocy51bm9DU1NVcmwrIi9wcmVzZXQtdW5vIik6UHJvbWlzZS5yZXNvbHZlKHt9KSxlLnByZXNldEljb25zP2ltcG9ydChzLnVub0NTU1VybCsiL3ByZXNldC1pY29ucy9icm93c2VyIik6UHJvbWlzZS5yZXNvbHZlKHt9KSxlLnByZXNldEF0dHJpYnV0aWZ5P2ltcG9ydChzLnVub0NTU1VybCsiL3ByZXNldC1hdHRyaWJ1dGlmeSIpOlByb21pc2UucmVzb2x2ZSh7fSksZS5wcmVzZXRUeXBvZ3JhcGh5P2ltcG9ydChzLnVub0NTU1VybCsiL3ByZXNldC10eXBvZ3JhcGh5Iik6UHJvbWlzZS5yZXNvbHZlKHt9KSxlLnByZXNldFdlYkZvbnRzP2ltcG9ydChzLnVub0NTU1VybCsiL3ByZXNldC13ZWItZm9udHMiKTpQcm9taXNlLnJlc29sdmUoe30pLGUucHJlc2V0VGFnaWZ5P2ltcG9ydChzLnVub0NTU1VybCsiL3ByZXNldC10YWdpZnkiKTpQcm9taXNlLnJlc29sdmUoe30pLGUucHJlc2V0UmVtVG9QeD9pbXBvcnQocy51bm9DU1NVcmwrIi9wcmVzZXQtcmVtLXRvLXB4Iik6UHJvbWlzZS5yZXNvbHZlKHt9KV0pLHQ9W107aWYoZS5wcmVzZXRXaW5kP3QucHVzaCh1KGUucHJlc2V0V2luZCkpOmUucHJlc2V0TWluaT90LnB1c2goYShlLnByZXNldE1pbmkpKTp0LnB1c2goYygpKSxlLnByZXNldEljb25zKXtsZXQgaT17Li4uZS5wcmVzZXRJY29uc30sUD1sKHMuaWNvbmlmeUpzb25DRE4pLFU9YXdhaXQgbShzLnVub0NTU1VybCksYj0oKT0+e2xldCBuPXt9O3JldHVybiBVLmZvckVhY2gocD0+e25bcF09UChwKX0pLG59O2kuYXV0b0luc3RhbGw9ITEsaS5jb2xsZWN0aW9ucz17Li4uYigpfSx0LnB1c2goeShpKSl9ZS5wcmVzZXRBdHRyaWJ1dGlmeSYmdC5wdXNoKGYoZS5wcmVzZXRBdHRyaWJ1dGlmeSkpLGUucHJlc2V0VHlwb2dyYXBoeSYmdC5wdXNoKFMoZS5wcmVzZXRUeXBvZ3JhcGh5KSksZS5wcmVzZXRXZWJGb250cyYmdC5wdXNoKGQoZS5wcmVzZXRXZWJGb250cykpLGUucHJlc2V0VGFnaWZ5JiZ0LnB1c2goZyhlLnByZXNldFRhZ2lmeSkpLGUucHJlc2V0UmVtVG9QeCYmdC5wdXNoKEMoKSk7bGV0IGg9ZS5ydWxlcz8/W107byh7ZGVmYXVsdHM6e3J1bGVzOmgscHJlc2V0czp0fX0pfTtleHBvcnR7dyBhcyBkZWZhdWx0fTsKLy8jIHNvdXJjZU1hcHBpbmdVUkw9aW5pdC11bm8tY3NzLm1qcy5tYXAK"
 };
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.11/src/create-tags.ts
-var initAll = (extrajsOptions) => extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS ? `
-export default async (options = {}, frontMatter = {}, additionalSettings = {}) => {
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.12/src/create-tags.ts
+var initScript = (extrajsOptions) => extrajsOptions.useMermaid || extrajsOptions.useFontAwesome || extrajsOptions.useUnoCSS ? `
+export default async (options = {}, frontMatter = {}) => {
   const tasks = [];
 ${extrajsOptions.useMermaid ? `
   const mermaidScript = document.getElementById('extrajs')?.getAttribute('data-extrajs-mermaid-js');
@@ -3622,7 +3622,7 @@ ${extrajsOptions.useMermaid ? `
     tasks.push(
       (async () => {
         const { default: initMermaid } = await import("data:text/javascript;base64," + mermaidScript);
-        await initMermaid(options, frontMatter, additionalSettings);
+        await initMermaid(options, frontMatter);
       })()
     );
   }` : ""}
@@ -3632,7 +3632,7 @@ ${extrajsOptions.useFontAwesome ? `
     tasks.push(
       (async () => {
         const { default: initFontAwesome } = await import("data:text/javascript;base64," + fontAwesomeScript);
-        await initFontAwesome(options, frontMatter, additionalSettings);
+        await initFontAwesome(options, frontMatter);
       })()
     );
   }` : ""}
@@ -3642,7 +3642,7 @@ ${extrajsOptions.useUnoCSS ? `
     tasks.push(
       (async () => {
         const { default: initUnoCSS } = await import("data:text/javascript;base64," + unoCSSScript);
-        await initUnoCSS(options, frontMatter, additionalSettings);
+        await initUnoCSS(options, frontMatter);
       })()
     );
   }` : ""}
@@ -3654,7 +3654,7 @@ var createTemplateTag = (extrajsOptions, frontMatter) => extrajsOptions.useMerma
 ${extrajsOptions.useMermaid ? `data-extrajs-mermaid-js="${base64js_default.INIT_MERMAID}"` : ""}
 ${extrajsOptions.useFontAwesome ? `data-extrajs-font-awesome="${base64js_default.INIT_FONT_AWESOME}"` : ""}
 ${extrajsOptions.useUnoCSS ? `data-extrajs-uno-css="${base64js_default.INIT_UNO_CSS}"` : ""}
-${`data-extrajs-init="${btoa(initAll(extrajsOptions))}"`}
+${`data-extrajs-init="${btoa(initScript(extrajsOptions))}"`}
 ${`data-extrajs-options="${btoa("export default" + JSON.stringify(extrajsOptions))}"`}
 ${`data-extrajs-frontMatter="${btoa("export default" + JSON.stringify(frontMatter))}"`}>
 </template>` : "";
@@ -3665,13 +3665,12 @@ var createScriptTag = (extrajsOptions, frontMatter) => (extrajsOptions.useMermai
     const { default: init } = await import("data:text/javascript;base64," + initScript);
     await init(
       ${JSON.stringify(extrajsOptions)},
-      ${JSON.stringify(frontMatter)},
-      {}
+      ${JSON.stringify(frontMatter)}
     );
   }
 </script>` : "";
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.11/src/types.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.12/src/types.ts
 var defaultOptions = {
   discardFrontMatter: true,
   outputScriptTag: true,
@@ -3685,7 +3684,7 @@ var defaultOptions = {
   iconifyJsonCDN: "https://esm.sh"
 };
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.11/src/plugin.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.12/src/plugin.ts
 function extraJsPlugin(md, userOptions) {
   const { renderer: { render }, parse: parse2 } = md;
   let frontMatter = {};
@@ -3710,7 +3709,7 @@ function extraJsPlugin(md, userOptions) {
 }
 var plugin_default = extraJsPlugin;
 
-// https://jsr.io/@morish000/markdown-it-extrajs/0.0.11/src/index.ts
+// https://jsr.io/@morish000/markdown-it-extrajs/0.0.12/src/index.ts
 var src_default = plugin_default;
 
 // src/extension.ts
