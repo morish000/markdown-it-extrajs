@@ -51,6 +51,11 @@ export type ExtraJSOptions = ExtraJSUseOptions & {
   iconifyJsonCDN?: string;
 };
 
+export type InitFunctionType = (
+  options: ExtraJSOptions,
+  frontMatter: ExtraJSFrontMatter,
+) => Promise<void>;
+
 export const defaultOptions: {
   [K in keyof ExtraJSOptions]-?: ExtraJSOptions[K];
 } = {

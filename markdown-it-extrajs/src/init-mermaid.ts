@@ -1,9 +1,13 @@
-import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
+import type {
+  ExtraJSFrontMatter,
+  ExtraJSOptions,
+  InitFunctionType,
+} from "./types.ts";
 import type { IconifyJSON } from "@iconify/types";
 import { createIconLoader, getIcons } from "./iconify-json.ts";
 import { dedent } from "ts-dedent";
 
-export default async (
+export const initMermaid: InitFunctionType = async (
   options: ExtraJSOptions = {},
   frontMatter: ExtraJSFrontMatter = {},
 ) => {
@@ -65,6 +69,8 @@ export default async (
         }
       },
     );
-    await Promise.all(renders);
+
+    const safeRenders = renders.map((p) => p.catch((e) => console.error(e)));
+    await Promise.all(safeRenders);
   }
 };
