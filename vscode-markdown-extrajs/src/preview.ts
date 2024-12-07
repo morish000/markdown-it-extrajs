@@ -1,4 +1,4 @@
-import { initAll } from "@morish000/markdown-it-extrajs";
+import { initAll } from "@morish000/markdown-it-extrajs/scripts";
 
 const init = async () => {
   const optionsStr = document.getElementById("extrajs")?.getAttribute(
@@ -9,8 +9,8 @@ const init = async () => {
   );
   if (optionsStr && frontMatterStr) {
     await initAll(
-      JSON.parse(btoa(optionsStr)),
-      JSON.parse(btoa(frontMatterStr)),
+      JSON.parse(atob(optionsStr)),
+      JSON.parse(atob(frontMatterStr)),
     );
   }
 };

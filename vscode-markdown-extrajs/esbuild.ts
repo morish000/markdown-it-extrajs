@@ -54,7 +54,6 @@ async function main() {
     sourcemap: !production,
     sourcesContent: false,
     platform: "browser",
-    external: ["gray-matter"],
     logLevel: "silent",
     plugins: [
       esbuildProblemMatcherPlugin,

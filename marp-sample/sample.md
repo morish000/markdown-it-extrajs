@@ -20,6 +20,21 @@ extrajs:
   presetAttributify:
     prefix: "un-"
     prefixedOnly: true
+  rules:
+    -
+      - text-box-1
+      - font-size: 48px
+        color: white
+        background-color: black
+        padding: 50px
+        border-radius: 16px
+    -
+      - text-box-2
+      - font-size: 48px
+        color: red
+        background-color: yellow
+        padding: 50px
+        border-radius: 16px
 ---
 
 # Title
@@ -64,6 +79,17 @@ extrajs:
 
 ---
 
+# UnoCSS Rules
+
+<div un-text-box-1>
+  This is a sample text with UnoCSS styles applied.
+</div>
+<div un-text-box-2>
+  Sample 2.
+</div>
+
+---
+
 # Font Awesome
 
 ## Solid icons
@@ -102,25 +128,7 @@ graph TD
 
 ---
 
-# Mermaid(architecture)
-
-<pre class="mermaid" style="background-color: white;">
-architecture-beta
-    group api(cloud)[API]
-
-    service db(database)[Database] in api
-    service disk1(disk)[Storage] in api
-    service disk2(disk)[Storage] in api
-    service server(server)[Server] in api
-
-    db:L -- R:server
-    disk1:T -- B:server
-    disk2:T -- B:db
-</pre>
-
----
-
-# Mermaid(architecture2)
+# Mermaid(architecture: use icon)
 
 <pre class="mermaid" style="background-color: white;">
 architecture-beta
@@ -135,15 +143,3 @@ architecture-beta
     disk1:T -- B:server
     disk2:T -- B:db
 </pre>
-
----
-
-# Mermaid(sequence)
-
-<pre class="mermaid" style="background-color: white;">
-sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-    Alice-)John: See you later!
-</pre>
-
