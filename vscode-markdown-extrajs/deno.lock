@@ -2,17 +2,19 @@
   "version": "4",
   "specifiers": {
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
-    "jsr:@morish000/markdown-it-extrajs@0.0.13": "0.0.13",
+    "jsr:@morish000/markdown-it-extrajs@0.0.14": "0.0.14",
     "jsr:@std/bytes@^1.0.2": "1.0.4",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.6": "1.0.8",
     "npm:@fortawesome/fontawesome-svg-core@6.7": "6.7.1",
+    "npm:@iconify/types@2.0": "2.0.0",
     "npm:@types/markdown-it@14.1": "14.1.2",
     "npm:@types/vscode@1.95": "1.95.0",
     "npm:gray-matter@4.0": "4.0.3",
     "npm:markdown-it-front-matter@0.2": "0.2.4",
     "npm:markdown-it@14.1": "14.1.0",
     "npm:mermaid@11.4": "11.4.1_cytoscape@3.30.4",
+    "npm:ts-dedent@2.2": "2.2.0",
     "npm:unocss@0.64": "0.64.1"
   },
   "jsr": {
@@ -24,14 +26,16 @@
         "jsr:@std/path"
       ]
     },
-    "@morish000/markdown-it-extrajs@0.0.13": {
-      "integrity": "7977251a7b2efcf93d5ec2d5f664585dcf8f45a5db4693ffb2fd39eb56a1cc8d",
+    "@morish000/markdown-it-extrajs@0.0.14": {
+      "integrity": "e3764d14dfd7a6f9ee8ddf51421ee0c82743d70807828b40cb6e368fce4c9827",
       "dependencies": [
         "npm:@fortawesome/fontawesome-svg-core",
+        "npm:@iconify/types",
         "npm:@types/markdown-it",
         "npm:gray-matter",
         "npm:markdown-it-front-matter",
         "npm:mermaid",
+        "npm:ts-dedent",
         "npm:unocss"
       ]
     },

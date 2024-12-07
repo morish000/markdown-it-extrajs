@@ -1,6 +1,6 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "tasks": {
     "sample": "deno run --allow-all sample.ts",
     "build": "deno run --allow-all build.ts"
@@ -10,7 +10,8 @@
     "lib": ["dom", "deno.ns"]
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./scripts": "./src/scripts.ts"
   },
   "publish": {
     "include": [

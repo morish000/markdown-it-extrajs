@@ -1,24 +1,17 @@
+import { initAll } from "@morish000/markdown-it-extrajs";
+
 const init = async () => {
-  const optionsScript = document.getElementById("extrajs")?.getAttribute(
+  const optionsStr = document.getElementById("extrajs")?.getAttribute(
     "data-extrajs-options",
   );
-  const frontMatterScript = document.getElementById("extrajs")?.getAttribute(
+  const frontMatterStr = document.getElementById("extrajs")?.getAttribute(
     "data-extrajs-frontMatter",
   );
-  const initScript = document.getElementById("extrajs")?.getAttribute(
-    "data-extrajs-init",
-  );
-  if (optionsScript && frontMatterScript && initScript) {
-    const [
-      { default: init },
-      { default: options },
-      { default: frontMatter },
-    ] = await Promise.all([
-      import("data:text/javascript;base64," + initScript),
-      import("data:text/javascript;base64," + optionsScript),
-      import("data:text/javascript;base64," + frontMatterScript),
-    ]);
-    await init(options, frontMatter);
+  if (optionsStr && frontMatterStr) {
+    await initAll(
+      JSON.parse(btoa(optionsStr)),
+      JSON.parse(btoa(frontMatterStr)),
+    );
   }
 };
 
