@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "html": "marp slide.md --engine ./marp.engine.mjs --html -o ./dist/slide.html",
-    "pdf": "marp slide.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pdf -o ./dist/slide.pdf",
-    "pptx": "marp slide.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pptx -o ./dist/slide.pptx"
+    "html": "marp ./sample.md --engine ./marp.engine.mjs --html -o ./dist/sample.html",
+    "pdf": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pdf -o ./dist/sample.pdf",
+    "pptx": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pptx -o ./dist/sample.pptx"
   },
   "keywords": [],
   "author": "morish000",

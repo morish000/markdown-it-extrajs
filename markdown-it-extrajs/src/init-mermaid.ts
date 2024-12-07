@@ -45,24 +45,26 @@ export default async (
       ...{ startOnLoad: false, suppressErrorRendering: true },
     });
 
-    const elements = document.querySelectorAll(".mermaid");
-    elements.forEach(async (element) => {
-      if (element.getAttribute("data-processed")) {
-        return;
-      }
-      element.setAttribute("data-processed", "true");
-      const graphDefinition = element.textContent;
-      element.querySelectorAll("svg").forEach((svg) => svg.remove());
-      if (graphDefinition) {
-        const renderResult = await mermaid.render(
-          `mermaid-${crypto.randomUUID()}`,
-          dedent(entityDecode(graphDefinition))
-            .trim()
-            .replace(/<br\s*\/?>/gi, "<br/>"),
-        );
-        element.innerHTML = renderResult.svg;
-        renderResult.bindFunctions?.(element);
-      }
-    });
+    const renders = Array.from(document.querySelectorAll(".mermaid")).map(
+      async (element) => {
+        if (element.getAttribute("data-processed")) {
+          return;
+        }
+        element.setAttribute("data-processed", "true");
+        const graphDefinition = element.textContent;
+        element.querySelectorAll("svg").forEach((svg) => svg.remove());
+        if (graphDefinition) {
+          const renderResult = await mermaid.render(
+            `mermaid-${crypto.randomUUID()}`,
+            dedent(entityDecode(graphDefinition))
+              .trim()
+              .replace(/<br\s*\/?>/gi, "<br/>"),
+          );
+          element.innerHTML = renderResult.svg;
+          renderResult.bindFunctions?.(element);
+        }
+      },
+    );
+    await Promise.all(renders);
   }
 };
