@@ -1,5 +1,5 @@
 (() => {
-  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.15/src/init-font-awesome.ts
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.16/src/init-font-awesome.ts
   var initFontAwesome = async (options = {}, frontMatter = {}) => {
     try {
       const [
@@ -64,7 +64,7 @@
     }
   };
 
-  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.15/src/types.ts
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.16/src/types.ts
   var defaultOptions = {
     discardFrontMatter: true,
     outputScriptTag: true,
@@ -78,7 +78,7 @@
     iconifyJsonCDN: "https://esm.sh"
   };
 
-  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.15/src/iconify-json.ts
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.16/src/iconify-json.ts
   var getIcons = async (unoCSSUrl = defaultOptions.unoCSSUrl) => await import(`${unoCSSUrl}/preset-icons/core`).then(
     (i) => i.icons
   );
@@ -124,7 +124,7 @@
     return string;
   }
 
-  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.15/src/init-mermaid.ts
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.16/src/init-mermaid.ts
   var initMermaid = async (options = {}, frontMatter = {}) => {
     const entityDecode = function(html) {
       const decoder = document.createElement("div");
@@ -180,7 +180,7 @@
     }
   };
 
-  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.15/src/init-uno-css.ts
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.16/src/init-uno-css.ts
   var initUnoCSS = async (options = {}, frontMatter = {}) => {
     const [
       { default: initUnocssRuntime },
@@ -254,7 +254,7 @@
     });
   };
 
-  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.15/src/init-all.ts
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.16/src/init-all.ts
   var initAll = async (options = {}, frontMatter = {}) => {
     const tasks = [];
     options.useMermaid && tasks.push(initMermaid(options, frontMatter));

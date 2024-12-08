@@ -3,7 +3,7 @@
   "displayName": "Markdown Preview Extrajs",
   "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "morish000",
   "license": "MIT",
   "repository": {

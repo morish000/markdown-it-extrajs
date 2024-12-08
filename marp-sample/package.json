@@ -13,6 +13,6 @@
   "description": "Marp Sample",
   "devDependencies": {
     "@marp-team/marp-cli": "^4.0.3",
-    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.15"
+    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.16"
   }
 }

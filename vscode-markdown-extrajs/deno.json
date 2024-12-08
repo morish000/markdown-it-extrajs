@@ -1,6 +1,6 @@
 {
   "name": "@morish000/vscode-markdown-extrajs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "tasks": {
     "install": "deno install",
     "esbuild": {
