@@ -36,7 +36,7 @@
       "properties": {
         "markdownExtraJS.discardFrontMatter": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Discard front matter from the markdown."
         },
         "markdownExtraJS.outputScriptTag": {

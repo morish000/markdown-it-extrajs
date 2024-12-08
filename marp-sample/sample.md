@@ -113,10 +113,22 @@ extrajs:
 
 ---
 
-# Mermaid
+# Mermaid(sequence)
 
 <pre class="mermaid" style="background-color: white;">
-graph TD
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+</pre>
+
+---
+
+# Mermaid(sequence: use ELK)
+
+<pre class="mermaid" style="background-color: white;">
+%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
+flowchart TD
   A[Enter Chart Definition] --> B(Preview)
   B --> C{decide}
   C --> D[Keep]
