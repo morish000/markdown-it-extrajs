@@ -24,9 +24,12 @@ export const createScriptTag = (
     ? `
 <script type="module">
   const { initAll } = await import("data:text/javascript;base64,${SRC_BASE64.INIT_ALL}");
-  await initAll(
-    ${JSON.stringify(options)},
-    ${JSON.stringify(frontMatter)}
-  );
+  const options = ${JSON.stringify(options)};
+  const frontMatter = ${JSON.stringify(frontMatter)};
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAll(options, frontMatter));
+  } else {
+    await initAll(options, frontMatter);
+  }
 </script>`
     : "";

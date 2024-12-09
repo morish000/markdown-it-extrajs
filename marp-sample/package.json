@@ -5,8 +5,10 @@
   "scripts": {
     "html": "marp ./sample.md --engine ./marp.engine.mjs --html -o ./dist/sample.html",
     "pdf": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pdf -o ./dist/sample.pdf",
-    "pptx": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pptx -o ./dist/sample.pptx"
+    "pptx": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pptx -o ./dist/sample.pptx",
+    "debug": "node ./debug.mjs"
   },
+  "type": "module",
   "keywords": [],
   "author": "morish000",
   "license": "MIT",

@@ -43,9 +43,10 @@ extrajs:                      # Root element
   presetRemToPx: [boolean]    # Enables the Rem to px preset. Default is false.
 ```
 
-Only one of presetWind, presetMini, or presetUno will be active.  
-If presetWind is set, it will be active. If presetWind is not set and presetMini is set, then presetMini will be active.  
-If neither is set, presetUno will be active.  
+Only one of presetWind, presetMini, or presetUno will be active.\
+If presetWind is set, it will be active. If presetWind is not set and presetMini
+is set, then presetMini will be active.\
+If neither is set, presetUno will be active.\
 Other UnoCSS settings will not activate their presets if they are not set.
 
 - [mermaidConfig](https://mermaid.js.org/config/setup/interfaces/mermaid.Mermaid.html#initialize)
@@ -63,8 +64,12 @@ Other UnoCSS settings will not activate their presets if they are not set.
 ## Note
 
 - Some settings required for operation will be forcibly overwritten.
-- Due to the YAML format, only static settings are valid. Settings that require regular expression literals, template literals, functions, etc., cannot be configured.
-- If you have installed [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid), set `useMermaid` to false. The default is false.
+- Due to the YAML format, only static settings are valid. Settings that require
+  regular expression literals, template literals, functions, etc., cannot be
+  configured.
+- If you have installed
+  [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid),
+  set `useMermaid` to false. The default is false.
 
 # VSCode Settings
 
@@ -81,13 +86,16 @@ Other UnoCSS settings will not activate their presets if they are not set.
 | unoCSSUrl          | "https://esm.sh/@unocss"                |
 | iconifyJsonCDN     | "https://esm.sh"                        |
 
-useMermaid, useFontAwesome, and useUnoCSS will only be enabled if both the VSCode setting and the Front Matter setting are set to true.
+useMermaid, useFontAwesome, and useUnoCSS will only be enabled if both the
+VSCode setting and the Front Matter setting are set to true.
 
 # Known Issues
 
 - Export is not available; it is preview only.
-- The initial run may take some time due to large download sizes, but subsequent runs will improve with caching.
-- If you edit UnoCSS Front Matter, a reload of the preview window is required for the changes to take effect.
+- The initial run may take some time due to large download sizes, but subsequent
+  runs will improve with caching.
+- If you edit UnoCSS Front Matter, a reload of the preview window is required
+  for the changes to take effect.
 
 # License
 

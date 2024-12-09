@@ -1,6 +1,7 @@
 {
   "imports": {
     "ts-dedent": "npm:ts-dedent@2.2.x",
+    "uuid": "npm:uuid@9.0.x",
     "gray-matter": "npm:gray-matter@4.0.x",
     "markdown-it": "npm:markdown-it@14.1.x",
     "markdown-it-front-matter": "npm:markdown-it-front-matter@0.2.x",

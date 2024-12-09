@@ -16,19 +16,27 @@ extrajs:
   useMermaid: true
   useFontAwesome: true
   useUnoCSS: true
-  rules: []
-  presetWind: null
-  presetMini: null
   presetIcons:
     extraProperties:
       display: inline-block
   presetAttributify:
     prefix: "un-"
     prefixedOnly: true
-  presetTypography: null
-  presetWebFonts: null
-  presetTagify: null
-  presetRemToPx: false
+  rules:
+    -
+      - text-box-1
+      - font-size: 48px
+        color: white
+        background-color: black
+        padding: 50px
+        border-radius: 16px
+    -
+      - text-box-2
+      - font-size: 48px
+        color: red
+        background-color: yellow
+        padding: 50px
+        border-radius: 16px
 ---
 
 # Title

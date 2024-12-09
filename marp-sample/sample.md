@@ -134,7 +134,7 @@ flowchart TD
   C --> D[Keep]
   C --> E[Edit Definition]
   E --> B
-  D --> F[Save Image and Code]
+  D --> F[Save Image and <br/> Code]
   F --> B
 </pre>
 

@@ -6,6 +6,7 @@ import type {
 import type { IconifyJSON } from "@iconify/types";
 import { createIconLoader, getIcons } from "./iconify-json.ts";
 import { dedent } from "ts-dedent";
+import { v4 } from "uuid";
 
 export const initMermaid: InitFunctionType = async (
   options: ExtraJSOptions = {},
@@ -49,36 +50,30 @@ export const initMermaid: InitFunctionType = async (
       ...{ startOnLoad: false, suppressErrorRendering: true },
     });
 
-    const render = async () => {
-      const renders = Array.from(document.querySelectorAll(".mermaid")).map(
-        async (element) => {
-          if (element.getAttribute("data-processed")) {
-            return;
-          }
-          element.setAttribute("data-processed", "true");
-          const graphDefinition = element.textContent;
-          element.querySelectorAll("svg").forEach((svg) => svg.remove());
-          if (graphDefinition) {
-            const renderResult = await mermaid.render(
-              `mermaid-${crypto.randomUUID()}`,
-              dedent(entityDecode(graphDefinition))
-                .trim()
-                .replace(/<br\s*\/?>/gi, "<br/>"),
-            );
-            element.innerHTML = renderResult.svg;
-            renderResult.bindFunctions?.(element);
-          }
-        },
-      );
+    const renders = Array.from(document.querySelectorAll(".mermaid")).map(
+      async (element) => {
+        if (element.getAttribute("data-processed")) {
+          return;
+        }
+        element.setAttribute("data-processed", "true");
+        const graphDefinition = element.innerHTML;
 
-      const safeRenders = renders.map((p) => p.catch((e) => console.error(e)));
-      await Promise.all(safeRenders);
-    };
-    if (document.readyState !== "complete") {
-      // It runs one extra time, but there is no negative impact.
-      // deno-lint-ignore no-window no-window-prefix
-      window.addEventListener("load", render, { once: true });
-    }
-    await render();
+        element.querySelectorAll("svg").forEach((svg) => svg.remove());
+        if (graphDefinition) {
+          const id = `mermaid-${v4()}`;
+          const renderResult = await mermaid.render(
+            id,
+            dedent(entityDecode(graphDefinition))
+              .trim()
+              .replace(/<br\s*\/?>/gi, "<br/>"),
+          );
+          element.innerHTML = renderResult.svg;
+          renderResult.bindFunctions?.(element);
+        }
+      },
+    );
+
+    const safeRenders = renders.map((p) => p.catch((e) => console.error(e)));
+    await Promise.all(safeRenders);
   }
 };
