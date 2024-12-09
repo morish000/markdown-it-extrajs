@@ -4,6 +4,7 @@
     "npm:@fortawesome/fontawesome-svg-core@6.7": "6.7.1",
     "npm:@iconify/types@2.0": "2.0.0",
     "npm:@types/markdown-it@14.1": "14.1.2",
+    "npm:@types/uuid@10.0": "10.0.0",
     "npm:gray-matter@4.0": "4.0.3",
     "npm:markdown-it-front-matter@0.2": "0.2.4",
     "npm:markdown-it@14.1": "14.1.0",
@@ -517,6 +518,9 @@
     },
     "@types/trusted-types@2.0.7": {
       "integrity": "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw=="
+    },
+    "@types/uuid@10.0.0": {
+      "integrity": "sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ=="
     },
     "@unocss/astro@0.64.1": {
       "integrity": "sha512-UBB2nDc3aqBmdcgJHOsnAQaQnbdch4f3CKfV+LTv77D4tPizagUCODwPVTK3CA3leQzVbbUV06uHfo5hsv2PUw==",

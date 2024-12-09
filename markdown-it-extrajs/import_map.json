@@ -10,6 +10,7 @@
     "@unocss": "npm:unocss@0.64.x",
     "@iconify/types": "npm:@iconify/types@2.0.x",
     "@types/markdown-it": "npm:@types/markdown-it@14.1.x",
+    "@types/uuid": "npm:@types/uuid@10.0.x",
     "esbuild": "https://deno.land/x/esbuild@v0.24.0/mod.js"
   }
 }

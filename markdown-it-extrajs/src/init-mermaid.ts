@@ -6,6 +6,7 @@ import type {
 import type { IconifyJSON } from "@iconify/types";
 import { createIconLoader, getIcons } from "./iconify-json.ts";
 import { dedent } from "ts-dedent";
+// @deno-types="@types/uuid"
 import { v4 } from "uuid";
 
 export const initMermaid: InitFunctionType = async (
