@@ -13,7 +13,7 @@ Converts [sample.md](https://github.com/morish000/markdown-it-extrajs/blob/main/
 npm run html
 ```
 
-- Outputs `./dist/sample.html`.
+- Outputs [./dist/sample.html](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.html).
 
 ### PDF Output
 
@@ -21,7 +21,7 @@ npm run html
 npm run pdf
 ```
 
-- Outputs `./dist/sample.pdf`.
+- Outputs [./dist/sample.pdf](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.pdf).
 
 ### PPTX Output
 
@@ -29,7 +29,7 @@ npm run pdf
 npm run pptx
 ```
 
-- Outputs `./dist/sample.pptx`.
+- Outputs [./dist/sample.pptx](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.pptx).
 
 ### Debug Mode
 
@@ -39,8 +39,8 @@ npm run debug
 
 Output HTML to PDF using Puppeteer without using Marp CLI. Handle and output `console.log` for debugging.
 
-- Converts [./dist/sample.html](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.html?plain=1) to PDF.
-- Outputs `./dist/sample_debug.pdf`.
+- Converts [./dist/sample.html](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.html) to PDF.
+- Outputs [./dist/sample_debug.pdf](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample_debug.pdf).
 
 ## Known Issues
 
