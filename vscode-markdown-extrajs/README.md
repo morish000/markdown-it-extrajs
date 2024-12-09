@@ -91,11 +91,16 @@ VSCode setting and the Front Matter setting are set to true.
 
 # Known Issues
 
-- Export is not available; it is preview only.
+- Export is not available; it is preview only. However, a sample project for
+  exporting using Marp CLI is available at
+  [marp-sample](https://github.com/morish000/markdown-it-extrajs/tree/main/marp-sample).
 - The initial run may take some time due to large download sizes, but subsequent
   runs will improve with caching.
 - If you edit UnoCSS Front Matter, a reload of the preview window is required
-  for the changes to take effect.
+  for the changes to take effect. Please execute 'Refresh Preview' in the
+  preview window.
+- Occasionally, Mermaid.js fails to render; please execute 'Refresh Preview' in
+  the preview window.
 
 # License
 

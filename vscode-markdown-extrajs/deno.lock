@@ -3,19 +3,22 @@
   "specifiers": {
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
     "jsr:@morish000/markdown-it-extrajs@0.0.16": "0.0.16",
+    "jsr:@morish000/markdown-it-extrajs@0.0.17": "0.0.17",
     "jsr:@std/bytes@^1.0.2": "1.0.4",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.6": "1.0.8",
     "npm:@fortawesome/fontawesome-svg-core@6.7": "6.7.1",
     "npm:@iconify/types@2.0": "2.0.0",
     "npm:@types/markdown-it@14.1": "14.1.2",
+    "npm:@types/uuid@10.0": "10.0.0",
     "npm:@types/vscode@1.95": "1.95.0",
     "npm:gray-matter@4.0": "4.0.3",
     "npm:markdown-it-front-matter@0.2": "0.2.4",
     "npm:markdown-it@14.1": "14.1.0",
     "npm:mermaid@11.4": "11.4.1_cytoscape@3.30.4",
     "npm:ts-dedent@2.2": "2.2.0",
-    "npm:unocss@0.64": "0.64.1"
+    "npm:unocss@0.64": "0.64.1",
+    "npm:uuid@9.0": "9.0.1"
   },
   "jsr": {
     "@luca/esbuild-deno-loader@0.11.0": {
@@ -37,6 +40,21 @@
         "npm:mermaid",
         "npm:ts-dedent",
         "npm:unocss"
+      ]
+    },
+    "@morish000/markdown-it-extrajs@0.0.17": {
+      "integrity": "4ab19efac1cc572e038fba8ced622dcc5df76ddf1fceca4e224327cbeeed537c",
+      "dependencies": [
+        "npm:@fortawesome/fontawesome-svg-core",
+        "npm:@iconify/types",
+        "npm:@types/markdown-it",
+        "npm:@types/uuid",
+        "npm:gray-matter",
+        "npm:markdown-it-front-matter",
+        "npm:mermaid",
+        "npm:ts-dedent",
+        "npm:unocss",
+        "npm:uuid"
       ]
     },
     "@std/bytes@1.0.4": {
@@ -554,6 +572,9 @@
     },
     "@types/trusted-types@2.0.7": {
       "integrity": "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw=="
+    },
+    "@types/uuid@10.0.0": {
+      "integrity": "sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ=="
     },
     "@types/vscode@1.95.0": {
       "integrity": "sha512-0LBD8TEiNbet3NvWsmn59zLzOFu/txSlGxnv5yAFHCrhG9WvAnR3IvfHzMOs2aeWqgvNjq9pO99IUw8d3n+unw=="

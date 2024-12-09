@@ -20,21 +20,43 @@ extrajs:
   presetAttributify:
     prefix: "un-"
     prefixedOnly: true
+  presetTagify:
+    prefix: "un-"
   rules:
     -
       - text-box-1
-      - font-size: 48px
+      - display: 'block'
+        font-size: 48px
         color: white
         background-color: black
         padding: 50px
         border-radius: 16px
     -
       - text-box-2
-      - font-size: 48px
+      - display: block
+        font-size: 48px
         color: red
         background-color: yellow
         padding: 50px
         border-radius: 16px
+    -
+      - red
+      - display: inline
+        color: red
+    -
+      - blue
+      - display: inline
+        color: blue
+    -
+      - danger
+      - display: inline
+        color: red
+        font-weight: bold
+    -
+      - warning
+      - display: inline
+        color: blue
+        font-weight: bold
 ---
 
 # Title
@@ -79,7 +101,7 @@ extrajs:
 
 ---
 
-# UnoCSS Rules
+# UnoCSS Rules(Attributes Mode)
 
 <div un-text-box-1>
   This is a sample text with UnoCSS styles applied.
@@ -87,6 +109,23 @@ extrajs:
 <div un-text-box-2>
   Sample 2.
 </div>
+
+---
+
+# UnoCSS(Tagify Mode: block)
+
+<un-text-box-1>
+  This is a sample text with UnoCSS styles applied.
+</un-text-box-1>
+<un-text-box-2>
+  Sample 2.
+</un-text-box-2>
+
+---
+
+# UnoCSS(Tagify Mode: inline)
+
+Please proceed with caution as <un-danger>danger!!</un-danger> zones can cause severe injuries. Make sure to follow the instructions carefully to avoid any <un-warning>warning!</un-warning> signs. Areas marked with <un-red>color red</un-red> indicate critical errors, while <un-blue>color blue</un-blue> denotes informational content.
 
 ---
 
@@ -124,7 +163,7 @@ sequenceDiagram
 
 ---
 
-# Mermaid(sequence: use ELK)
+# Mermaid(flowchart: use ELK)
 
 <pre class="mermaid" style="background-color: white;">
 %%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
