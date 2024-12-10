@@ -8,9 +8,15 @@ const init = async () => {
     "data-extrajs-frontMatter",
   );
   if (optionsStr && frontMatterStr) {
-    await initAll(JSON.parse(atob(optionsStr)), JSON.parse(atob(frontMatterStr)));
+    await initAll(
+      JSON.parse(atob(optionsStr)),
+      JSON.parse(atob(frontMatterStr)),
+    );
   }
 };
 
+// deno-lint-ignore no-window no-window-prefix
+window.removeEventListener("vscode.markdown.updateContent", init);
+// deno-lint-ignore no-window no-window-prefix
 window.addEventListener("vscode.markdown.updateContent", init);
 init();

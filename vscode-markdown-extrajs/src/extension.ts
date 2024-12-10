@@ -1,50 +1,44 @@
-// @deno-types="@types/vscode"
-import type { ExtensionContext, WorkspaceConfiguration } from "vscode";
-// @deno-types="@types/markdown-it"
+import * as vscode from 'vscode';
 import type MarkdownIt from "markdown-it";
-import extraJsPlugin, {
-  type ExtraJSOptions,
-} from "@morish000/markdown-it-extrajs";
+import extraJsPlugin, { ExtraJSOptions } from "@morish000/markdown-it-extrajs";
 
-// deno-lint-ignore no-explicit-any
-declare const require: (path: string) => any;
-const requireWrapper = (path: string) => require(path);
-const vscode = requireWrapper("vscode");
+const globalOptions = (() => {
+	const storedOptions: ExtraJSOptions = {};
+	return {
+		update: () => {
+			const config = vscode.workspace.getConfiguration('markdownExtraJS');
 
-export function activate(_context: ExtensionContext) {
-  return {
-    extendMarkdownIt(md: MarkdownIt) {
-      const config = vscode.workspace
-        .getConfiguration(
-          "markdownExtraJS",
-        ) as WorkspaceConfiguration;
+			storedOptions.discardFrontMatter = config.get<boolean>('discardFrontMatter', true);
+			storedOptions.outputScriptTag = config.get<boolean>('outputScriptTag', false);
+			storedOptions.useMermaid = config.get<boolean>('useMermaid', true);
+			storedOptions.useFontAwesome = config.get<boolean>('useFontAwesome', true);
+			storedOptions.useUnoCSS = config.get<boolean>('useUnoCSS', true);
+			storedOptions.mermaidUrl = config.get<string>('mermaidUrl', 'https://esm.sh/mermaid');
+			storedOptions.mermaidElkUrl = config.get<string>('mermaidElkUrl', 'https://esm.sh/@mermaid-js/layout-elk');
+			storedOptions.fontAwesomeUrl = config.get<string>('fontAwesomeUrl', 'https://esm.sh/@fortawesome');
+			storedOptions.unoCSSUrl = config.get<string>('unoCSSUrl', 'https://esm.sh/@unocss');
+			storedOptions.iconifyJsonCDN = config.get<string>('iconifyJsonCDN', 'https://esm.sh');
 
-      const options: ExtraJSOptions = {
-        discardFrontMatter: config.get<boolean>(
-          "discardFrontMatter",
-          true,
-        ),
-        outputScriptTag: config.get<boolean>("outputScriptTag", false),
-        useMermaid: config.get<boolean>("useMermaid", true),
-        useFontAwesome: config.get<boolean>("useFontAwesome", true),
-        useUnoCSS: config.get<boolean>("useUnoCSS", true),
-        mermaidUrl: config.get<string>("mermaidUrl", "https://esm.sh/mermaid"),
-        mermaidElkUrl: config.get<string>(
-          "mermaidElkUrl",
-          "https://esm.sh/@mermaid-js/layout-elk",
-        ),
-        fontAwesomeUrl: config.get<string>(
-          "fontAwesomeUrl",
-          "https://esm.sh/@fortawesome",
-        ),
-        unoCSSUrl: config.get<string>("unoCSSUrl", "https://esm.sh/@unocss"),
-        iconifyJsonCDN: config.get<string>(
-          "iconifyJsonCDN",
-          "https://esm.sh",
-        ),
-      };
+			return storedOptions;
+		}
+	};
+})();
 
-      return md.use(extraJsPlugin, options);
-    },
-  };
+export function activate(context: vscode.ExtensionContext) {
+	const configChangeListener = vscode.workspace.onDidChangeConfiguration(event => {
+		if (event.affectsConfiguration('markdownExtraJS')) {
+			globalOptions.update();
+			vscode.commands.executeCommand('markdown.preview.refresh');
+		}
+	});
+
+	context.subscriptions.push(configChangeListener);
+
+	return {
+		extendMarkdownIt(md: MarkdownIt) {
+			return md.use(extraJsPlugin, globalOptions.update());
+		},
+	};
 }
+
+export function deactivate() { }

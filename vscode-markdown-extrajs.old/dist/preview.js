@@ -1,16 +1,22 @@
-"use strict";
 (() => {
-  // node_modules/@morish000/markdown-it-extrajs/src/init-font-awesome.js
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.17/src/init-font-awesome.ts
   var initFontAwesome = async (options = {}, frontMatter = {}) => {
     try {
-      const [fontawesomeSvgCore, freeSolidSvgIcons, freeRegularSvgIcons, freeBrandsSvgIcons] = await Promise.all([
+      const [
+        fontawesomeSvgCore,
+        freeSolidSvgIcons,
+        freeRegularSvgIcons,
+        freeBrandsSvgIcons
+      ] = await Promise.all([
         import(options.fontAwesomeUrl + "/fontawesome-svg-core"),
         import(options.fontAwesomeUrl + "/free-solid-svg-icons"),
         import(options.fontAwesomeUrl + "/free-regular-svg-icons"),
         import(options.fontAwesomeUrl + "/free-brands-svg-icons")
       ]);
       const extractIcons = (iconSet) => {
-        return Object.entries(iconSet).filter(([key, value]) => key !== "prefix" && key !== "default" && typeof value !== "string").map(([, value]) => value);
+        return Object.entries(iconSet).filter(
+          ([key, value]) => key !== "prefix" && key !== "default" && typeof value !== "string"
+        ).map(([, value]) => value);
       };
       const icons = [
         ...extractIcons(freeSolidSvgIcons),
@@ -30,7 +36,9 @@
         "measurePerformance",
         "mutateApproach",
         "showMissingIcons"
-      ].forEach((key) => frontMatter.fontAwesomeConfig?.[key] && (fontawesomeSvgCore.config[key] = frontMatter.fontAwesomeConfig[key]));
+      ].forEach(
+        (key) => frontMatter.fontAwesomeConfig?.[key] && (fontawesomeSvgCore.config[key] = frontMatter.fontAwesomeConfig[key])
+      );
       fontawesomeSvgCore.config.observeMutations = false;
       fontawesomeSvgCore.config.autoAddCss = false;
       fontawesomeSvgCore.library.add(...icons);
@@ -56,7 +64,7 @@
     }
   };
 
-  // node_modules/@morish000/markdown-it-extrajs/src/types.js
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.17/src/types.ts
   var defaultOptions = {
     discardFrontMatter: true,
     outputScriptTag: true,
@@ -70,11 +78,13 @@
     iconifyJsonCDN: "https://esm.sh"
   };
 
-  // node_modules/@morish000/markdown-it-extrajs/src/iconify-json.js
-  var getIcons = async (unoCSSUrl = defaultOptions.unoCSSUrl) => await import(`${unoCSSUrl}/preset-icons/core`).then((i) => i.icons);
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.17/src/iconify-json.ts
+  var getIcons = async (unoCSSUrl = defaultOptions.unoCSSUrl) => await import(`${unoCSSUrl}/preset-icons/core`).then(
+    (i) => i.icons
+  );
   var createIconLoader = (iconifyJsonCDN = defaultOptions.iconifyJsonCDN) => (key) => () => import(`${iconifyJsonCDN}/@iconify-json/${key}`).then((i) => i.icons);
 
-  // node_modules/ts-dedent/esm/index.js
+  // node_modules/.deno/ts-dedent@2.2.0/node_modules/ts-dedent/esm/index.js
   function dedent(templ) {
     var values = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -114,7 +124,7 @@
     return string;
   }
 
-  // node_modules/uuid/dist/esm-browser/rng.js
+  // node_modules/.deno/uuid@9.0.1/node_modules/uuid/dist/esm-browser/rng.js
   var getRandomValues;
   var rnds8 = new Uint8Array(16);
   function rng() {
@@ -127,7 +137,7 @@
     return getRandomValues(rnds8);
   }
 
-  // node_modules/uuid/dist/esm-browser/stringify.js
+  // node_modules/.deno/uuid@9.0.1/node_modules/uuid/dist/esm-browser/stringify.js
   var byteToHex = [];
   for (let i = 0; i < 256; ++i) {
     byteToHex.push((i + 256).toString(16).slice(1));
@@ -136,13 +146,13 @@
     return byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]];
   }
 
-  // node_modules/uuid/dist/esm-browser/native.js
+  // node_modules/.deno/uuid@9.0.1/node_modules/uuid/dist/esm-browser/native.js
   var randomUUID = typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
   var native_default = {
     randomUUID
   };
 
-  // node_modules/uuid/dist/esm-browser/v4.js
+  // node_modules/.deno/uuid@9.0.1/node_modules/uuid/dist/esm-browser/v4.js
   function v4(options, buf, offset) {
     if (native_default.randomUUID && !buf && !options) {
       return native_default.randomUUID();
@@ -162,7 +172,7 @@
   }
   var v4_default = v4;
 
-  // node_modules/@morish000/markdown-it-extrajs/src/init-mermaid.js
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.17/src/init-mermaid.ts
   var initMermaid = async (options = {}, frontMatter = {}) => {
     const entityDecode = function(html) {
       const decoder = document.createElement("div");
@@ -181,43 +191,58 @@
       const createMermaidIconLoaders = () => {
         const loaders = [];
         icons.forEach((key) => {
-          loaders.push({
-            name: key,
-            loader: iconLoader(key)
-          });
+          loaders.push(
+            {
+              name: key,
+              loader: iconLoader(key)
+            }
+          );
         });
         return loaders;
       };
       mermaid.registerIconPacks(createMermaidIconLoaders());
       mermaid.initialize({
         ...frontMatter.mermaidConfig ?? {},
-        ...{
-          startOnLoad: false,
-          suppressErrorRendering: true
-        }
+        ...{ startOnLoad: false, suppressErrorRendering: true }
       });
-      const renders = Array.from(document.querySelectorAll(".mermaid")).map(async (element) => {
-        if (element.getAttribute("data-processed")) {
-          return;
+      const renders = Array.from(document.querySelectorAll(".mermaid")).map(
+        async (element) => {
+          if (element.getAttribute("data-processed")) {
+            return;
+          }
+          element.setAttribute("data-processed", "true");
+          const graphDefinition = element.innerHTML;
+          element.querySelectorAll("svg").forEach((svg) => svg.remove());
+          if (graphDefinition) {
+            const id = `mermaid-${v4_default()}`;
+            const renderResult = await mermaid.render(
+              id,
+              dedent(entityDecode(graphDefinition)).trim().replace(/<br\s*\/?>/gi, "<br/>")
+            );
+            element.innerHTML = renderResult.svg;
+            renderResult.bindFunctions?.(element);
+          }
         }
-        element.setAttribute("data-processed", "true");
-        const graphDefinition = element.innerHTML;
-        element.querySelectorAll("svg").forEach((svg) => svg.remove());
-        if (graphDefinition) {
-          const id = `mermaid-${v4_default()}`;
-          const renderResult = await mermaid.render(id, dedent(entityDecode(graphDefinition)).trim().replace(/<br\s*\/?>/gi, "<br/>"));
-          element.innerHTML = renderResult.svg;
-          renderResult.bindFunctions?.(element);
-        }
-      });
+      );
       const safeRenders = renders.map((p) => p.catch((e) => console.error(e)));
       await Promise.all(safeRenders);
     }
   };
 
-  // node_modules/@morish000/markdown-it-extrajs/src/init-uno-css.js
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.17/src/init-uno-css.ts
   var initUnoCSS = async (options = {}, frontMatter = {}) => {
-    const [{ default: initUnocssRuntime }, { default: initPresetWind }, { default: initPresetMini }, { default: initPresetUno }, { default: initPresetIcons }, { default: initPresetAttributify }, { default: initPresetTypography }, { default: initPresetWebFonts }, { default: initPresetTagify }, { default: initPresetRemToPx }] = await Promise.all([
+    const [
+      { default: initUnocssRuntime },
+      { default: initPresetWind },
+      { default: initPresetMini },
+      { default: initPresetUno },
+      { default: initPresetIcons },
+      { default: initPresetAttributify },
+      { default: initPresetTypography },
+      { default: initPresetWebFonts },
+      { default: initPresetTagify },
+      { default: initPresetRemToPx }
+    ] = await Promise.all([
       import(options.unoCSSUrl + "/runtime"),
       frontMatter.presetWind ? import(options.unoCSSUrl + "/preset-wind") : Promise.resolve({}),
       !frontMatter.presetWind && frontMatter.presetMini ? import(options.unoCSSUrl + "/preset-mini") : Promise.resolve({}),
@@ -238,9 +263,7 @@
       presets.push(initPresetUno());
     }
     if (frontMatter.presetIcons) {
-      const presetIcons = {
-        ...frontMatter.presetIcons
-      };
+      const presetIcons = { ...frontMatter.presetIcons };
       const iconLoader = createIconLoader(options.iconifyJsonCDN);
       const icons = await getIcons(options.unoCSSUrl);
       const iconCollections = () => {
@@ -280,7 +303,7 @@
     });
   };
 
-  // node_modules/@morish000/markdown-it-extrajs/src/init-all.js
+  // https://jsr.io/@morish000/markdown-it-extrajs/0.0.17/src/init-all.ts
   var initAll = async (options = {}, frontMatter = {}) => {
     const tasks = [];
     options.useMermaid && tasks.push(initMermaid(options, frontMatter));
@@ -298,9 +321,13 @@
       "data-extrajs-frontMatter"
     );
     if (optionsStr && frontMatterStr) {
-      await initAll(JSON.parse(atob(optionsStr)), JSON.parse(atob(frontMatterStr)));
+      await initAll(
+        JSON.parse(atob(optionsStr)),
+        JSON.parse(atob(frontMatterStr))
+      );
     }
   };
+  window.removeEventListener("vscode.markdown.updateContent", init);
   window.addEventListener("vscode.markdown.updateContent", init);
   init();
 })();

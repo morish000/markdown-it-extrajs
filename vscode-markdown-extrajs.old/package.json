@@ -3,15 +3,14 @@
   "displayName": "Markdown Preview Extrajs",
   "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
   "private": true,
-  "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.6",
   "publisher": "morish000",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/morish000/markdown-it-extrajs.git"
   },
   "engines": {
-    "vscode": "^1.95.0"
+    "vscode": "^1.54.0"
   },
   "icon": "morish000_128x128.png",
   "keywords": [
@@ -26,7 +25,7 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./dist/extension.cjs",
+  "main": "./dist/extension.js",
   "contributes": {
     "markdown.previewScripts": [
       "./dist/preview.js"
@@ -87,31 +86,5 @@
         }
       }
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "npm run check-types && npm run lint && node esbuild.js",
-    "watch": "npm-run-all -p watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "npm run check-types && npm run lint && node esbuild.js --production",
-    "check-types": "tsc --noEmit",
-    "lint": "eslint src"
-  },
-  "devDependencies": {
-    "@types/node": "20.x",
-    "@types/vscode": "^1.95.0",
-    "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^8.17.0",
-    "esbuild": "^0.24.0",
-    "eslint": "^9.16.0",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.7.2"
-  },
-  "dependencies": {
-    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.17",
-    "@types/markdown-it": "^14.1.2",
-    "markdown-it": "^14.1.0",
-    "vsce": "^2.15.0"
   }
 }

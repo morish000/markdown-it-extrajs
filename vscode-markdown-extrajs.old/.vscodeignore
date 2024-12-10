@@ -1,11 +1,13 @@
 .vscode/**
-out/**
 node_modules/**
+node_modules/.deno
 src/**
 .gitignore
-.nprmc
+.npmrc
+deno.json
+deno.lock
 esbuild.js
-**/tsconfig.json
-**/eslint.config.mjs
+import_map.json
+sample.md
 **/*.map
 **/*.ts
