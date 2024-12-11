@@ -1,17 +1,21 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "tasks": {
     "sample": "deno run --allow-all sample.ts",
     "build": "deno run --allow-all build.ts"
   },
   "importMap": "import_map.json",
   "compilerOptions": {
-    "lib": ["dom", "deno.ns"]
+    "lib": [
+      "dom",
+      "deno.ns"
+    ]
   },
   "exports": {
     ".": "./src/index.ts",
-    "./scripts": "./src/scripts.ts"
+    "./scripts": "./src/scripts.ts",
+    "./create-tags": "./src/create-tags.ts"
   },
   "publish": {
     "include": [
@@ -23,9 +27,20 @@
     ]
   },
   "lint": {
-    "include": ["./*.ts", "./*.mjs", "./*.json", "src/**/*.ts"]
+    "include": [
+      "./*.ts",
+      "./*.mjs",
+      "./*.json",
+      "src/**/*.ts"
+    ]
   },
   "fmt": {
-    "include": ["./*.ts", "./*.mjs", "./*.md", "./*.json", "src/**/*.ts"]
+    "include": [
+      "./*.ts",
+      "./*.mjs",
+      "./*.md",
+      "./*.json",
+      "src/**/*.ts"
+    ]
   }
 }
