@@ -89,11 +89,36 @@ Other UnoCSS settings will not activate their presets if they are not set.
 useMermaid, useFontAwesome, and useUnoCSS will only be enabled if both the
 VSCode setting and the Front Matter setting are set to true.
 
+# Exports
+
+With the Markdown file opened in an active editor, select the following from the command palette:
+
+```
+> Markdown ExtraJS: Export Script-Embedded File
+```
+
+## For non-Marp (if "marp: true" is not set in the Front Matter)
+
+Exports a ".html" file.
+
+## For Marp
+
+Exports a ".md" file.
+This file has embedded script tags, which might not be previewable due to VSCode's security settings.
+However, you can export it to HTML or PDF using Marp for VSCode with HTML tags enabled.
+
+When exporting to formats other than HTML, the headless browser executed by Puppeteer will download a large amount of JavaScript/icon data, which can take considerable time on the first run. If you encounter a timeout error, consider adjusting the VSCode settings (the default value is 30000 ms).
+
+| Setting                          | Value  |
+| -------------------------------- | ------ |
+| markdownExtraJS.puppeteerTimeout | 120000 |
+
+Subsequent runs should be faster due to caching.
+
+This setting adjusts the `process.env.PUPPETEER_TIMEOUT` in VSCode, which may affect Puppeteer instances launched from VSCode. If it is no longer needed, set a negative value (e.g., -1) and restart VSCode.
+
 # Known Issues
 
-- Export is not available; it is preview only. However, a sample project for
-  exporting using Marp CLI is available at
-  [marp-sample](https://github.com/morish000/markdown-it-extrajs/tree/main/marp-sample).
 - The initial run may take some time due to large download sizes, but subsequent
   runs will improve with caching.
 - If you edit UnoCSS Front Matter, a reload of the preview window is required
