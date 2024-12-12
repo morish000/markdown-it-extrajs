@@ -60,10 +60,10 @@ extrajs:
         color: blue
         font-weight: bold
     -
-      - /^m-(\\d+)px$/
+      - /^m-(.+)px-sample$/
       - margin: \${m}px
     -
-      - /^p-(\\d+)px$/
+      - /^p-(.+)px-sample$/
       - padding: \${m}px
 ---
 

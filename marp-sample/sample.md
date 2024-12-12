@@ -57,6 +57,12 @@ extrajs:
       - display: inline
         color: blue
         font-weight: bold
+    -
+      - /^m-(.+)px-sample$/
+      - margin: ${m}px
+    -
+      - /^p-(.+)px-sample$/
+      - padding: ${m}px
 ---
 
 # Title
@@ -66,16 +72,16 @@ extrajs:
 # UnoCSS Attributes Mode
 
 <div class="text-blue-500" un-cloak>
-  This text will only be visible in blue color.
+  <un-p-25px-sample>This text will only be visible in blue color.</un-p-25px-sample>
 </div>
 <div un-text="red-500" un-cloak>
-  This text will only be visible in red color.
+  <un-p-50px-sample>This text will only be visible in red color.</un-p-50px-sample>
 </div>
 <div un-text-green="500" un-cloak>
-  This text will only be visible in geen color.
+  <un-m-75px-sample>This text will only be visible in geen color.</un-m-75px-sample>
 </div>
 <div un-text-yellow-500 un-cloak>
-  This text will only be visible in yellow color.
+  <un-m-100px-sample>This text will only be visible in yellow color.</un-m-100px-sample>
 </div>
 
 ---
