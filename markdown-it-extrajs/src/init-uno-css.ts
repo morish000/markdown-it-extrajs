@@ -106,14 +106,23 @@ export const initUnoCSS: InitFunctionType = async (
     presets.push(initPresetRemToPx());
   }
 
-  const rules = ((frontMatter.rules ?? []) as [string, object][]).map(([pattern, template]) =>
-    (!pattern.startsWith('/') || !pattern.endsWith('/')) ? [pattern, template] :
-      [
-        new RegExp(pattern.replace(/^\/|\/$/g, '')),
-        ([, m]) => Object.fromEntries(
-          Object.entries(template).map(([key, value]) => [key, value.replaceAll("${m}", m)])
-        )
-      ]);
+  const rules = ((frontMatter.rules ?? []) as [string, object][]).map((
+    [pattern, template],
+  ) =>
+    (!pattern.startsWith("/") || !pattern.endsWith("/"))
+      ? [pattern, template]
+      : [
+        new RegExp(pattern.replace(/^\/|\/$/g, "")),
+        ([_, m]: [string, string]) =>
+          m
+            ? Object.fromEntries(
+              Object.entries(template).map((
+                [key, value],
+              ) => [key, value.replaceAll("${m}", m)]),
+            )
+            : template,
+      ]
+  );
 
   initUnocssRuntime({
     defaults: {
