@@ -1,4 +1,4 @@
-import type { Rule } from "@unocss";
+import type { Rule } from "@unocss/core";
 import type { IconsOptions } from "@unocss/preset-icons";
 import type { PresetWindOptions } from "@unocss/preset-wind";
 import type { PresetMiniOptions } from "@unocss/preset-mini";

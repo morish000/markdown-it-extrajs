@@ -59,6 +59,12 @@ extrajs:
       - display: inline
         color: blue
         font-weight: bold
+    -
+      - /^m-(\\d+)px$/
+      - margin: \${m}px
+    -
+      - /^p-(\\d+)px$/
+      - padding: \${m}px
 ---
 
 # Title

@@ -1,10 +1,11 @@
+import type { IconifyJSON } from "@iconify/types";
+import type { PresetOrFactory } from "@unocss/core";
 import type {
   ExtraJSFrontMatter,
   ExtraJSOptions,
   InitFunctionType,
 } from "./types.ts";
 import { createIconLoader, getIcons } from "./iconify-json.ts";
-import type { IconifyJSON } from "@iconify/types";
 
 export const initUnoCSS: InitFunctionType = async (
   options: ExtraJSOptions = {},
@@ -52,7 +53,7 @@ export const initUnoCSS: InitFunctionType = async (
       : Promise.resolve({}),
   ]);
 
-  const presets = [];
+  const presets: PresetOrFactory[] = [];
 
   if (frontMatter.presetWind) {
     presets.push(initPresetWind(frontMatter.presetWind));
@@ -105,7 +106,14 @@ export const initUnoCSS: InitFunctionType = async (
     presets.push(initPresetRemToPx());
   }
 
-  const rules = frontMatter.rules ?? [];
+  const rules = ((frontMatter.rules ?? []) as [string, object][]).map(([pattern, template]) =>
+    (!pattern.startsWith('/') || !pattern.endsWith('/')) ? [pattern, template] :
+      [
+        new RegExp(pattern.replace(/^\/|\/$/g, '')),
+        ([, m]) => Object.fromEntries(
+          Object.entries(template).map(([key, value]) => [key, value.replaceAll("${m}", m)])
+        )
+      ]);
 
   initUnocssRuntime({
     defaults: {
