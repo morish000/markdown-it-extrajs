@@ -117,6 +117,44 @@ Subsequent runs should be faster due to caching.
 
 This setting adjusts the `process.env.PUPPETEER_TIMEOUT` in VSCode, which may affect Puppeteer instances launched from VSCode. If it is no longer needed, set a negative value (e.g., -1) and restart VSCode.
 
+# Simplified Support for UnoCSS Dynamic Rules and String Replacement
+
+Using `eval` or the `Function` constructor in VSCode's Markdown preview violates security policies, so I have implemented a simple string replacement feature.  
+This allows for basic string replacement for text that matches a regular expression.
+
+- [Dynamic rules](https://unocss.dev/config/rules#dynamic-rules)
+
+Note that this method does not support advanced features such as "CSS Rules Fallback," "Special symbols," "Multi-selector rules," and "Fully controlled rules."
+
+## Example Configuration
+
+The following settings in FrontMatter:
+```yaml
+extrajs:
+  rules:
+    -
+      - /^m-(\d+)$/
+      - margin: ${m}em
+    -
+      - /^p-(\d+)$/
+      - padding: ${m[1]}em
+```
+
+Correspond to the following Dynamic Rules configuration:
+```javascript
+rules: [
+  [/^m-(\d+)$/, ([, m]) => ({ margin: `${m}em` })],
+  [/^p-(\d+)$/, m => ({ padding: `${m[1]}em` })],
+]
+```
+
+## Notes
+
+- `m` is a fixed match group.
+- `${m}` and `${m[1]}` mean the same thing.
+- Since this is not a literal template, `${m}` and `${m[n]}` are simply replaced as strings.
+- If the index does not exist, the replacement is not performed.
+
 # Known Issues
 
 - The initial run may take some time due to large download sizes, but subsequent

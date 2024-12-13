@@ -63,6 +63,10 @@ extrajs:
     -
       - /^p-(.+)px-sample$/
       - padding: ${m}px
+    -
+      - /^p-(\d+)m-(\d+)px$/
+      - padding: ${m[1]}px
+        margin: ${m[2]}px
 ---
 
 # Title
@@ -75,13 +79,13 @@ extrajs:
   <un-p-25px-sample>This text will only be visible in blue color.</un-p-25px-sample>
 </div>
 <div un-text="red-500" un-cloak>
-  <un-p-50px-sample>This text will only be visible in red color.</un-p-50px-sample>
+  <un-m-50px-sample>This text will only be visible in red color.</un-m-50px-sample>
 </div>
 <div un-text-green="500" un-cloak>
-  <un-m-75px-sample>This text will only be visible in geen color.</un-m-75px-sample>
+  <un-m-50px-sample un-p-50px-sample>This text will only be visible in geen color.</un-m-50px-sample>
 </div>
 <div un-text-yellow-500 un-cloak>
-  <un-m-100px-sample>This text will only be visible in yellow color.</un-m-100px-sample>
+  <un-p-50m-50px>This text will only be visible in yellow color.</un-p-50m-50px>
 </div>
 
 ---
