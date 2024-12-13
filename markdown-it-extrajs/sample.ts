@@ -65,6 +65,10 @@ extrajs:
     -
       - /^p-(.+)px-sample$/
       - padding: \${m}px
+    -
+      - /^p-(\\d+)m-(\\d+)px$/
+      - padding: \${m[1]}px
+        margin: \${m[2]}px
 ---
 
 # Title

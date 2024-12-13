@@ -113,12 +113,16 @@ export const initUnoCSS: InitFunctionType = async (
       ? [pattern, template]
       : [
         new RegExp(pattern.replace(/^\/|\/$/g, "")),
-        ([_, m]: [string, string]) =>
+        (m: string[]) =>
           m
             ? Object.fromEntries(
-              Object.entries(template).map((
-                [key, value],
-              ) => [key, value.replaceAll("${m}", m)]),
+              Object.entries(template).map(([key, value]) => [
+                key,
+                value.replace(/\$\{m(?:\[(\d+)\])?\}/g, (src, index) => {
+                  const idx = index ? parseInt(index, 10) : 1;
+                  return idx < m.length ? m[idx] : src;
+                }),
+              ]),
             )
             : template,
       ]
