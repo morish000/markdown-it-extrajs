@@ -120,7 +120,7 @@ export const initUnoCSS: InitFunctionType = async (
                 key,
                 value.replace(
                   /\$\{m(?:\[(\d+)\])?\}/g,
-                  (src, index: string) => {
+                  (src: string, index: string) => {
                     const idx = index ? parseInt(index, 10) : 1;
                     return idx < m.length ? m[idx] : src;
                   },
