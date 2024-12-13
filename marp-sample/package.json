@@ -15,7 +15,7 @@
   "description": "Marp Sample",
   "devDependencies": {
     "@marp-team/marp-cli": "^4.0.3",
-    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@0.0.19",
+    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@0.0.20",
     "puppeteer": "^23.10.4"
   }
 }
