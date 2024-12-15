@@ -4,6 +4,7 @@ import MarkdownIt from "markdown-it";
 import { createScriptTag } from "@morish000/markdown-it-extrajs/create-tags";
 import grayMatter from "gray-matter";
 import css from "css";
+import markdownKatex from "@vscode/markdown-it-katex";
 
 export const createExportContent = async (options: ExtraJSOptions, lang: string, sourceFileName: string, markdown: string): Promise<{ marp: boolean, content: string }> => {
   const grayMatterFile = grayMatter(markdown);
@@ -66,12 +67,6 @@ const createHtml = ({
 </body>
 </html>`;
 
-/*
-TODO: katex not support.
-- markdown.math.enabled
-  - @vscode/markdown-it-katex
-  - https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css
-*/
 const convertMarkdownToHtml = (options: ExtraJSOptions, markdown: string) => {
   const md = new MarkdownIt({ html: true });
   md.use(extraJsPlugin, {
@@ -81,6 +76,9 @@ const convertMarkdownToHtml = (options: ExtraJSOptions, markdown: string) => {
       outputScriptTag: true
     }
   });
+  if (vscode.workspace.getConfiguration('markdown').get('math.enabled', true)) {
+    md.use(markdownKatex.default);
+  }
   return md.render(markdown);
 };
 
@@ -108,6 +106,9 @@ const createCss = async (): Promise<{ cssLink?: string[], css?: string[] }> => {
     }
   } else {
     cssLink.push("https://cdn.jsdelivr.net/gh/microsoft/vscode/extensions/markdown-language-features/media/markdown.css");
+  }
+  if (config.get('math.enabled', true)) {
+    cssLink.push("https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css");
   }
 
   return {

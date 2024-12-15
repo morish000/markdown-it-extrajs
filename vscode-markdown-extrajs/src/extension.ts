@@ -29,10 +29,6 @@ const globalOptions = (() => {
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(vscode.commands.registerCommand('extension.markdown-extrajs.export', async () => {
     const config = vscode.workspace.getConfiguration('markdownExtraJS');
-    const puppeteerTimeout = config.get<number>('puppeteerTimeout', -1);
-    if (puppeteerTimeout >= 0) {
-      process.env.PUPPETEER_TIMEOUT = puppeteerTimeout.toString();
-    }
 
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
@@ -52,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
     const marpPath = filePath.replace(/\.md$/, '_extrajs.md');
     const sourceFileName = path.basename(filePath, '.md') ?? "";
 
-    const fileContent = await createExportContent(globalOptions.update(), config.get<string>('htmlLang', ""), sourceFileName, document.getText());
+    const fileContent = await createExportContent(globalOptions.update(), config.get<string>('export.htmlLang', ""), sourceFileName, document.getText());
     let outputPath = fileContent.marp ? marpPath : htmlPath;
 
     while (true) {

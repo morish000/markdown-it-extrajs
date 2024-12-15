@@ -107,15 +107,9 @@ Exports a ".md" file.
 This file has embedded script tags, which might not be previewable due to VSCode's security settings.
 However, you can export it to HTML or PDF using Marp for VSCode with HTML tags enabled.
 
-When exporting to formats other than HTML, the headless browser executed by Puppeteer will download a large amount of JavaScript/icon data, which can take considerable time on the first run. If you encounter a timeout error, consider adjusting the VSCode settings (the default value is 30000 ms).
-
-| Setting                          | Value  |
-| -------------------------------- | ------ |
-| markdownExtraJS.puppeteerTimeout | 120000 |
-
-Subsequent runs should be faster due to caching.
-
-This setting adjusts the `process.env.PUPPETEER_TIMEOUT` in VSCode, which may affect Puppeteer instances launched from VSCode. If it is no longer needed, set a negative value (e.g., -1) and restart VSCode.
+When exporting to formats other than HTML, the headless browser executed by Puppeteer will download a large amount of JavaScript and icon data,
+which can take considerable time on the first run.
+If you encounter a timeout error, try retrying a few times. Currently, there is no method to set the timeout externally.
 
 # Simplified Support for UnoCSS Dynamic Rules and String Replacement
 

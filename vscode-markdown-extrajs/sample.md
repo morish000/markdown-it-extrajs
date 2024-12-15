@@ -204,3 +204,19 @@ architecture-beta
     disk1:T -- B:server
     disk2:T -- B:db
 </pre>
+
+---
+
+# KaTex
+
+Inline math: $x^2$
+
+Math block:
+
+$$
+\displaystyle
+\left( \sum_{k=1}^n a_k b_k \right)^2
+\leq
+\left( \sum_{k=1}^n a_k^2 \right)
+\left( \sum_{k=1}^n b_k^2 \right)
+$$

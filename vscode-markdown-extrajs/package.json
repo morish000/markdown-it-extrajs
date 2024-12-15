@@ -4,7 +4,7 @@
   "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
   "private": true,
   "type": "module",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "publisher": "morish000",
   "license": "MIT",
   "repository": {
@@ -100,12 +100,7 @@
           "default": "https://esm.sh",
           "description": "CDN URL for UnoCSS preset icons."
         },
-        "markdownExtraJS.puppeteerTimeout": {
-          "type": "number",
-          "default": -1,
-          "description": "Set the process.env.PUPPETEER_TIMEOUT variable. Negative values are ignored."
-        },
-        "markdownExtraJS.htmlLang": {
+        "markdownExtraJS.export.htmlLang": {
           "type": "string",
           "default": "",
           "description": "The value of the lang attribute in the HTML tag when exporting to HTML."
@@ -137,6 +132,7 @@
     "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.20",
     "@types/css": "^0.0.38",
     "@types/markdown-it": "^14.1.2",
+    "@vscode/markdown-it-katex": "^1.1.1",
     "css": "^3.0.0",
     "markdown-it": "^14.1.0",
     "vsce": "^2.15.0"
