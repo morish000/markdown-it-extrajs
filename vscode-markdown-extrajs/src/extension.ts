@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import type MarkdownIt from "markdown-it";
 import extraJsPlugin, { type ExtraJSOptions } from "@morish000/markdown-it-extrajs";
-import { createExportContent } from "./export.js";
+import { createExportContent, exportPDF } from "./export.js";
 import path from 'path';
 
 const globalOptions = (() => {
@@ -27,6 +27,7 @@ const globalOptions = (() => {
 })();
 
 export function activate(context: vscode.ExtensionContext) {
+  const globalStorageUri = context.globalStorageUri;
   context.subscriptions.push(vscode.commands.registerCommand('extension.markdown-extrajs.export', async () => {
     const config = vscode.workspace.getConfiguration('markdownExtraJS');
 
@@ -48,7 +49,11 @@ export function activate(context: vscode.ExtensionContext) {
     const marpPath = filePath.replace(/\.md$/, '_extrajs.md');
     const sourceFileName = path.basename(filePath, '.md') ?? "";
 
-    const fileContent = await createExportContent(globalOptions.update(), config.get<string>('export.htmlLang', ""), sourceFileName, document.getText());
+    const fileContent = await createExportContent(
+      globalOptions.update(),
+      config.get<string>('export.htmlLang', ""),
+      sourceFileName,
+      document.getText());
     let outputPath = fileContent.marp ? marpPath : htmlPath;
 
     while (true) {
@@ -90,6 +95,18 @@ export function activate(context: vscode.ExtensionContext) {
     } catch (err) {
       const error = err as Error;
       vscode.window.showErrorMessage(`Error writing file: ${error.message}`);
+    }
+
+    // TODO: export pdf
+    if (!fileContent.marp) {
+      exportPDF(
+        fileContent.content,
+        path.join(dirPath, "extrajs_sample.pdf"),
+        "A4",
+        false,
+        120000,
+        globalStorageUri
+      );
     }
   }));
 

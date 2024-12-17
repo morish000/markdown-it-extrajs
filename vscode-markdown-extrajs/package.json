@@ -133,8 +133,10 @@
     "@types/css": "^0.0.38",
     "@types/markdown-it": "^14.1.2",
     "@vscode/markdown-it-katex": "^1.1.1",
+    "chromium-bidi": "^0.10.2",
     "css": "^3.0.0",
     "markdown-it": "^14.1.0",
+    "playwright-chromium": "^1.49.1",
     "vsce": "^2.15.0"
   }
 }

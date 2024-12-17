@@ -5,8 +5,13 @@ import { createScriptTag, escapeForHTML } from "@morish000/markdown-it-extrajs/c
 import grayMatter from "gray-matter";
 import css from "css";
 import markdownKatex from "@vscode/markdown-it-katex";
+import { chromium } from "playwright-chromium";
 
-export const createExportContent = async (options: ExtraJSOptions, lang: string, sourceFileName: string, markdown: string): Promise<{ marp: boolean, content: string }> => {
+export const createExportContent = async (
+  options: ExtraJSOptions,
+  lang: string,
+  sourceFileName: string,
+  markdown: string): Promise<{ marp: boolean, content: string }> => {
   const grayMatterFile = grayMatter(markdown);
   const frontMatter = grayMatterFile.data ?? {};
   const markdwonContent = grayMatterFile.content ?? "";
@@ -27,7 +32,7 @@ export const createExportContent = async (options: ExtraJSOptions, lang: string,
         })
     };
   } else {
-    return {
+    const exportContent = {
       marp: false,
       content: createHtml({
         lang,
@@ -36,7 +41,35 @@ export const createExportContent = async (options: ExtraJSOptions, lang: string,
         ...(await createCss())
       })
     };
+
+    return exportContent;
   }
+};
+
+export const exportPDF = async (
+  exportContent: string,
+  exportpath: string,
+  exportSize: string,
+  headless: boolean,
+  timeout: number,
+  globalStorageUri: vscode.Uri) => {
+
+  const cacheDir = await createCacheDirectoryIfNotExists(globalStorageUri);
+  const browser = await chromium.launchPersistentContext(
+    cacheDir, { headless });
+
+  const page = await browser.newPage();
+  await page.setContent(exportContent, { timeout, waitUntil: 'networkidle' });
+  await page.pdf({
+    path: exportpath,
+    format: exportSize,
+    preferCSSPageSize: true,
+    printBackground: true,
+    displayHeaderFooter: false,
+    margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' }
+  });
+
+  await browser.close();
 };
 
 const createMarp = (options: ExtraJSOptions, frontMatter: { [key: string]: any }, markdonwContent: string) =>
@@ -136,4 +169,15 @@ const sanitizeCSS = (rawCSS: string) => {
     }
   });
   return css.stringify(ast);
+};
+
+const createCacheDirectoryIfNotExists = async (globalStorageUri: vscode.Uri) => {
+  const cacheUri = vscode.Uri.joinPath(globalStorageUri, '.playwright', 'browser-chromium');
+  try {
+    await vscode.workspace.fs.stat(cacheUri);
+  } catch (e) {
+    await vscode.workspace.fs.createDirectory(cacheUri);
+    vscode.window.showInformationMessage(`Directory created: ${cacheUri.fsPath}`);
+  }
+  return cacheUri.fsPath;
 };
