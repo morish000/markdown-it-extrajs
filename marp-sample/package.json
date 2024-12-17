@@ -6,7 +6,8 @@
     "html": "marp ./sample.md --engine ./marp.engine.mjs --html -o ./dist/sample.html",
     "pdf": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pdf -o ./dist/sample.pdf",
     "pptx": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pptx -o ./dist/sample.pptx",
-    "debug": "node ./debug.mjs"
+    "puppeteer": "node ./puppeteer.mjs",
+    "playwright": "node ./playwright.mjs"
   },
   "type": "module",
   "keywords": [],
@@ -16,6 +17,9 @@
   "devDependencies": {
     "@marp-team/marp-cli": "^4.0.3",
     "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@0.0.20",
-    "puppeteer": "^23.10.4"
+    "puppeteer": "^23.10.4",
+    "playwright": "^1.49.1"
+  },
+  "dependencies": {
   }
 }

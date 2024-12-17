@@ -1,12 +1,9 @@
-import puppeteer from 'puppeteer';
+import { chromium } from 'playwright';
 import fs from 'fs/promises';
 
 async function convertHtmlFileToPdf(htmlFilePath, outputPdfPath) {
-    const browser = await puppeteer.launch({
-        executablePath: '/snap/bin/chromium',
-        args: ['--no-sandbox']
-    });
-    
+    const browser = await chromium.launchPersistentContext("./.playwright", { channel: 'chromium', headless: false });
+
     const page = await browser.newPage();
 
     page.on('console', async msg => {
@@ -33,15 +30,16 @@ async function convertHtmlFileToPdf(htmlFilePath, outputPdfPath) {
         }
     });
 
-    // HTMLファイルを読み込み
     const htmlContent = await fs.readFile(htmlFilePath, 'utf8');
-    await page.setContent(htmlContent, { timeout: 60000, waitUntil: ['load', 'networkidle0'] });
-    
-    // PDFとして保存
-    await page.pdf({ path: outputPdfPath, format: 'A4' });
+    await page.setContent(htmlContent, { timeout: 120000, waitUntil: 'networkidle' });
+
+    await page.pdf({
+        // format: 'A4', 
+        path: outputPdfPath, width: '1280px', height: '720px', printBackground: true, displayHeaderFooter: false, margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' }
+    });
     await browser.close();
 }
 
 const htmlFilePath = './dist/sample.html';
-const outputPdfPath = './dist/sample_debug.pdf';
+const outputPdfPath = './dist/sample_playweigth.pdf';
 convertHtmlFileToPdf(htmlFilePath, outputPdfPath);

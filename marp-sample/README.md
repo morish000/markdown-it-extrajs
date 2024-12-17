@@ -34,13 +34,22 @@ npm run pptx
 ### Debug Mode
 
 ```sh
-npm run debug
+npm run puppeteer
 ```
 
 Output HTML to PDF using Puppeteer without using Marp CLI. Handle and output `console.log` for debugging.
 
 - Converts [./dist/sample.html](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.html) to PDF.
-- Outputs [./dist/sample_debug.pdf](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample_debug.pdf).
+- Outputs [./dist/sample_puppeteer.pdf](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample_puppeteer.pdf).
+
+```sh
+npm run playwright
+```
+
+Output HTML to PDF using Playwright without using Marp CLI. Handle and output `console.log` for debugging.
+
+- Converts [./dist/sample.html](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.html) to PDF.
+- Outputs [./dist/sample_playwright.pdf](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample_playwright.pdf).
 
 ## Known Issues
 
