@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import extraJsPlugin, { ExtraJSOptions } from "@morish000/markdown-it-extrajs";
 import MarkdownIt from "markdown-it";
-import { createScriptTag } from "@morish000/markdown-it-extrajs/create-tags";
+import { createScriptTag, escapeForHTML } from "@morish000/markdown-it-extrajs/create-tags";
 import grayMatter from "gray-matter";
 import css from "css";
 import markdownKatex from "@vscode/markdown-it-katex";
@@ -92,7 +92,7 @@ const createCss = async (): Promise<{ cssLink?: string[], css?: string[] }> => {
   if (styles.length > 0) {
     for (const style of styles) {
       if (style.startsWith('https')) {
-        cssLink.push(style);
+        cssLink.push(escapeForHTML(style));
       } else {
         try {
           const uri = vscode.Uri.file(style);

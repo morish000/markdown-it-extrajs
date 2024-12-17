@@ -129,7 +129,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.20",
+    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.21",
     "@types/css": "^0.0.38",
     "@types/markdown-it": "^14.1.2",
     "@vscode/markdown-it-katex": "^1.1.1",
