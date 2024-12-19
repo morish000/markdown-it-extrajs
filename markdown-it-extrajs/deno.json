@@ -1,6 +1,6 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "tasks": {
     "sample": "deno run --allow-all sample.ts",
     "build": "deno run --allow-all build.ts"

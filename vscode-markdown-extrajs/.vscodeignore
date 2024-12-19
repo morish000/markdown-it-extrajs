@@ -2,6 +2,7 @@
 out/**
 node_modules/**
 src/**
+.editorconfig
 .gitignore
 .nprmc
 esbuild.js
@@ -9,3 +10,4 @@ esbuild.js
 **/eslint.config.mjs
 **/*.map
 **/*.ts
+sample.md

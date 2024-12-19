@@ -69,6 +69,13 @@ extrajs:
       - /^p-(\\d+)m-(\\d+)px$/
       - padding: \${m[1]}px
         margin: \${m[2]}px
+  preflightStyle: |
+    div.preflight-g {
+      color: green;
+    }
+    div.preflight-y {
+      color: yellow;
+    }
 ---
 
 # Title
