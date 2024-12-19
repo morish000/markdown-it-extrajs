@@ -4,7 +4,7 @@
   "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
   "private": true,
   "type": "module",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "publisher": "morish000",
   "license": "MIT",
   "repository": {
@@ -129,7 +129,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.21",
+    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.22",
     "@types/css": "^0.0.38",
     "@types/markdown-it": "^14.1.2",
     "@vscode/markdown-it-katex": "^1.1.1",

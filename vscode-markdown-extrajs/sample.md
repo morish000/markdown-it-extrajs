@@ -67,6 +67,13 @@ extrajs:
       - /^p-(\d+)m-(\d+)px$/
       - padding: ${m[1]}px
         margin: ${m[2]}px
+  preflightStyle: |
+    div.preflight-g {
+      color: green;
+    }
+    div.preflight-y {
+      color: yellow;
+    }
 ---
 
 # Title
@@ -220,3 +227,10 @@ $$
 \left( \sum_{k=1}^n a_k^2 \right)
 \left( \sum_{k=1}^n b_k^2 \right)
 $$
+
+---
+
+# preflight
+
+<div class="preflight-g">This text will turn green.</div>
+<div class="preflight-y">This text will turn yellow.</div>
