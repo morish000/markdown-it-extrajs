@@ -3,7 +3,6 @@ import fs from 'fs/promises';
 
 async function convertHtmlFileToPdf(htmlFilePath, outputPdfPath) {
     const browser = await puppeteer.launch({
-        executablePath: '/snap/bin/chromium',
         args: ['--no-sandbox']
     });
 
