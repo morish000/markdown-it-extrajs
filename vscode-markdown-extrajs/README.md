@@ -21,11 +21,11 @@ A simple working example is
 
 - To enable Marp, you need
   [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode).
-- If you set the "marp: true" to false, you can preview it as regular Markdown.
+- If you set `"marp: true"` to `false`, you can preview it as regular Markdown.
 
 # Front Matter
 
-```
+```yaml
 extrajs:                      # Root element
   useMermaid: [boolean]       # Enables Mermaid.js. Default is false.
   useFontAwesome: [boolean]   # Enables FontAwesome. Default is false.
@@ -41,12 +41,13 @@ extrajs:                      # Root element
   presetWebFonts: [Object]    # Options for the UnoCSS Web Fonts preset
   presetTagify: [Object]      # Options for the UnoCSS Tagify preset
   presetRemToPx: [boolean]    # Enables the Rem to px preset. Default is false.
+  preflightStyle: [string]    # The static CSS string returned by the getCSS method in UnoCSS Preflights.
 ```
 
-Only one of presetWind, presetMini, or presetUno will be active.\
-If presetWind is set, it will be active. If presetWind is not set and presetMini
-is set, then presetMini will be active.\
-If neither is set, presetUno will be active.\
+Only one of `presetWind`, `presetMini`, or `presetUno` will be active.\
+If `presetWind` is set, it will be active. If `presetWind` is not set and `presetMini`
+is set, then `presetMini` will be active.\
+If neither is set, `presetUno` will be active.\
 Other UnoCSS settings will not activate their presets if they are not set.
 
 - [mermaidConfig](https://mermaid.js.org/config/setup/interfaces/mermaid.Mermaid.html#initialize)
@@ -60,6 +61,7 @@ Other UnoCSS settings will not activate their presets if they are not set.
 - [presetWebFonts](https://unocss.dev/presets/web-fonts)
 - [presetTagify](https://unocss.dev/presets/tagify)
 - [presetRemToPx](https://unocss.dev/presets/rem-to-px)
+- Reference: [Preflights](https://unocss.dev/config/preflights)
 
 ## Note
 
@@ -86,7 +88,7 @@ Other UnoCSS settings will not activate their presets if they are not set.
 | unoCSSUrl          | "https://esm.sh/@unocss"                |
 | iconifyJsonCDN     | "https://esm.sh"                        |
 
-useMermaid, useFontAwesome, and useUnoCSS will only be enabled if both the
+`useMermaid`, `useFontAwesome`, and `useUnoCSS` will only be enabled if both the
 VSCode setting and the Front Matter setting are set to true.
 
 # Exports
@@ -148,6 +150,40 @@ rules: [
 - `${m}` and `${m[1]}` mean the same thing.
 - Since this is not a literal template, `${m}` and `${m[n]}` are simply replaced as strings.
 - If the index does not exist, the replacement is not performed.
+
+# Support for UnoCSS Preflights
+
+It is possible to return a static CSS string as one of the Preflights.
+
+## Example Configuration
+
+The following settings in FrontMatter:
+```yaml
+extrajs:
+  preflightStyle: |
+    div.preflight-g {
+      color: green;
+    }
+    div.preflight-y {
+      color: yellow;
+    }
+```
+
+This corresponds to the following UnoCSS configuration:
+```javascript
+preflights: [
+  {
+    getCSS: () => `
+      div.preflight-g {
+        color: green;
+      }
+      div.preflight-y {
+        color: yellow;
+      }
+    `,
+  },
+]
+```
 
 # Known Issues
 

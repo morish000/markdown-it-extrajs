@@ -6,8 +6,7 @@ import type {
 import type { IconifyJSON } from "@iconify/types";
 import { createIconLoader, getIcons } from "./iconify-json.ts";
 import { dedent } from "ts-dedent";
-// @deno-types="@types/uuid"
-import { v4 } from "uuid";
+import { nanoid } from "nanoid";
 
 export const initMermaid: InitFunctionType = async (
   options: ExtraJSOptions = {},
@@ -61,7 +60,7 @@ export const initMermaid: InitFunctionType = async (
 
         element.querySelectorAll("svg").forEach((svg) => svg.remove());
         if (graphDefinition) {
-          const id = `mermaid-${v4()}`;
+          const id = `mermaid-${nanoid()}`;
           const renderResult = await mermaid.render(
             id,
             dedent(entityDecode(graphDefinition))

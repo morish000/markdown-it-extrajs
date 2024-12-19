@@ -19,6 +19,7 @@ export type UnoCSSConfig<Theme extends object = object> = {
   presetWebFonts?: WebFontsOptions | null;
   presetTagify?: TagifyOptions | null;
   presetRemToPx?: boolean;
+  preflightStyle?: string;
 };
 
 export type MermaidJSConfig = {

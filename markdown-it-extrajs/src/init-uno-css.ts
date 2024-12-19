@@ -1,5 +1,5 @@
 import type { IconifyJSON } from "@iconify/types";
-import type { PresetOrFactory } from "@unocss/core";
+import type { Preflight, PresetOrFactory } from "@unocss/core";
 import type {
   ExtraJSFrontMatter,
   ExtraJSOptions,
@@ -106,35 +106,49 @@ export const initUnoCSS: InitFunctionType = async (
     presets.push(initPresetRemToPx());
   }
 
-  const rules = ((frontMatter.rules ?? []) as [string, object][]).map((
-    [pattern, template],
-  ) =>
-    (!pattern.startsWith("/") || !pattern.endsWith("/"))
-      ? [pattern, template]
-      : [
-        new RegExp(pattern.replace(/^\/|\/$/g, "")),
-        (m: string[]) =>
-          m
-            ? Object.fromEntries(
-              Object.entries(template).map(([key, value]) => [
-                key,
-                value.replace(
-                  /\$\{m(?:\[(\d+)\])?\}/g,
-                  (src: string, index: string) => {
-                    const idx = index ? parseInt(index, 10) : 1;
-                    return idx < m.length ? m[idx] : src;
-                  },
-                ),
-              ]),
-            )
-            : template,
-      ]
+  // deno-lint-ignore no-explicit-any
+  const replacePlaceholders = (m: string[], value: any): any => {
+    if (typeof value === "string") {
+      return value.replace(
+        /\$\{m(?:\[(\d+)\])?\}/g,
+        (src: string, index: string) => {
+          const idx = index ? parseInt(index, 10) : 1;
+          return idx < m.length ? m[idx] : src;
+        },
+      );
+    } else if (typeof value === "object" && value !== null) {
+      return Object.fromEntries(
+        Object.entries(value).map(([key, val]) => [
+          key,
+          replacePlaceholders(m, val),
+        ]),
+      );
+    }
+    return value;
+  };
+
+  const rules = ((frontMatter.rules ?? []) as [string, object][]).map(
+    ([pattern, template]) =>
+      !pattern.startsWith("/") || !pattern.endsWith("/")
+        ? [pattern, template]
+        : [
+          new RegExp(pattern.replace(/^\/|\/$/g, "")),
+          (m: string[]) => (m ? replacePlaceholders(m, template) : template),
+        ],
   );
+
+  const preflights: Preflight[] = [];
+  if (frontMatter.preflightStyle) {
+    preflights.push({
+      getCSS: () => frontMatter.preflightStyle ?? "",
+    });
+  }
 
   initUnocssRuntime({
     defaults: {
       rules,
       presets,
+      preflights,
     },
   });
 };
