@@ -37,6 +37,11 @@
         "category": "Markdown ExtraJS",
         "command": "extension.markdown-extrajs.export",
         "title": "Export Script-Embedded File"
+      },
+      {
+        "category": "Markdown ExtraJS",
+        "command": "extension.markdown-extrajs.export-pdf",
+        "title": "Export PDF File(experimental)"
       }
     ],
     "menus": {
@@ -44,6 +49,10 @@
         {
           "when": "resourceLangId == markdown && resourceExtname == .md",
           "command": "extension.markdown-extrajs.export"
+        },
+        {
+          "when": "resourceLangId == markdown && resourceExtname == .md",
+          "command": "extension.markdown-extrajs.export-pdf"
         }
       ]
     },
@@ -102,8 +111,63 @@
         },
         "markdownExtraJS.export.htmlLang": {
           "type": "string",
-          "default": "",
+          "default": null,
           "description": "The value of the lang attribute in the HTML tag when exporting to HTML."
+        },
+        "markdownExtraJS.playwright.browser": {
+          "type": "string",
+          "enum": [
+            "chromium",
+            "firefox",
+            "webkit"
+          ],
+          "default": "chromium",
+          "description": "The browser to use with Playwright."
+        },
+        "markdownExtraJS.playwright.waitTimeout": {
+          "type": "number",
+          "default": 30000,
+          "description": "Time (ms) to wait for browser navigation."
+        },
+        "markdownExtraJS.playwright.executablePath": {
+          "type": "string",
+          "default": null,
+          "description": "Path to the browser executable."
+        },
+        "markdownExtraJS.playwright.devtools": {
+          "type": "boolean",
+          "default": false,
+          "description": "Open developer tools on launch."
+        },
+        "markdownExtraJS.playwright.headless": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run browser in headless mode."
+        },
+        "markdownExtraJS.playwright.timeout": {
+          "type": "number",
+          "default": 30000,
+          "description": "Time (ms) to wait for browser launch."
+        },
+        "markdownExtraJS.playwright.locale": {
+          "type": "string",
+          "default": null,
+          "description": "Set the browser's language/region."
+        },
+        "markdownExtraJS.playwright.offline": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run browser in offline mode."
+        },
+        "markdownExtraJS.playwright.timezoneId": {
+          "type": "string",
+          "default": null,
+          "description": "Set the browser's time zone."
+        },
+        "markdownExtraJS.playwright.useProxy": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use proxy settings from environment variables."
         }
       }
     }
@@ -129,6 +193,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@marp-team/marp-core": "^4.0.0",
     "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.22",
     "@types/css": "^0.0.38",
     "@types/markdown-it": "^14.1.2",
@@ -136,7 +201,7 @@
     "chromium-bidi": "^0.10.2",
     "css": "^3.0.0",
     "markdown-it": "^14.1.0",
-    "playwright-chromium": "^1.49.1",
+    "playwright-core": "^1.49.1",
     "vsce": "^2.15.0"
   }
 }

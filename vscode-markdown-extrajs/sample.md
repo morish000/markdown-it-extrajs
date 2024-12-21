@@ -1,5 +1,5 @@
 ---
-marp: true
+marp: false
 style: |
   pre.mermaid {
     all: unset;
@@ -73,6 +73,11 @@ extrajs:
     }
     div.preflight-y {
       color: yellow;
+    }
+    @media print {
+      h1 {
+        break-before: page;
+      }
     }
 ---
 
