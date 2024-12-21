@@ -47,7 +47,6 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
         globalOptions.update(),
         config.get<string>('export.htmlLang', ""),
         path.basename(filePath, '.md') ?? "",
-        undefined,
         document.getText(),
         frontMatter);
 

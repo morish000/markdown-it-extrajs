@@ -9,7 +9,6 @@ export const createHTMLExportContent = async (
   options: ExtraJSOptions,
   lang: string,
   sourceFileName: string,
-  sourceDir: string | undefined,
   source: string,
   frontMatter: {
     estrajs: ExtraJSFrontMatter;[key: string]: any
@@ -19,26 +18,23 @@ export const createHTMLExportContent = async (
     lang,
     title: frontMatter.title ? frontMatter.title : sourceFileName,
     body: convertMarkdownToHtml(options, source),
-    base: sourceDir,
     ...(await createCss())
   });
 };
 
 export const createHtml = ({
   lang = "",
-  base,
   title = "",
   cssLink = [],
   css = [],
   body = "",
 }: {
-  lang?: string, title?: string, cssLink?: string[], css?: string[], body?: string, base?: string
+  lang?: string, title?: string, cssLink?: string[], css?: string[], body?: string,
 }) => `<!DOCTYPE html>
 <html${(lang && /^[a-z]{2}(-[A-Z]{2})?$/.test(lang)) ? ` lang="${lang}"` : ""}>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    ${base ? `<base href="file://${/^[a-zA-Z]:[\\\\/]/.test(base) ? '/' + base.replace(/\\/g, '/') : base}">` : ""}
     <title>${title}</title>
     ${cssLink.map(link => `<link rel="stylesheet" href="${link}">`).join('\n')}
     ${css.map(style => `<style>${style}</style>`).join('\n')}

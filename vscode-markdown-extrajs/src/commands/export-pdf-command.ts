@@ -44,18 +44,16 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
     }
 
     const htmlContent = frontMatter.marp ?
-      createMarpHtmlExportContent(
+      await createMarpHtmlExportContent(
         globalOptions.update(),
         config.get<string>('export.htmlLang', ""),
         path.basename(filePath, '.md') ?? "",
-        dirPath,
         document.getText(),
         frontMatter) :
       await createHTMLExportContent(
         globalOptions.update(),
         config.get<string>('export.htmlLang', ""),
         path.basename(filePath, '.md') ?? "",
-        dirPath,
         document.getText(),
         frontMatter);
 

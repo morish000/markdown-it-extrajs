@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { randomUUID } from 'crypto';
 import { chromium, firefox, webkit, BrowserType } from 'playwright-core';
 import type { ExtraJSFrontMatter } from "@morish000/markdown-it-extrajs";
 
@@ -86,59 +87,73 @@ export const exportPDF = async (
 
   const cacheDir = await createCacheDirectoryIfNotExists(globalStorageUri, browserName);
 
+
+  const tempFileUri = vscode.Uri.file(`${exportPath}-${randomUUID()}.html`);
+  await vscode.workspace.fs.writeFile(
+    tempFileUri,
+    new TextEncoder().encode(exportContent));
+
   const browser = await browserType.launchPersistentContext(
     cacheDir, { ...launchOptions, ...getProxySettings(!!launchOptions.useProxy) });
 
-  const page = await browser.newPage();
-  await page.setContent(exportContent, { timeout: waitTimeout, waitUntil: 'load' });
-  await page.waitForLoadState('networkidle', { timeout: waitTimeout });
+  try {
+    const page = await browser.newPage();
+    await page.goto(`file://${tempFileUri.fsPath}`, { timeout: waitTimeout, waitUntil: 'load' });
+    await page.waitForLoadState('networkidle', { timeout: waitTimeout });
 
-  const settings = {
-    timeout: waitTimeout,
-    interval: 200,
-    stablePeriod: 1000
-  };
+    const settings = {
+      timeout: waitTimeout,
+      interval: 200,
+      stablePeriod: 1000
+    };
 
-  await page.evaluate(({ timeout, interval, stablePeriod }) => {
-    return new Promise<void>((resolve) => {
-      let lastMutationTime = Date.now();
-      const observer = new MutationObserver(() => {
-        lastMutationTime = Date.now();
-      });
+    await page.evaluate(({ timeout, interval, stablePeriod }) => {
+      return new Promise<void>((resolve) => {
+        let lastMutationTime = Date.now();
+        const observer = new MutationObserver(() => {
+          lastMutationTime = Date.now();
+        });
 
-      observer.observe(document.body, {
-        attributes: true,
-        childList: true,
-        subtree: true
-      });
+        observer.observe(document.body, {
+          attributes: true,
+          childList: true,
+          subtree: true
+        });
 
-      const checkInterval = setInterval(() => {
-        if (Date.now() - lastMutationTime > stablePeriod) {
+        const checkInterval = setInterval(() => {
+          if (Date.now() - lastMutationTime > stablePeriod) {
+            clearInterval(checkInterval);
+            observer.disconnect();
+            resolve();
+          }
+        }, interval);
+
+        setTimeout(() => {
           clearInterval(checkInterval);
           observer.disconnect();
           resolve();
-        }
-      }, interval);
+        }, timeout);
+      });
+    }, settings);
 
-      setTimeout(() => {
-        clearInterval(checkInterval);
-        observer.disconnect();
-        resolve();
-      }, timeout);
+    await page.pdf({
+      ...commonOptions(),
+      ...(frontMatter.marp ? marpOptions() : regularOptions(frontMatter.title ?? filename)),
+      ...(frontMatter.playwright?.pdfOptions ? frontMatter.playwright.pdfOptions : {}),
+      path: exportPath
     });
-  }, settings);
 
-  await page.pdf({
-    ...commonOptions(),
-    ...(frontMatter.marp ? marpOptions() : regularOptions(frontMatter.title ?? filename)),
-    ...(frontMatter.playwright?.pdfOptions ? frontMatter.playwright.pdfOptions : {}),
-    path: exportPath
-  });
-
-  try {
-    await browser.close();
-  } catch (e) {
-    console.error(e);
+  } finally {
+    try {
+      await browser.close();
+    } catch (e) {
+      console.error(e);
+    }
+    try {
+      await vscode.workspace.fs.delete(tempFileUri);
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 
