@@ -64,6 +64,7 @@ export const exportPDF = async (
     };
     [key: string]: any;
   },
+  browserName: string,
   launchOptions: {
     executablePath?: string,
     devtools?: boolean,
@@ -76,10 +77,6 @@ export const exportPDF = async (
   } = {},
   waitTimeout: number,
   globalStorageUri: vscode.Uri) => {
-
-  const config = vscode.workspace.getConfiguration('markdownExtraJS');
-
-  const browserName = config.get<string>('playwright.browser') ?? 'chromium';
   const browserType = browserTypeMap[browserName];
 
   if (!browserType) {

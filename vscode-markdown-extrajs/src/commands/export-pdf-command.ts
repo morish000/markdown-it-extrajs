@@ -70,6 +70,8 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
           htmlContent,
           outputPath,
           frontMatter,
+          // This setting is not included in package.json.Reason: PDF export only works with Chromium.
+          "chromium",
           {
             devtools: config.get<boolean>('playwright.devtools', false),
             headless: config.get<boolean>('playwright.headless', true),

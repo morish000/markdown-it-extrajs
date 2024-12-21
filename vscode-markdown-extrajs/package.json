@@ -114,16 +114,6 @@
           "default": null,
           "description": "The value of the lang attribute in the HTML tag when exporting to HTML."
         },
-        "markdownExtraJS.playwright.browser": {
-          "type": "string",
-          "enum": [
-            "chromium",
-            "firefox",
-            "webkit"
-          ],
-          "default": "chromium",
-          "description": "The browser to use with Playwright."
-        },
         "markdownExtraJS.playwright.waitTimeout": {
           "type": "number",
           "default": 30000,

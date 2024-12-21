@@ -185,6 +185,105 @@ preflights: [
 ]
 ```
 
+# Export PDF (Experimental)
+
+Due to environmental dependencies, the PDF Export feature has been added experimentally.  
+Playwright is required to run this feature. Currently, Playwright's PDF Export seems to support only Chromium.
+
+If Playwright is not installed, please run the following to install it:
+
+```
+> npx playwright install
+> npx playwright install-deps chromium
+```
+
+> Refer to the official site for more information: [Browsers](https://playwright.dev/docs/browsers)
+
+With the Markdown editor active, select the following from the command palette:
+
+```
+> Export PDF File (experimental)
+```
+
+PDF export settings can be configured in Front Matter and VSCode settings.
+
+## Front Matter
+
+```yaml
+extrajs:                      # Root element
+  playwright:
+    pdfOptions:               # PDF options
+```
+
+Refer to Playwright's [official documentation](https://playwright.dev/docs/next/api/class-page#page-pdf) for available `pdfOptions` settings.
+
+The following settings are configured by default:
+
+### Common
+
+```javascript
+{
+  printBackground: true
+}
+```
+
+### Marp
+
+```javascript
+{
+  preferCSSPageSize: true,
+  margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' }
+}
+```
+
+### Non-Marp
+
+```javascript
+{
+  displayHeaderFooter: true,
+  headerTemplate: `
+  <div style="font-size: 12px; width: 100%; text-align: center; margin-top: 10px;">
+    ${title}
+  </div>`,
+  footerTemplate: `
+  <div style="font-size: 12px; width: 100%; text-align: center; margin-top: 10px;">
+    <span class="pageNumber"></span> / <span class="totalPages"></span>
+  </div>`,
+  margin: { top: '40px', right: '40px', bottom: '40px', left: '40px' }
+}
+```
+
+In the header, `${title}` will be replaced with the `title` from the Front Matter, or the file name (without extension) if not set.
+
+## VSCode Settings
+
+The following settings are available under `markdownExtraJS.playwright`:
+
+| name           | default |
+| -------------- | ------- |
+| waitTimeout    | 30000   |
+| executablePath | null    |
+| devtools       | false   |
+| headless       | true    |
+| timeout        | 30000   |
+| locale         | null    |
+| offline        | false   |
+| timezoneId     | null    |
+| useProxy       | false   |
+
+### Note: Proxy
+
+If `useProxy` is set to `true`, proxy settings will be retrieved from environment variables.
+
+| name                      | value                                                                                                                            |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| HTTP_PROXY (or http_proxy) | `http://host:port`. If authentication is required: `http://username:password@host:port`                                           |
+| NO_PROXY (or no_proxy)    | Set this for the bypass property. [Reference](https://playwright.dev/docs/next/api/class-apirequest#api-request-new-context-option-proxy) |
+
+## Page Breaks
+
+For PDF page breaks, use CSS properties [break-before](https://developer.mozilla.org/en-US/docs/Web/CSS/break-before) and [break-after](https://developer.mozilla.org/en-US/docs/Web/CSS/break-after). This is not necessary for Marp.
+
 # Known Issues
 
 - The initial run may take some time due to large download sizes, but subsequent

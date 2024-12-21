@@ -1,5 +1,5 @@
 ---
-marp: false
+marp: true
 style: |
   pre.mermaid {
     all: unset;
