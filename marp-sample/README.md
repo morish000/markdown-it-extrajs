@@ -49,7 +49,7 @@ npm run playwright
 Outputs HTML to PDF using Playwright without using Marp CLI. Handles and outputs `console.log` for debugging.
 
 - Converts [./dist/sample.html](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample.html) to PDF.
-- Outputs [./dist/sample_playwright.pdf](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample_playwright.pdf).
+- Outputs [./dist/sample_playwright.pdf](https://github.com/morish000/markdown-it-extrajs/blob/main/marp-sample/dist/sample_playweigth.pdf).
 
 ## Marp Core Example
 
