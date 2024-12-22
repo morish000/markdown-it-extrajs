@@ -1,27 +1,26 @@
 import * as vscode from 'vscode';
 import { randomUUID } from 'crypto';
-import { chromium, firefox, webkit, BrowserType } from 'playwright-core';
+import puppeteer, { PaperFormat, PDFMargin } from 'puppeteer-core';
 import type { ExtraJSFrontMatter } from "@morish000/markdown-it-extrajs";
+import {
+  install,
+  canDownload,
+  Browser,
+  computeExecutablePath,
+  detectBrowserPlatform,
+  resolveBuildId,
+  getInstalledBrowsers
+} from '@puppeteer/browsers';
 
-const browserTypeMap: { [key: string]: BrowserType<any> } = {
-  chromium,
-  firefox,
-  webkit
-};
-
-export type PDFOptions = {
+// https://pptr.dev/api/puppeteer.pdfoptions
+export type PDFOptionsPuppeteer = {
   displayHeaderFooter?: boolean;
   footerTemplate?: string;
-  format?: string;
+  format?: PaperFormat;
   headerTemplate?: string;
   height?: string | number;
   landscape?: boolean;
-  margin?: {
-    top?: string | number;
-    right?: string | number;
-    bottom?: string | number;
-    left?: string | number;
-  };
+  margin?: PDFMargin;
   outline?: boolean;
   pageRanges?: string;
   path?: string;
@@ -29,19 +28,20 @@ export type PDFOptions = {
   printBackground?: boolean;
   scale?: number;
   tagged?: boolean;
+  waitForFonts?: boolean;
   width?: string | number;
 };
 
-const commonOptions = (): PDFOptions => ({
+const commonOptions = (): PDFOptionsPuppeteer => ({
   printBackground: true
 });
 
-const marpOptions = (): PDFOptions => ({
+const marpOptions = (): PDFOptionsPuppeteer => ({
   preferCSSPageSize: true,
   margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' }
 });
 
-const regularOptions = (title: string): PDFOptions => ({
+const regularOptions = (title: string): PDFOptionsPuppeteer => ({
   displayHeaderFooter: true,
   headerTemplate: `
   <div style="font-size: 12px; width: 100%; text-align: center; margin-top: 10px;">
@@ -54,52 +54,44 @@ const regularOptions = (title: string): PDFOptions => ({
   margin: { top: '40px', right: '40px', bottom: '40px', left: '40px' }
 });
 
-export const exportPDF = async (
+export const exportPDFPuppeteer = async (
   filename: string,
   exportContent: string,
   exportPath: string,
   frontMatter: {
     estrajs: ExtraJSFrontMatter;
-    playwright: {
-      pdfOptions: PDFOptions;
+    puppeteer: {
+      pdfOptions: PDFOptionsPuppeteer;
     };
     [key: string]: any;
   },
-  browserName: string,
-  launchOptions: {
-    executablePath?: string,
-    devtools?: boolean,
-    headless?: boolean,
-    timeout?: number,
-    locale?: string,
-    offline?: boolean,
-    timezoneId?: string,
-    useProxy?: boolean
-  } = {},
+  launchOptions: puppeteer.LaunchOptions & { useProxy?: boolean } = {},
   waitTimeout: number,
   globalStorageUri: vscode.Uri) => {
-  const browserType = browserTypeMap[browserName];
 
-  if (!browserType) {
-    vscode.window.showErrorMessage(`Unsupported browser: ${browserName}`);
-    return;
-  }
-
-  const cacheDir = await createCacheDirectoryIfNotExists(globalStorageUri, browserName);
-
+  const cacheDir = await createCacheDirectoryIfNotExists(globalStorageUri);
 
   const tempFileUri = vscode.Uri.file(`${exportPath}-${randomUUID()}.html`);
   await vscode.workspace.fs.writeFile(
     tempFileUri,
     new TextEncoder().encode(exportContent));
 
-  const browser = await browserType.launchPersistentContext(
-    cacheDir, { ...launchOptions, ...getProxySettings(!!launchOptions.useProxy) });
+  const executablePath = launchOptions.executablePath ?
+    launchOptions.executablePath :
+    await downloadChromium(globalStorageUri);
+  const browser = await puppeteer.launch({
+    ...launchOptions,
+    userDataDir: cacheDir,
+    args: [
+      ...getProxySettingsArgs(!!launchOptions.useProxy),
+      "--disable-dev-shm-usage"],
+    executablePath
+  });
 
   try {
     const page = await browser.newPage();
     await page.goto(`file://${tempFileUri.fsPath}`, { timeout: waitTimeout, waitUntil: 'load' });
-    await page.waitForLoadState('networkidle', { timeout: waitTimeout });
+    await page.waitForNetworkIdle({ timeout: waitTimeout });
 
     const settings = {
       timeout: waitTimeout,
@@ -139,7 +131,7 @@ export const exportPDF = async (
     await page.pdf({
       ...commonOptions(),
       ...(frontMatter.marp ? marpOptions() : regularOptions(frontMatter.title ?? filename)),
-      ...(frontMatter.playwright?.pdfOptions ? frontMatter.playwright.pdfOptions : {}),
+      ...(frontMatter.puppeteer?.pdfOptions ? frontMatter.puppeteer.pdfOptions : {}),
       path: exportPath
     });
 
@@ -157,8 +149,8 @@ export const exportPDF = async (
   }
 };
 
-const createCacheDirectoryIfNotExists = async (globalStorageUri: vscode.Uri, browserName: string) => {
-  const cacheUri = vscode.Uri.joinPath(globalStorageUri, '.playwright', `browser-${browserName}`);
+const createCacheDirectoryIfNotExists = async (globalStorageUri: vscode.Uri) => {
+  const cacheUri = vscode.Uri.joinPath(globalStorageUri, '.puppeteer', 'browser-chromium');
   try {
     await vscode.workspace.fs.stat(cacheUri);
   } catch (e) {
@@ -168,27 +160,61 @@ const createCacheDirectoryIfNotExists = async (globalStorageUri: vscode.Uri, bro
   return cacheUri.fsPath;
 };
 
-const getProxySettings = (useProxy: boolean) => {
+const createBrowserDirectoryIfNotExists = async (globalStorageUri: vscode.Uri) => {
+  const cacheUri = vscode.Uri.joinPath(globalStorageUri, '.puppeteer-browsers');
+  try {
+    await vscode.workspace.fs.stat(cacheUri);
+  } catch (e) {
+    await vscode.workspace.fs.createDirectory(cacheUri);
+    vscode.window.showInformationMessage(`Directory created: ${cacheUri.fsPath}`);
+  }
+  return cacheUri.fsPath;
+};
+
+const getProxySettingsArgs = (useProxy: boolean) => {
   if (!useProxy) {
-    return {};
+    return [];
   }
 
   const proxyUrl = process.env.HTTP_PROXY || process.env.http_proxy;
 
   if (!proxyUrl) {
     console.error('proxy settings not found.');
-    return {};
+    return [];
   }
 
   const url = new URL(proxyUrl);
 
-  const bypass = process.env.NO_PROXY || process.env.no_proxy || '';
-  return {
-    proxy: {
-      server: `${url.protocol}//${url.hostname}` + (url.port ? `:${url.port}` : ''),
-      ...(url.username ? { username: url.username } : {}),
-      ...(url.password ? { password: url.password } : {}),
-      ...(bypass ? { bypass } : {}),
-    },
-  };
+  const args = [`--proxy-server=${url.protocol}//${url.hostname}` + (url.port ? `:${url.port}` : '')];
+  if (url.username) { args.push(`--proxy-auth=${url.username}:${url.password}`); }
+
+  return args;
+};
+
+const downloadChromium = async (globalStorageUri: vscode.Uri) => {
+  const cacheDir = await createBrowserDirectoryIfNotExists(globalStorageUri);
+  const browserPlatform = detectBrowserPlatform();
+  const installedBrowsers = await getInstalledBrowsers({ cacheDir });
+  let installedBuildId = "";
+  if (installedBrowsers && 0 < installedBrowsers.length) {
+    installedBuildId = installedBrowsers.sort((a, b) => parseInt(b.buildId) - parseInt(a.buildId))[0].buildId;
+  }
+  if (!browserPlatform) {
+    return "";
+  }
+  const options = { browser: Browser.CHROMIUM, buildId: installedBuildId, cacheDir };
+  if (!installedBuildId) {
+    options.buildId = await resolveBuildId(Browser.CHROMIUM, browserPlatform, "latest");
+    if (await canDownload(options)) {
+      await vscode.window.withProgress({
+        location: vscode.ProgressLocation.Notification,
+        title: "Installing Chromium",
+        cancellable: false
+      }, async (progress) => {
+        await install(options);
+        progress.report({ increment: 100 });
+      });
+    }
+  }
+  return await computeExecutablePath(options);
 };

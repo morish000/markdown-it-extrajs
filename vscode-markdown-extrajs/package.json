@@ -114,6 +114,15 @@
           "default": null,
           "description": "The value of the lang attribute in the HTML tag when exporting to HTML."
         },
+        "markdownExtraJS.export.browserAutomation": {
+          "type": "string",
+          "enum": [
+            "puppeteer",
+            "playwright"
+          ],
+          "default": "playwright",
+          "description": "Choose the browser automation tool."
+        },
         "markdownExtraJS.playwright.waitTimeout": {
           "type": "number",
           "default": 30000,
@@ -158,6 +167,46 @@
           "type": "boolean",
           "default": false,
           "description": "Use proxy settings from environment variables."
+        },
+        "markdownExtraJS.puppeteer.waitTimeout": {
+          "type": "number",
+          "default": 30000,
+          "description": "Time (ms) to wait for browser navigation."
+        },
+        "markdownExtraJS.puppeteer.executablePath": {
+          "type": "string",
+          "default": null,
+          "description": "Path to the browser executable."
+        },
+        "markdownExtraJS.puppeteer.devtools": {
+          "type": "boolean",
+          "default": false,
+          "description": "Open developer tools on launch."
+        },
+        "markdownExtraJS.puppeteer.headless": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run browser in headless mode."
+        },
+        "markdownExtraJS.puppeteer.timeout": {
+          "type": "number",
+          "default": 30000,
+          "description": "Time (ms) to wait for browser launch."
+        },
+        "markdownExtraJS.puppeteer.locale": {
+          "type": "string",
+          "default": null,
+          "description": "Set the browser's language/region."
+        },
+        "markdownExtraJS.puppeteer.timezoneId": {
+          "type": "string",
+          "default": null,
+          "description": "Set the browser's time zone."
+        },
+        "markdownExtraJS.puppeteer.useProxy": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use proxy settings from environment variables."
         }
       }
     }
@@ -185,6 +234,7 @@
   "dependencies": {
     "@marp-team/marp-core": "^4.0.0",
     "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@^0.0.22",
+    "@puppeteer/browsers": "^2.6.1",
     "@types/css": "^0.0.38",
     "@types/markdown-it": "^14.1.2",
     "@vscode/markdown-it-katex": "^1.1.1",
@@ -192,6 +242,7 @@
     "css": "^3.0.0",
     "markdown-it": "^14.1.0",
     "playwright-core": "^1.49.1",
+    "puppeteer-core": "^23.11.1",
     "vsce": "^2.15.0"
   }
 }

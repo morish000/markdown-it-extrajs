@@ -3,7 +3,8 @@ import path from 'path';
 import grayMatter from "gray-matter";
 import { createHTMLExportContent } from "../exports/export-html.js";
 import { createMarpHtmlExportContent } from "../exports/export-marp.js";
-import { exportPDF } from "../exports/export-pdf.js";
+import { exportPDFPuppeteer } from "../exports/export-pdf-puppeteer.js";
+import { exportPDFPlaywright } from "../exports/export-pdf-playwright.js";
 import type { ExtraJSFrontMatter } from "@morish000/markdown-it-extrajs";
 import type { GlobalOptions } from "../global-options.js";
 import { selectFile } from "./select-file.js";
@@ -26,9 +27,15 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
     }
 
     const grayMatterFile = grayMatter(document.getText());
-    const frontMatter = (grayMatterFile.data ?? {}) as {
+    const frontMatter = ({
+      ...{ estrajs: {}, playwright: {}, puppeteer: {} },
+      ...(grayMatterFile.data ?? {})
+    }) as {
       estrajs: ExtraJSFrontMatter;
       playwright: {
+        pdfOptions: any;
+      };
+      puppeteer: {
         pdfOptions: any;
       };
       [key: string]: any;
@@ -63,32 +70,62 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
       cancellable: false
     }, async (progress) => {
       try {
-        await exportPDF(
-          path.basename(filePath, '.md') ?? "",
-          htmlContent,
-          outputPath,
-          frontMatter,
-          // This setting is not included in package.json.Reason: PDF export only works with Chromium.
-          "chromium",
-          {
-            devtools: config.get<boolean>('playwright.devtools', false),
-            headless: config.get<boolean>('playwright.headless', true),
-            timeout: config.get<number>('playwright.timeout', 30000),
-            offline: config.get<boolean>('playwright.offline', false),
-            useProxy: config.get<boolean>('playwright.useProxy', false),
-            ...(config.get<string | null>('playwright.executablePath', null) ? { executablePath: config.get<string>('playwright.executablePath') } : {}),
-            ...(config.get<string | null>('playwright.locale', null) ? { locale: config.get<string>('playwright.locale') } : {}),
-            ...(config.get<string | null>('playwright.timezoneId', null) ? { timezoneId: config.get<string>('playwright.timezoneId') } : {})
-          },
-          config.get<number>('playwright.waitTimeout', 30000),
-          globalOptions.globalStorageUri
-        );
+        const browserAutomationTool = config.get<string>('export.browserAutomation', "playwright");
+        if (browserAutomationTool === "playwright") {
+          vscode.window.showInformationMessage("Exporting PDF using Playwright.");
+          await exportPDFPlaywright(
+            path.basename(filePath, '.md') ?? "",
+            htmlContent,
+            outputPath,
+            frontMatter,
+            // This setting is not included in package.json.Reason: PDF export only works with Chromium.
+            "chromium",
+            {
+              devtools: config.get<boolean>('playwright.devtools', false),
+              headless: config.get<boolean>('playwright.headless', true),
+              timeout: config.get<number>('playwright.timeout', 30000),
+              offline: config.get<boolean>('playwright.offline', false),
+              useProxy: config.get<boolean>('playwright.useProxy', false),
+              ...(config.get<string | null>('playwright.executablePath', null) ?
+                { executablePath: config.get<string>('playwright.executablePath') } : {}),
+              ...(config.get<string | null>('playwright.locale', null) ?
+                { locale: config.get<string>('playwright.locale') } : {}),
+              ...(config.get<string | null>('playwright.timezoneId', null) ?
+                { timezoneId: config.get<string>('playwright.timezoneId') } : {})
+            },
+            config.get<number>('playwright.waitTimeout', 30000),
+            globalOptions.globalStorageUri
+          );
+        } else if (browserAutomationTool === "puppeteer") {
+          vscode.window.showInformationMessage("Exporting PDF using Puppeteer.");
+          await exportPDFPuppeteer(
+            path.basename(filePath, '.md') ?? "",
+            htmlContent,
+            outputPath,
+            frontMatter,
+            {
+              devtools: config.get<boolean>('puppeteer.devtools', false),
+              headless: config.get<boolean>('puppeteer.headless', true),
+              timeout: config.get<number>('puppeteer.timeout', 30000),
+              useProxy: config.get<boolean>('puppeteer.useProxy', false),
+              ...(config.get<string | null>('puppeteer.executablePath', null) ?
+                { executablePath: config.get<string>('puppeteer.executablePath') } : {}),
+              ...(config.get<string | null>('puppeteer.locale', null) ?
+                { locale: config.get<string>('puppeteer.locale') } : {}),
+              ...(config.get<string | null>('puppeteer.timezoneId', null) ?
+                { timezoneId: config.get<string>('puppeteer.timezoneId') } : {})
+            },
+            config.get<number>('puppeteer.waitTimeout', 30000),
+            globalOptions.globalStorageUri
+          );
+        } else {
+          vscode.window.showErrorMessage(`The configuration value "${browserAutomationTool}" for "markdownExtraJS.export.browserAutomation" is not supported.`);
+        }
       } finally {
         progress.report({ increment: 100 });
       }
+      vscode.window.showInformationMessage(`File written successfully: ${outputPath}`);
     });
-
-    vscode.window.showInformationMessage(`File written successfully: ${outputPath}`);
   },
   undefined
 ];
