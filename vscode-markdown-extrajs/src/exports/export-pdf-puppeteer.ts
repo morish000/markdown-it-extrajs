@@ -3,13 +3,15 @@ import { randomUUID } from 'crypto';
 import puppeteer, { PaperFormat, PDFMargin } from 'puppeteer-core';
 import type { ExtraJSFrontMatter } from "@morish000/markdown-it-extrajs";
 import {
-  install,
-  canDownload,
   Browser,
+  BrowserPlatform,
+  canDownload,
   computeExecutablePath,
   detectBrowserPlatform,
+  getInstalledBrowsers,
+  install,
   resolveBuildId,
-  getInstalledBrowsers
+  uninstall
 } from '@puppeteer/browsers';
 
 // https://pptr.dev/api/puppeteer.pdfoptions
@@ -42,6 +44,7 @@ const marpOptions = (): PDFOptionsPuppeteer => ({
 });
 
 const regularOptions = (title: string): PDFOptionsPuppeteer => ({
+  format: "A4",
   displayHeaderFooter: true,
   headerTemplate: `
   <div style="font-size: 12px; width: 100%; text-align: center; margin-top: 10px;">
@@ -60,9 +63,7 @@ export const exportPDFPuppeteer = async (
   exportPath: string,
   frontMatter: {
     estrajs: ExtraJSFrontMatter;
-    puppeteer: {
-      pdfOptions: PDFOptionsPuppeteer;
-    };
+    pdfOptions: PDFOptionsPuppeteer;
     [key: string]: any;
   },
   launchOptions: puppeteer.LaunchOptions & { useProxy?: boolean } = {},
@@ -78,7 +79,7 @@ export const exportPDFPuppeteer = async (
 
   const executablePath = launchOptions.executablePath ?
     launchOptions.executablePath :
-    await downloadChromium(globalStorageUri);
+    await getExecutablePath(globalStorageUri);
   const browser = await puppeteer.launch({
     ...launchOptions,
     userDataDir: cacheDir,
@@ -131,7 +132,7 @@ export const exportPDFPuppeteer = async (
     await page.pdf({
       ...commonOptions(),
       ...(frontMatter.marp ? marpOptions() : regularOptions(frontMatter.title ?? filename)),
-      ...(frontMatter.puppeteer?.pdfOptions ? frontMatter.puppeteer.pdfOptions : {}),
+      ...(frontMatter.pdfOptions ?? {}),
       path: exportPath
     });
 
@@ -186,35 +187,65 @@ const getProxySettingsArgs = (useProxy: boolean) => {
   const url = new URL(proxyUrl);
 
   const args = [`--proxy-server=${url.protocol}//${url.hostname}` + (url.port ? `:${url.port}` : '')];
-  if (url.username) { args.push(`--proxy-auth=${url.username}:${url.password}`); }
+
+  // Unfortunately, there is no official method to set this currently. [Using Proxies with Puppeteer](https://puppeteer.guide/posts/proxies/)
+  // if (url.username) { args.push(`--proxy-auth=${url.username}:${url.password}`); }
 
   return args;
 };
 
-const downloadChromium = async (globalStorageUri: vscode.Uri) => {
+export const getExecutablePath = async (globalStorageUri: vscode.Uri) => {
   const cacheDir = await createBrowserDirectoryIfNotExists(globalStorageUri);
-  const browserPlatform = detectBrowserPlatform();
   const installedBrowsers = await getInstalledBrowsers({ cacheDir });
-  let installedBuildId = "";
-  if (installedBrowsers && 0 < installedBrowsers.length) {
-    installedBuildId = installedBrowsers.sort((a, b) => parseInt(b.buildId) - parseInt(a.buildId))[0].buildId;
+  let buildId = "";
+  if (0 < installedBrowsers.length) {
+    buildId = installedBrowsers.sort((a, b) => parseInt(b.buildId) - parseInt(a.buildId))[0].buildId;
   }
-  if (!browserPlatform) {
-    return "";
-  }
-  const options = { browser: Browser.CHROMIUM, buildId: installedBuildId, cacheDir };
-  if (!installedBuildId) {
-    options.buildId = await resolveBuildId(Browser.CHROMIUM, browserPlatform, "latest");
-    if (await canDownload(options)) {
-      await vscode.window.withProgress({
-        location: vscode.ProgressLocation.Notification,
-        title: "Installing Chromium",
-        cancellable: false
-      }, async (progress) => {
-        await install(options);
-        progress.report({ increment: 100 });
-      });
-    }
-  }
+  const options = buildId ?
+    { browser: Browser.CHROMIUM, buildId, cacheDir } :
+    await installLatestChromium(globalStorageUri);
   return await computeExecutablePath(options);
+};
+
+export const installLatestChromium = async (globalStorageUri: vscode.Uri) => {
+  const cacheDir = await createBrowserDirectoryIfNotExists(globalStorageUri);
+  const browserPlatform = detectBrowserPlatform() as BrowserPlatform;
+  const buildId = await resolveBuildId(Browser.CHROMIUM, browserPlatform, "latest");
+  const options = { browser: Browser.CHROMIUM, buildId, cacheDir };
+  if (await canDownload(options)) {
+    await vscode.window.withProgress({
+      location: vscode.ProgressLocation.Notification,
+      title: "Installing Chromium",
+      cancellable: false
+    }, async (progress) => {
+      await install(options);
+      progress.report({ increment: 100 });
+    });
+  }
+  return options;
+};
+
+export const uninstallOldChromium = async (globalStorageUri: vscode.Uri) => {
+  const cacheDir = await createBrowserDirectoryIfNotExists(globalStorageUri);
+  const platform = detectBrowserPlatform();
+  const installedBrowsers = await getInstalledBrowsers({ cacheDir });
+
+  if (installedBrowsers.length < 2) {
+    return;
+  }
+
+  const latestBuildId = installedBrowsers.sort(
+    (a, b) => parseInt(b.buildId) - parseInt(a.buildId))[0].buildId;
+  const oldBrowsers = installedBrowsers.filter(browser => browser.buildId !== latestBuildId);
+
+  await vscode.window.withProgress({
+    location: vscode.ProgressLocation.Notification,
+    title: "Uninstalling Chromium",
+    cancellable: false
+  }, async (progress) => {
+    for (const browser of oldBrowsers) {
+      await uninstall({ browser: Browser.CHROMIUM, buildId: browser.buildId, cacheDir, platform });
+    }
+    progress.report({ increment: 100 });
+  });
 };

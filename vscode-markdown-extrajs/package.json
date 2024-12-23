@@ -42,6 +42,11 @@
         "category": "Markdown ExtraJS",
         "command": "extension.markdown-extrajs.export-pdf",
         "title": "Export PDF File(experimental)"
+      },
+      {
+        "category": "Markdown ExtraJS",
+        "command": "extension.markdown-extrajs.install-chromium-for-puppeteer",
+        "title": "Install Chromium for Puppeteer(experimental)"
       }
     ],
     "menus": {
@@ -207,6 +212,11 @@
           "type": "boolean",
           "default": false,
           "description": "Use proxy settings from environment variables."
+        },
+        "markdownExtraJS.puppeteer.uninstallOldChromium": {
+          "type": "boolean",
+          "default": true,
+          "description": "Remove old Chromium versions during installation."
         }
       }
     }

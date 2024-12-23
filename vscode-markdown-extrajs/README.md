@@ -188,6 +188,15 @@ preflights: [
 # Export PDF (Experimental)
 
 Due to environmental dependencies, the PDF Export feature has been added experimentally.  
+
+You can choose either Playwright or Puppeteer to export PDFs.  
+You can select which to use by changing the following setting in VSCode.  
+The default is Playwright.
+
+> markdownExtraJS.export.browserAutomation
+
+## Using Playwright
+
 Playwright is required to run this feature. Currently, Playwright's PDF Export seems to support only Chromium.
 
 If Playwright is not installed, please run the following to install it:
@@ -199,10 +208,21 @@ If Playwright is not installed, please run the following to install it:
 
 > Refer to the official site for more information: [Browsers](https://playwright.dev/docs/browsers)
 
+## Using Puppeteer
+
+The version of Chromium used by Puppeteer is automatically installed during the first export.  
+This Chromium version is not updated automatically. To update it, select and run the following from the VSCode command palette:
+
+> Markdown ExtraJS: Install Chromium for Puppeteer (experimental)
+
+Running this command will always install the latest build.
+
+## Executing the PDF Export
+
 With the Markdown editor active, select the following from the command palette:
 
 ```
-> Export PDF File (experimental)
+> Markdown ExtraJS: Export PDF File (experimental)
 ```
 
 PDF export settings can be configured in Front Matter and VSCode settings.
@@ -210,12 +230,16 @@ PDF export settings can be configured in Front Matter and VSCode settings.
 ## Front Matter
 
 ```yaml
-extrajs:                      # Root element
-  playwright:
-    pdfOptions:               # PDF options
+extrajs:     # Extrajs options
+  ...
+pdfOptions:  # PDF options
+  ...
 ```
 
-Refer to Playwright's [official documentation](https://playwright.dev/docs/next/api/class-page#page-pdf) for available `pdfOptions` settings.
+Refer to Playwright's [official documentation](https://playwright.dev/docs/next/api/class-page#page-pdf) or Puppeteer's [official documentation](https://pptr.dev/api/puppeteer.pdfoptions) for available `pdfOptions` settings.
+
+Most of the same options are available for both Playwright and Puppeteer, but there are some differences.  
+For example, `waitForFonts` is only defined in Puppeteer.
 
 The following settings are configured by default:
 
@@ -240,6 +264,7 @@ The following settings are configured by default:
 
 ```javascript
 {
+  format: "A4",
   displayHeaderFooter: true,
   headerTemplate: `
   <div style="font-size: 12px; width: 100%; text-align: center; margin-top: 10px;">
@@ -271,14 +296,28 @@ The following settings are available under `markdownExtraJS.playwright`:
 | timezoneId     | null    |
 | useProxy       | false   |
 
+The following settings are available under `markdownExtraJS.puppeteer`:
+
+| name           | default |
+| -------------- | ------- |
+| waitTimeout    | 30000   |
+| executablePath | null    |
+| devtools       | false   |
+| headless       | true    |
+| timeout        | 30000   |
+| locale         | null    |
+| timezoneId     | null    |
+| useProxy       | false   |
+
 ### Note: Proxy
 
-If `useProxy` is set to `true`, proxy settings will be retrieved from environment variables.
+If `useProxy` is set to `true`, proxy settings will be retrieved from environment variables.  
+Although the exact reason has not been investigated, it appears that the feature might work without configuring a proxy. Adjust settings as needed.
 
 | name                      | value                                                                                                                            |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| HTTP_PROXY (or http_proxy) | `http://host:port`. If authentication is required: `http://username:password@host:port`                                           |
-| NO_PROXY (or no_proxy)    | Set this for the bypass property. [Reference](https://playwright.dev/docs/next/api/class-apirequest#api-request-new-context-option-proxy) |
+| HTTP_PROXY (or http_proxy) | `http://host:port`. <br>If authentication is required: `http://username:password@host:port`                                      |
+| NO_PROXY (or no_proxy)    | <ul><li>Playwright: Set this for the bypass property. [Reference](https://playwright.dev/docs/next/api/class-apirequest#api-request-new-context-option-proxy)</li><li>Puppeteer: Unfortunately, there is no official method to set this currently. [Using Proxies with Puppeteer](https://puppeteer.guide/posts/proxies/)</li></ul> |
 
 ## Page Breaks
 

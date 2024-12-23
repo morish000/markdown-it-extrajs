@@ -42,6 +42,7 @@ const marpOptions = (): PDFOptionsPlaywright => ({
 });
 
 const regularOptions = (title: string): PDFOptionsPlaywright => ({
+  format: "A4",
   displayHeaderFooter: true,
   headerTemplate: `
   <div style="font-size: 12px; width: 100%; text-align: center; margin-top: 10px;">
@@ -60,9 +61,7 @@ export const exportPDFPlaywright = async (
   exportPath: string,
   frontMatter: {
     estrajs: ExtraJSFrontMatter;
-    playwright: {
-      pdfOptions: PDFOptionsPlaywright;
-    };
+    pdfOptions: PDFOptionsPlaywright;
     [key: string]: any;
   },
   browserName: string,
@@ -139,7 +138,7 @@ export const exportPDFPlaywright = async (
     await page.pdf({
       ...commonOptions(),
       ...(frontMatter.marp ? marpOptions() : regularOptions(frontMatter.title ?? filename)),
-      ...(frontMatter.playwright?.pdfOptions ? frontMatter.playwright.pdfOptions : {}),
+      ...(frontMatter.pdfOptions ?? {}),
       path: exportPath
     });
 

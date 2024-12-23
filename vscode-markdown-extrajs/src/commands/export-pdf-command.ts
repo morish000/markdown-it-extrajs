@@ -28,16 +28,11 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
 
     const grayMatterFile = grayMatter(document.getText());
     const frontMatter = ({
-      ...{ estrajs: {}, playwright: {}, puppeteer: {} },
+      ...{ estrajs: {}, pdfOptions: {} },
       ...(grayMatterFile.data ?? {})
     }) as {
       estrajs: ExtraJSFrontMatter;
-      playwright: {
-        pdfOptions: any;
-      };
-      puppeteer: {
-        pdfOptions: any;
-      };
+      pdfOptions: any;
       [key: string]: any;
     };
 
@@ -64,15 +59,14 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
         document.getText(),
         frontMatter);
 
+    const browserAutomationTool = config.get<string>('export.browserAutomation', "playwright");
     await vscode.window.withProgress({
       location: vscode.ProgressLocation.Notification,
-      title: "Exporting PDF",
+      title: `Exporting PDF (using: ${browserAutomationTool}).`,
       cancellable: false
     }, async (progress) => {
       try {
-        const browserAutomationTool = config.get<string>('export.browserAutomation', "playwright");
         if (browserAutomationTool === "playwright") {
-          vscode.window.showInformationMessage("Exporting PDF using Playwright.");
           await exportPDFPlaywright(
             path.basename(filePath, '.md') ?? "",
             htmlContent,
@@ -97,7 +91,6 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
             globalOptions.globalStorageUri
           );
         } else if (browserAutomationTool === "puppeteer") {
-          vscode.window.showInformationMessage("Exporting PDF using Puppeteer.");
           await exportPDFPuppeteer(
             path.basename(filePath, '.md') ?? "",
             htmlContent,
