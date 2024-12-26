@@ -1,5 +1,7 @@
 // @deno-types="@types/markdown-it"
 import type MarkdownIt from "markdown-it";
+// @deno-types="@types/markdown-it/lib/rules_block/state_block.mjs"
+import type StateBlock from "markdown-it/lib/rules_block/state_block.mjs";
 
 const blockTagPlugin = (
   md: MarkdownIt,
@@ -17,7 +19,12 @@ const blockTagPlugin = (
   const endMarkerStr = options.endMarker || markerStr;
   const endMarkerChar = endMarkerStr.charCodeAt(0);
 
-  const blockTagRule = (state, startLine: number, endLine: number, silent) => {
+  const blockTagRule = (
+    state: StateBlock,
+    startLine: number,
+    endLine: number,
+    silent: boolean,
+  ) => {
     let start = state.bMarks[startLine];
     let max = state.eMarks[startLine];
 

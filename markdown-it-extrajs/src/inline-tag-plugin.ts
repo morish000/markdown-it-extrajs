@@ -1,5 +1,8 @@
 // @deno-types="@types/markdown-it"
 import type MarkdownIt from "markdown-it";
+// @deno-types="@types/markdown-it/lib/rules_inline/state_inline.mjs"
+import type StateInline from "markdown-it/lib/rules_inline/state_inline.mjs";
+import type { Delimiter } from "markdown-it/lib/rules_inline/state_inline.mjs";
 
 const inlineTagPlugin = (
   md: MarkdownIt,
@@ -17,7 +20,7 @@ const inlineTagPlugin = (
   const endMarkerStr = options.endMarker || markerStr;
   const endMarkerChar = endMarkerStr.charCodeAt(0);
 
-  const tokenize = (state, silent) => {
+  const tokenize = (state: StateInline, silent: boolean) => {
     const start = state.pos;
     const marker = state.src.charCodeAt(start);
 
@@ -61,7 +64,7 @@ const inlineTagPlugin = (
     return true;
   };
 
-  const postProcess = (state) => {
+  const postProcess = (state: StateInline) => {
     const delimiters = state.delimiters;
     const loneMarkers: number[] = [];
     const stack: typeof delimiters = [];
@@ -73,7 +76,7 @@ const inlineTagPlugin = (
           stack.push(delim);
         } else if (delim.marker === endMarkerChar) {
           if (stack.length > 0) {
-            const startDelim = stack.pop();
+            const startDelim = stack.pop() as Delimiter;
             startDelim.open = true;
             startDelim.end = i;
             delim.end = -1;
