@@ -1,5 +1,6 @@
 {
   "imports": {
+    "markdown-it-attrs": "npm:markdown-it-attrs@4.3.x",
     "ts-dedent": "npm:ts-dedent@2.2.x",
     "nanoid": "npm:nanoid@5.0.x",
     "gray-matter": "npm:gray-matter@4.0.x",

@@ -14,6 +14,7 @@
     "npm:@unocss/preset-wind@0.64": "0.64.1",
     "npm:@unocss/runtime@0.64": "0.64.1",
     "npm:gray-matter@4.0": "4.0.3",
+    "npm:markdown-it-attrs@4.3": "4.3.1_markdown-it@14.1.0",
     "npm:markdown-it-front-matter@0.2": "0.2.4",
     "npm:markdown-it@14.1": "14.1.0",
     "npm:mermaid@11.4": "11.4.1_cytoscape@3.30.4",
@@ -777,6 +778,12 @@
       "integrity": "sha512-zXeaYRgZ6ldS1RJJUrMrYgNJ4fdwnyI6tVqoiIhyCyv5IVTK9BU8Ic2l253GGETQHxI4HNUwhJ3fjDhKqEoaAw==",
       "dependencies": [
         "@jridgewell/sourcemap-codec"
+      ]
+    },
+    "markdown-it-attrs@4.3.1_markdown-it@14.1.0": {
+      "integrity": "sha512-/ko6cba+H6gdZ0DOw7BbNMZtfuJTRp9g/IrGIuz8lYc/EfnmWRpaR3CFPnNbVz0LDvF8Gf1hFGPqrQqq7De0rg==",
+      "dependencies": [
+        "markdown-it"
       ]
     },
     "markdown-it-front-matter@0.2.4": {

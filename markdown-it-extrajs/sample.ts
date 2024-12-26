@@ -1,15 +1,46 @@
 // @deno-types="@types/markdown-it"
 import MarkdownIt from "markdown-it";
 import extraJsPlugin from "./src/index.ts";
+import inlineTagPlugin from "./src/inline-tag-plugin.ts";
+import blockTagPlugin from "./src/block-tag-plugin.ts";
+import voidTagPlugin from "./src/void-tag-plugin.ts";
+import markdownItAttrs from "markdown-it-attrs";
 
 const md = new MarkdownIt();
-md.use(extraJsPlugin, {
-  discardFrontMatter: true,
-  useMermaid: true,
-  useFontAwesome: true,
-  useUnoCSS: true,
-  outputScriptTag: true,
-});
+md
+  .use(blockTagPlugin, "div", { tag: "div", marker: ":", markerCount: 3 })
+  .use(blockTagPlugin, "pre", {
+    tag: "pre",
+    marker: "[",
+    endMarker: "]",
+    markerCount: 3,
+  })
+  .use(inlineTagPlugin, "span", {
+    tag: "span",
+    marker: "=",
+    endMarker: "=",
+    markerCount: 2,
+  })
+  .use(voidTagPlugin, "br", {
+    tag: "br",
+    marker: "$",
+    isVoidElement: true,
+    markerCount: 2,
+  })
+  .use(voidTagPlugin, "i", {
+    tag: "i",
+    marker: "@",
+    isVoidElement: false,
+    markerCount: 2,
+  })
+  .use(markdownItAttrs)
+  .use(extraJsPlugin, {
+    discardFrontMatter: true,
+    useMermaid: true,
+    useFontAwesome: true,
+    useUnoCSS: true,
+    outputScriptTag: false,
+  });
 
 const markdownContent = `---
 extrajs:
@@ -78,7 +109,66 @@ extrajs:
     }
 ---
 
-# Title
+# Title {#title}
+
+::: sample1 {#sample1 .class1a .class1b}
+
+**div block test.**
+
+::: sample2 {#sample2 .class2a .class2b}
+
+nest
+
+:::
+
+:::
+
+::: sample3 {#sample3 .class3a .class3b}
+
+**div block test.**
+
+::: sample4 {#sample4 .class4a .class4b}
+
+nest1
+
+::: sample5 {#sample5 .class5a .class5b}
+
+next2
+
+:::
+
+next3
+
+:::
+
+next4
+
+:::
+
+[[[ mermaid {.mermaid .xyz}
+
+pre block test.
+
+]]]
+
+::: preTest
+
+[[[ mermaid2 {.mermaid .abc}
+
+pre block test2.
+
+]]]
+
+:::
+
+inline ====text1=={.red .bold}== test1.
+======text2======{.brue .itaric} test2.
+
+![alt text](image.png){.test1 .test2}
+
+test$$!$$!test
+
+test@@!{.icon1 .icon2}@@!{.icon3 .icon4}test
 `;
 
 const result = md.render(markdownContent);

@@ -15,7 +15,10 @@
   "exports": {
     ".": "./src/index.ts",
     "./scripts": "./src/scripts.ts",
-    "./create-tags": "./src/create-tags.ts"
+    "./create-tags": "./src/create-tags.ts",
+    "./block-tag-plugin": "./src/block-tag-plugin.ts",
+    "./inline-tag-plugin": "./src/inline-tag-plugin.ts",
+    "./void-tag-plugin": "./src/void-tag-plugin.ts"
   },
   "publish": {
     "include": [
