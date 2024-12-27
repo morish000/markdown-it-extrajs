@@ -1,10 +1,9 @@
-// @deno-types="@types/markdown-it"
 import MarkdownIt from "markdown-it";
+import markdownItAttrs from "markdown-it-attrs";
 import extraJsPlugin from "./src/index.ts";
 import inlineTagPlugin from "./src/inline-tag-plugin.ts";
 import blockTagPlugin from "./src/block-tag-plugin.ts";
 import voidTagPlugin from "./src/void-tag-plugin.ts";
-import markdownItAttrs from "markdown-it-attrs";
 
 const md = new MarkdownIt();
 md

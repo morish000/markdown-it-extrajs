@@ -1,12 +1,12 @@
+import type { IconifyJSON } from "@iconify/types";
+import { dedent } from "ts-dedent";
+import { nanoid } from "nanoid";
 import type {
   ExtraJSFrontMatter,
   ExtraJSOptions,
   InitFunctionType,
-} from "./types.ts";
-import type { IconifyJSON } from "@iconify/types";
-import { createIconLoader, getIcons } from "./iconify-json.ts";
-import { dedent } from "ts-dedent";
-import { nanoid } from "nanoid";
+} from "./types.js";
+import { createIconLoader, getIcons } from "./iconify-json.js";
 
 export const initMermaid: InitFunctionType = async (
   options: ExtraJSOptions = {},

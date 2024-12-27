@@ -1,6 +1,4 @@
-// @deno-types="@types/markdown-it"
 import type MarkdownIt from "markdown-it";
-// @deno-types="@types/markdown-it/lib/rules_block/state_block.mjs"
 import type StateBlock from "markdown-it/lib/rules_block/state_block.mjs";
 
 const blockTagPlugin = (
@@ -77,7 +75,7 @@ const blockTagPlugin = (
             stack.push({ type: "close", line: nextLine });
             if (
               stack.filter((s) => s.type === "open").length ===
-                stack.filter((s) => s.type === "close").length
+              stack.filter((s) => s.type === "close").length
             ) {
               autoClosed = true;
               break;
@@ -100,7 +98,7 @@ const blockTagPlugin = (
           stack.push({ type: "close", line: nextLine });
           if (
             stack.filter((s) => s.type === "open").length ===
-              stack.filter((s) => s.type === "close").length
+            stack.filter((s) => s.type === "close").length
           ) {
             autoClosed = true;
             break;

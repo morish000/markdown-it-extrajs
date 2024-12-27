@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/init-all.ts"],
+  "sourcesContent": ["import type {\n  ExtraJSFrontMatter,\n  ExtraJSOptions,\n  InitFunctionType,\n} from \"./types.js\";\nimport { initMermaid } from \"./init-mermaid.js\";\nimport { initFontAwesome } from \"./init-font-awesome.js\";\nimport { initUnoCSS } from \"./init-uno-css.js\";\n\nexport const initAll: InitFunctionType = async (\n  options: ExtraJSOptions = {},\n  frontMatter: ExtraJSFrontMatter = {},\n) => {\n  const tasks: Promise<void>[] = [];\n\n  options.useMermaid && tasks.push(initMermaid(options, frontMatter));\n  options.useFontAwesome && tasks.push(initFontAwesome(options, frontMatter));\n  options.useUnoCSS && tasks.push(initUnoCSS(options, frontMatter));\n\n  tasks.length > 0 && await Promise.all(tasks);\n};\n"],
+  "mappings": "AAKA,SAAS,mBAAmB;AAC5B,SAAS,uBAAuB;AAChC,SAAS,kBAAkB;AAEpB,MAAM,UAA4B,OACvC,UAA0B,CAAC,GAC3B,cAAkC,CAAC,MAChC;AACH,QAAM,QAAyB,CAAC;AAEhC,UAAQ,cAAc,MAAM,KAAK,YAAY,SAAS,WAAW,CAAC;AAClE,UAAQ,kBAAkB,MAAM,KAAK,gBAAgB,SAAS,WAAW,CAAC;AAC1E,UAAQ,aAAa,MAAM,KAAK,WAAW,SAAS,WAAW,CAAC;AAEhE,QAAM,SAAS,KAAK,MAAM,QAAQ,IAAI,KAAK;AAC7C;",
+  "names": []
+}

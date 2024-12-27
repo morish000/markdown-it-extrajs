@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/iconify-json.ts"],
+  "sourcesContent": ["import { defaultOptions } from \"./types.js\";\n\nexport const getIcons = async (\n  unoCSSUrl: string = defaultOptions.unoCSSUrl,\n) =>\n  await import(`${unoCSSUrl}/preset-icons/core`).then((i) =>\n    i.icons as string[]\n  );\n\nexport const createIconLoader =\n  (iconifyJsonCDN: string = defaultOptions.iconifyJsonCDN) =>\n    (key: string) =>\n      () => import(`${iconifyJsonCDN}/@iconify-json/${key}`).then((i) => i.icons);\n"],
+  "mappings": "AAAA,SAAS,sBAAsB;AAExB,MAAM,WAAW,OACtB,YAAoB,eAAe,cAEnC,MAAM,OAAO,GAAG,SAAS,sBAAsB;AAAA,EAAK,CAAC,MACnD,EAAE;AACJ;AAEK,MAAM,mBACX,CAAC,iBAAyB,eAAe,mBACvC,CAAC,QACC,MAAM,OAAO,GAAG,cAAc,kBAAkB,GAAG,IAAI,KAAK,CAAC,MAAM,EAAE,KAAK;",
+  "names": []
+}

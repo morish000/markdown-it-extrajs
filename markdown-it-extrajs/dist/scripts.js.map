@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/scripts.ts"],
+  "sourcesContent": ["export * from \"./init-font-awesome.js\";\nexport * from \"./init-mermaid.js\";\nexport * from \"./init-uno-css.js\";\nexport * from \"./init-all.js\";\n"],
+  "mappings": "AAAA,cAAc;AACd,cAAc;AACd,cAAc;AACd,cAAc;",
+  "names": []
+}

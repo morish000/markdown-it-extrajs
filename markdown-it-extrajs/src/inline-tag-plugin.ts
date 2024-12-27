@@ -1,6 +1,4 @@
-// @deno-types="@types/markdown-it"
 import type MarkdownIt from "markdown-it";
-// @deno-types="@types/markdown-it/lib/rules_inline/state_inline.mjs"
 import type StateInline from "markdown-it/lib/rules_inline/state_inline.mjs";
 import type { Delimiter } from "markdown-it/lib/rules_inline/state_inline.mjs";
 

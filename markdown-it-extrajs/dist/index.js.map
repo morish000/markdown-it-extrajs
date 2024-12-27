@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/index.ts"],
+  "sourcesContent": ["import extraJsPlugin from \"./plugin.js\";\nexport default extraJsPlugin;\n\nexport * from \"./types.js\";\nexport * from \"./scripts.js\";\n"],
+  "mappings": "AAAA,OAAO,mBAAmB;AAC1B,IAAO,gBAAQ;AAEf,cAAc;AACd,cAAc;",
+  "names": []
+}

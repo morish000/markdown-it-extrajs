@@ -4,8 +4,8 @@ import type {
   ExtraJSFrontMatter,
   ExtraJSOptions,
   InitFunctionType,
-} from "./types.ts";
-import { createIconLoader, getIcons } from "./iconify-json.ts";
+} from "./types.js";
+import { createIconLoader, getIcons } from "./iconify-json.js";
 
 export const initUnoCSS: InitFunctionType = async (
   options: ExtraJSOptions = {},

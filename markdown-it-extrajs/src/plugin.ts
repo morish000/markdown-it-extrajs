@@ -1,10 +1,9 @@
-// @deno-types="@types/markdown-it"
 import type MarkdownIt from "markdown-it";
 import markdownItFrontMatter from "markdown-it-front-matter";
 import grayMatter from "gray-matter";
-import { createScriptTag, createTemplateTag } from "./create-tags.ts";
-import { defaultOptions } from "./types.ts";
-import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
+import { createScriptTag, createTemplateTag } from "./create-tags.js";
+import { defaultOptions } from "./types.js";
+import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.js";
 
 export function extraJsPlugin(md: MarkdownIt, userOptions: ExtraJSOptions) {
   const { renderer: { render }, parse } = md;

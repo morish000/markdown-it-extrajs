@@ -1,5 +1,5 @@
-import extraJsPlugin from "./plugin.ts";
+import extraJsPlugin from "./plugin.js";
 export default extraJsPlugin;
 
-export * from "./types.ts";
-export * from "./scripts.ts";
+export * from "./types.js";
+export * from "./scripts.js";

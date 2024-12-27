@@ -1,5 +1,5 @@
-import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.ts";
-import SRC_BASE64 from "./base64js.ts";
+import type { ExtraJSFrontMatter, ExtraJSOptions } from "./types.js";
+import SRC_BASE64 from "./base64js.js";
 
 export const escapeScriptClosingTags = (str: string): string => {
   return str.replace(/<\/script>/gi, function (match) {
@@ -31,7 +31,7 @@ export const createTemplateTag = (
   frontMatter: ExtraJSFrontMatter,
 ): string =>
   (options.useMermaid || options.useFontAwesome ||
-      options.useUnoCSS)
+    options.useUnoCSS)
     ? `
 <template
   id="extrajs"
@@ -45,7 +45,7 @@ export const createScriptTag = (
   frontMatter: ExtraJSFrontMatter,
 ): string =>
   (options.useMermaid || options.useFontAwesome ||
-      options.useUnoCSS) && options.outputScriptTag
+    options.useUnoCSS) && options.outputScriptTag
     ? `
 <script type="module">
   const { initAll } = await import("data:text/javascript;base64,${SRC_BASE64.INIT_ALL}");

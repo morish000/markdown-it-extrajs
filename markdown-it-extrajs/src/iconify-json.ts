@@ -1,4 +1,4 @@
-import { defaultOptions } from "./types.ts";
+import { defaultOptions } from "./types.js";
 
 export const getIcons = async (
   unoCSSUrl: string = defaultOptions.unoCSSUrl,
@@ -9,5 +9,5 @@ export const getIcons = async (
 
 export const createIconLoader =
   (iconifyJsonCDN: string = defaultOptions.iconifyJsonCDN) =>
-  (key: string) =>
-  () => import(`${iconifyJsonCDN}/@iconify-json/${key}`).then((i) => i.icons);
+    (key: string) =>
+      () => import(`${iconifyJsonCDN}/@iconify-json/${key}`).then((i) => i.icons);

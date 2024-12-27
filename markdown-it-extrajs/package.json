@@ -1,1 +1,88 @@
-{}
+{
+  "name": "@morish000/markdown-it-extrajs",
+  "version": "0.0.1",
+  "description": "A Markdown-it plugin for generating script tags to execute UnoCSS, Mermaid.js, and FontAwesome.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./scripts": {
+      "types": "./types/scripts.d.ts",
+      "default": "./dist/scripts.js"
+    },
+    "./create-tags": {
+      "types": "./types/create-tags.d.ts",
+      "default": "./dist/create-tags.js"
+    },
+    "./block-tag-plugin": {
+      "types": "./types/block-tag-plugin.d.ts",
+      "default": "./dist/block-tag-plugin.js"
+    },
+    "./inline-tag-plugin": {
+      "types": "./types/inline-tag-plugin.d.ts",
+      "default": "./dist/inline-tag-plugin.js"
+    },
+    "./void-tag-plugin": {
+      "types": "./types/void-tag-plugin.d.ts",
+      "default": "./dist/void-tag-plugin.js"
+    }
+  },
+  "scripts": {
+    "sample": "tsx sample.ts",
+    "esbuild": "tsx esbuild.ts",
+    "type-check": "tsc --noEmit",
+    "type-declaration": "tsc",
+    "build": "npm run type-check && npm run type-declaration && npm run esbuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morish000/markdown-it-extrajs.git"
+  },
+  "keywords": [
+    "markdown-it",
+    "unocss",
+    "mermaid.js",
+    "fontawesome"
+  ],
+  "author": "morish000",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/morish000/markdown-it-extrajs/issues"
+  },
+  "homepage": "https://github.com/morish000/markdown-it-extrajs#readme",
+  "files": [
+    "dist",
+    "types",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.10.2",
+    "esbuild": "^0.24.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@iconify/types": "^2.0.0",
+    "@unocss/core": "^0.65.3",
+    "@unocss/preset-attributify": "^0.65.3",
+    "@unocss/preset-icons": "^0.65.3",
+    "@unocss/preset-mini": "^0.65.3",
+    "@unocss/preset-tagify": "^0.65.3",
+    "@unocss/preset-typography": "^0.65.3",
+    "@unocss/preset-web-fonts": "^0.65.3",
+    "@unocss/preset-wind": "^0.65.3",
+    "@unocss/runtime": "^0.65.3",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0",
+    "markdown-it-attrs": "^4.3.1",
+    "markdown-it-front-matter": "^0.2.4",
+    "mermaid": "^11.4.1",
+    "nanoid": "^5.0.9",
+    "ts-dedent": "^2.2.0"
+  }
+}

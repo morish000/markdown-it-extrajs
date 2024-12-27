@@ -1,13 +1,13 @@
 import type {
-  ExtraJSFrontMatter,
-  ExtraJSOptions,
-  InitFunctionType,
-} from "./types.ts";
-import type {
   Config,
   IconDefinition,
   IconPack,
 } from "@fortawesome/fontawesome-svg-core";
+import type {
+  ExtraJSFrontMatter,
+  ExtraJSOptions,
+  InitFunctionType,
+} from "./types.js";
 
 export const initFontAwesome: InitFunctionType = async (
   options: ExtraJSOptions = {},

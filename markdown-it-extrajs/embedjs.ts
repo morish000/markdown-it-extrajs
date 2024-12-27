@@ -1,5 +1,7 @@
+import { readFileSync, writeFileSync } from "fs";
+
 function getFileContent(filePath: string): string {
-  const content = Deno.readFileSync(filePath);
+  const content = readFileSync(filePath);
   return new TextDecoder("utf-8").decode(content);
 }
 
@@ -23,5 +25,5 @@ export default function replacePlaceholdersInFile(
     );
   }
 
-  Deno.writeTextFileSync(outputFilePath, templateContent);
+  writeFileSync(outputFilePath, templateContent);
 }

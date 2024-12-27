@@ -2,10 +2,10 @@ import type {
   ExtraJSFrontMatter,
   ExtraJSOptions,
   InitFunctionType,
-} from "./types.ts";
-import { initMermaid } from "./init-mermaid.ts";
-import { initFontAwesome } from "./init-font-awesome.ts";
-import { initUnoCSS } from "./init-uno-css.ts";
+} from "./types.js";
+import { initMermaid } from "./init-mermaid.js";
+import { initFontAwesome } from "./init-font-awesome.js";
+import { initUnoCSS } from "./init-uno-css.js";
 
 export const initAll: InitFunctionType = async (
   options: ExtraJSOptions = {},
