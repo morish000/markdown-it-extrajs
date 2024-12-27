@@ -1,5 +1,8 @@
 {
   "imports": {
+    "markdown-it-attrs": "npm:markdown-it-attrs@4.3.x",
+    "markdown-it": "npm:markdown-it@14.1.x",
+    "markdown-it-front-matter": "npm:markdown-it-front-matter@0.2.x",
     "ts-dedent": "npm:ts-dedent@2.2.x",
     "nanoid": "npm:nanoid@5.0.x",
     "gray-matter": "npm:gray-matter@4.0.x",
@@ -15,6 +18,8 @@
     "@unocss/preset-web-fonts": "npm:@unocss/preset-web-fonts@0.64.x",
     "@unocss/preset-tagify": "npm:@unocss/preset-tagify@0.64.x",
     "@iconify/types": "npm:@iconify/types@2.0.x",
+    "@types/markdown-it": "npm:@types/markdown-it@14.1.x",
+    "markdown-it-types": "npm:@types/markdown-it@14.1.x",
     "esbuild": "https://deno.land/x/esbuild@v0.24.0/mod.js"
   }
 }

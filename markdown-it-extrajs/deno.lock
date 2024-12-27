@@ -3,7 +3,7 @@
   "specifiers": {
     "npm:@fortawesome/fontawesome-svg-core@6.7": "6.7.2",
     "npm:@iconify/types@2.0": "2.0.0",
-    "npm:@types/markdown-it@^14.1.0": "14.1.2",
+    "npm:@types/markdown-it@14.1": "14.1.2",
     "npm:@unocss/core@0.64": "0.64.1",
     "npm:@unocss/preset-attributify@0.64": "0.64.1",
     "npm:@unocss/preset-icons@0.64": "0.64.1",
@@ -14,9 +14,9 @@
     "npm:@unocss/preset-wind@0.64": "0.64.1",
     "npm:@unocss/runtime@0.64": "0.64.1",
     "npm:gray-matter@4.0": "4.0.3",
-    "npm:markdown-it-attrs@^4.3.0": "4.3.1_markdown-it@14.1.0",
+    "npm:markdown-it-attrs@4.3": "4.3.1_markdown-it@14.1.0",
     "npm:markdown-it-front-matter@0.2": "0.2.4",
-    "npm:markdown-it@^14.1.0": "14.1.0",
+    "npm:markdown-it@14.1": "14.1.0",
     "npm:mermaid@11.4": "11.4.1_cytoscape@3.30.4",
     "npm:nanoid@5.0": "5.0.9",
     "npm:ts-dedent@2.2": "2.2.0"
@@ -967,15 +967,5 @@
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate.js": "b9f9ad9457d3f12f28b1fb35c555f57443427f74decb403113d67364e4f2caf4",
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate_bg.wasm.js": "d581956245407a2115a3d7e8d85a9641c032940a8e810acbd59ca86afd34d44d",
     "https://deno.land/x/esbuild@v0.24.0/mod.js": "15b51f08198c373555700a695b6c6630a86f2c254938e81be7711eb6d4edc74e"
-  },
-  "workspace": {
-    "packageJson": {
-      "dependencies": [
-        "npm:@types/markdown-it@^14.1.0",
-        "npm:markdown-it-attrs@^4.3.0",
-        "npm:markdown-it-front-matter@0.2",
-        "npm:markdown-it@^14.1.0"
-      ]
-    }
   }
 }
