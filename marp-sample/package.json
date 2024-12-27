@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "html": "marp ./sample.md --engine ./marp.engine.mjs --html -o ./dist/sample.html",
+    "html-nohtml": "marp ./sample-nohtml.md --engine ./marp.engine.mjs --html -o ./dist/sample-nohtml.html",
     "pdf": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pdf -o ./dist/sample.pdf",
     "pptx": "marp ./sample.md --engine ./marp.engine.mjs --html --browser-timeout=12000 --pptx -o ./dist/sample.pptx",
     "puppeteer": "node ./puppeteer.mjs",
     "playwright": "node ./playwright.mjs",
-    "marp-core": "node ./marp-core.mjs"
+    "marp-core": "node ./marp-core.mjs",
+    "marp-core-nohtml": "node ./marp-core-nohtml.mjs"
   },
   "type": "module",
   "keywords": [],
@@ -16,12 +18,11 @@
   "license": "MIT",
   "description": "Marp Sample",
   "devDependencies": {
-    "@marp-team/marp-cli": "^4.0.3",
-    "@morish000/markdown-it-extrajs": "npm:@jsr/morish000__markdown-it-extrajs@0.0.22",
+    "@marp-team/marp-cli": "^4.0.4",
+    "@marp-team/marp-core": "^4.0.1",
+    "@morish000/markdown-it-extrajs": "../markdown-it-extrajs",
+    "markdown-it-attrs": "^4.3.1",
     "playwright": "^1.49.1",
-    "puppeteer": "^23.10.4",
-    "@marp-team/marp-core": "^4.0.0"
-  },
-  "dependencies": {
+    "puppeteer": "^23.11.1"
   }
 }
