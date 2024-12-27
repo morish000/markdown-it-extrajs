@@ -1,7 +1,7 @@
 // @deno-types="@types/markdown-it"
 import type MarkdownIt from "markdown-it";
-// "@types/markdown-it/lib/rules_inline/state_inline.mjs"
-// import type StateInline from "markdown-it/lib/rules_inline/state_inline.mjs";
+// @deno-types="@types/markdown-it/lib/rules_inline/state_inline.mjs"
+import type StateInline from "markdown-it/lib/rules_inline/state_inline.mjs";
 
 const voidTagPlugin = (
   md: MarkdownIt,
@@ -18,8 +18,7 @@ const voidTagPlugin = (
   const markerCount = options.markerCount;
   const isVoidElement = options.isVoidElement;
 
-  // deno-lint-ignore no-explicit-any
-  const voidTagRule = (state: any, /* StateInline */ silent: boolean) => {
+  const voidTagRule = (state: StateInline, silent: boolean) => {
     const max = state.posMax;
     const start = state.pos;
 

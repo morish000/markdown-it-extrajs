@@ -1,7 +1,7 @@
 // @deno-types="@types/markdown-it"
 import type MarkdownIt from "markdown-it";
-// "@types/markdown-it/lib/rules_block/state_block.mjs"
-// import type StateBlock from "markdown-it/lib/rules_block/state_block.mjs";
+// @deno-types="@types/markdown-it/lib/rules_block/state_block.mjs"
+import type StateBlock from "markdown-it/lib/rules_block/state_block.mjs";
 
 const blockTagPlugin = (
   md: MarkdownIt,
@@ -20,8 +20,7 @@ const blockTagPlugin = (
   const endMarkerChar = endMarkerStr.charCodeAt(0);
 
   const blockTagRule = (
-    // deno-lint-ignore no-explicit-any
-    state: any, /* StateBlock */
+    state: StateBlock,
     startLine: number,
     endLine: number,
     silent: boolean,
