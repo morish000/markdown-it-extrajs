@@ -1,6 +1,6 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Markdown-it plugin for generating script tags to execute UnoCSS, Mermaid.js, and FontAwesome.",
   "type": "module",
   "exports": {
@@ -34,7 +34,8 @@
     "esbuild": "tsx esbuild.ts",
     "type-check": "tsc --noEmit",
     "type-declaration": "tsc",
-    "build": "npm run type-check && npm run type-declaration && npm run esbuild"
+    "build": "npm run type-check && npm run type-declaration && npm run esbuild",
+    "publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",

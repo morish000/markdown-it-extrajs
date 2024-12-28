@@ -39,11 +39,11 @@ md
   })
   .use(markdownItAttrs);
 
-console.log(md.render(`::: sample1 {#sample1 .class1-a .class1-b}
+console.log(md.render(`::: test-div {#sample1 .class1-a .class1-b}
 example.
 :::`));
 
-console.log(md.render(`[[[ sample2 {#sample2 .class2-a .class2-b}
+console.log(md.render(`[[[ test-pre {#sample2 .class2-a .class2-b}
 example.
 ]]]`));
 ```
@@ -51,11 +51,11 @@ example.
 output:
 
 ```html
-<div name="sample1" id="sample1" class="class1-a class1-b">
-  <p>example.</p>
+<div data-block-tag-name="test-div" id="sample1" class="class1-a class1-b">
+<p>example.</p>
 </div>
 
-<pre name="sample2" id="sample2" class="class2-a class2-b">
+<pre data-block-tag-name="test-pre" id="sample2" class="class2-a class2-b">
 example.
 </pre>
 ```
@@ -83,7 +83,7 @@ console.log(md.render("This is a ==test=={.class1-a .class1-b}."));
 output:
 
 ```html
-<p>This is a <span class="class1-a class1-b">test</span>.</p>
+<p>This is a <span data-inline-tag-name="test-span" class="class1-a class1-b">test</span>.</p>
 ```
 
 ## void-tag-plugin
@@ -117,9 +117,9 @@ console.log(md.render("Icon: @@!{.icon1 .icon2} test."));
 output:
 
 ```html
-<p>123<br>456</p>
+<p>123<br data-void-tag-name="test-br">456</p>
 
-<p>Icon: <i class="icon1 icon2"></i> test.</p>
+<p>Icon: <i data-void-tag-name="test-i" class="icon1 icon2"></i> test.</p>
 ```
 
 # License

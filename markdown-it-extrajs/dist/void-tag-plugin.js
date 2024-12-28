@@ -27,6 +27,7 @@ const voidTagPlugin = (md, name, options) => {
     );
     tokenOpen.markup = markerStr;
     tokenOpen.block = false;
+    tokenOpen.attrJoin("data-void-tag-name", name);
     if (!isVoidElement) {
       const tokenClose = state.push(`void_tag_${name}_close`, options.tag, -1);
       tokenClose.markup = markerStr;

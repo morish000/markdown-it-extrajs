@@ -73,6 +73,7 @@ const inlineTagPlugin = (md, name, options) => {
       tokenOpen.tag = options.tag;
       tokenOpen.nesting = 1;
       tokenOpen.content = "";
+      tokenOpen.attrJoin("data-inline-tag-name", name);
       const tokenClose = state.tokens[endDelim.token];
       tokenClose.type = `inline_tag_${name}_close`;
       tokenClose.tag = options.tag;

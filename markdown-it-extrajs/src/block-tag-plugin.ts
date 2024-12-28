@@ -11,11 +11,9 @@ const blockTagPlugin = (
     endMarker?: string;
   },
 ): void => {
-  const markerStr = options.marker;
-  const markerChar = markerStr.charCodeAt(0);
+  const markerStr = options.marker.charAt(0);
   const markerCount = options.markerCount;
-  const endMarkerStr = options.endMarker || markerStr;
-  const endMarkerChar = endMarkerStr.charCodeAt(0);
+  const endMarkerStr = options.endMarker ? options.endMarker.charAt(0) : markerStr;
 
   const blockTagRule = (
     state: StateBlock,
@@ -23,10 +21,10 @@ const blockTagPlugin = (
     endLine: number,
     silent: boolean,
   ) => {
-    let start = state.bMarks[startLine];
+    let start = state.bMarks[startLine] + state.tShift[startLine];
     let max = state.eMarks[startLine];
 
-    if (markerChar !== state.src.charCodeAt(start)) return false;
+    if (markerStr !== state.src[start]) return false;
 
     let pos: number;
     for (pos = start + 1; pos <= max; pos++) {
@@ -38,11 +36,11 @@ const blockTagPlugin = (
     const count = pos - start;
     if (count < markerCount) return false;
 
-    const markup = state.src.slice(start, pos);
     const params = state.src.slice(pos, max).trim();
 
     const nameAttr = params.split(" ")[0];
-    if (!nameAttr) return false;
+    if (!nameAttr || name !== nameAttr) return false;
+    const markup = `${state.src.slice(start, pos)} ${nameAttr}`;
 
     if (silent) return true;
 
@@ -52,12 +50,13 @@ const blockTagPlugin = (
     }];
     let autoClosed = false;
 
-    let nextLine = startLine;
-    for (nextLine = startLine + 1; nextLine < endLine; nextLine++) {
-      start = state.bMarks[nextLine];
+    let nextLine: number;
+    let markupEnd = "<!-- auto-closed -->";
+    for (nextLine = startLine + 1; nextLine <= endLine; nextLine++) {
+      start = state.bMarks[nextLine] + state.tShift[nextLine];
       max = state.eMarks[nextLine];
 
-      if (markerChar === state.src.charCodeAt(start)) {
+      if (markerStr === state.src[start]) {
         for (pos = start + 1; pos <= max; pos++) {
           if (markerStr !== state.src[pos]) break;
         }
@@ -68,7 +67,7 @@ const blockTagPlugin = (
           const newNameAttr = newParams.split(" ")[0];
           if (newNameAttr) {
             stack.push({ type: "open", line: nextLine });
-          } else if (markerChar === endMarkerChar) {
+          } else if (markerStr === endMarkerStr) {
             pos = state.skipSpaces(pos);
             if (pos < max) continue;
 
@@ -77,6 +76,7 @@ const blockTagPlugin = (
               stack.filter((s) => s.type === "open").length ===
               stack.filter((s) => s.type === "close").length
             ) {
+              markupEnd = state.src.slice(start, pos);
               autoClosed = true;
               break;
             }
@@ -85,7 +85,7 @@ const blockTagPlugin = (
         }
       }
 
-      if (endMarkerChar === state.src.charCodeAt(start)) {
+      if (endMarkerStr === state.src[start]) {
         for (pos = start + 1; pos <= max; pos++) {
           if (endMarkerStr !== state.src[pos]) break;
         }
@@ -100,6 +100,7 @@ const blockTagPlugin = (
             stack.filter((s) => s.type === "open").length ===
             stack.filter((s) => s.type === "close").length
           ) {
+            markupEnd = state.src.slice(start, pos);
             autoClosed = true;
             break;
           }
@@ -107,12 +108,15 @@ const blockTagPlugin = (
       }
     }
 
+    const lineMaxOrg = state.lineMax;
+    state.lineMax = nextLine;
+
     const tokenOpen = state.push(`block_tag_${name}_open`, options.tag, 1);
     tokenOpen.markup = markup;
     tokenOpen.block = true;
     tokenOpen.info = params;
-    tokenOpen.map = [startLine, nextLine];
-    tokenOpen.attrJoin("name", nameAttr);
+    tokenOpen.map = [startLine, nextLine - (autoClosed ? 0 : 1)];
+    tokenOpen.attrJoin("data-block-tag-name", nameAttr);
 
     if (options.tag === "pre") {
       const content = state.getLines(
@@ -127,13 +131,12 @@ const blockTagPlugin = (
       state.md.block.tokenize(state, startLine + 1, nextLine);
     }
 
-    if (autoClosed) {
-      const tokenClose = state.push(`block_tag_${name}_close`, options.tag, -1);
-      tokenClose.markup = state.src.slice(start, pos);
-      tokenClose.block = true;
-      tokenClose.map = [startLine, nextLine];
-    }
+    const tokenClose = state.push(`block_tag_${name}_close`, options.tag, -1);
+    tokenClose.markup = markupEnd;
+    tokenClose.block = true;
+    tokenClose.map = [startLine, nextLine - (autoClosed ? 0 : 1)];
 
+    state.lineMax = lineMaxOrg;
     state.line = nextLine + (autoClosed ? 1 : 0);
 
     return true;

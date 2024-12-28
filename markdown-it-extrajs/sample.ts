@@ -7,8 +7,9 @@ import voidTagPlugin from "./src/void-tag-plugin.ts";
 
 const md = new MarkdownIt();
 md
-  .use(blockTagPlugin, "div", { tag: "div", marker: ":", markerCount: 3 })
-  .use(blockTagPlugin, "pre", {
+  .use(blockTagPlugin, "div-1", { tag: "div", marker: ":", markerCount: 3 })
+  .use(blockTagPlugin, "ext-1", { tag: "ext", marker: ":", markerCount: 3 })
+  .use(blockTagPlugin, "pre-1", {
     tag: "pre",
     marker: "[",
     endMarker: "]",
@@ -38,7 +39,7 @@ md
     useMermaid: true,
     useFontAwesome: true,
     useUnoCSS: true,
-    outputScriptTag: false,
+    outputScriptTag: true,
   });
 
 const markdownContent = `---
@@ -110,11 +111,11 @@ extrajs:
 
 # Title {#title}
 
-::: sample1 {#sample1 .class1a .class1b}
+::: div-1 {#sample1 .class1a .class1b}
 
 **div block test.**
 
-::: sample2 {#sample2 .class2a .class2b}
+::: div-1 {#sample2 .class2a .class2b}
 
 nest
 
@@ -122,15 +123,15 @@ nest
 
 :::
 
-::: sample3 {#sample3 .class3a .class3b}
+::: div-1 {#sample3 .class3a .class3b}
 
 **div block test.**
 
-::: sample4 {#sample4 .class4a .class4b}
+::: div-1 {#sample4 .class4a .class4b}
 
 nest1
 
-::: sample5 {#sample5 .class5a .class5b}
+::: div-1 {#sample5 .class5a .class5b}
 
 next2
 
@@ -144,15 +145,15 @@ next4
 
 :::
 
-[[[ mermaid {.mermaid .xyz}
+[[[ pre-1 {.mermaid .xyz}
 
 pre block test.
 
 ]]]
 
-::: preTest
+::: div-1
 
-[[[ mermaid2 {.mermaid .abc}
+[[[ pre-1 {.mermaid .abc}
 
 pre block test2.
 
@@ -160,12 +161,20 @@ pre block test2.
 
 :::
 
+::: div-1
+
 inline ====text1=={.red .bold}== test1.
 ======text2======{.brue .itaric} test2.
 
+::: ext-1
+
 ![alt text](image.png){.test1 .test2}
 
+:::
+
 test$$!$$!test
+
+:::
 
 test@@!{.icon1 .icon2}@@!{.icon3 .icon4}test
 `;
