@@ -82,16 +82,16 @@ extrajs:
 
 # UnoCSS Attributes Mode
 
-::: sample1 { .text-blue-500 }
+::: div { .text-blue-500 }
   ==This text will only be visible in blue color.=={ .p-25px-sample }
 :::
-::: sample2 { .text-red-500 }
+::: div { .text-red-500 }
   ==This text will only be visible in red color.=={ .m-50px-sample }
 :::
-::: sample3 { .text-green-500 }
+::: div { .text-green-500 }
   ==This text will only be visible in geen color.=={ .p-50px-sample .m-50px-sample }
 :::
-::: sample4 { .text-yellow-500 }
+::: div { .text-yellow-500 }
   ==This text will only be visible in yellow color.=={ .p-50m-50px }
 :::
 
@@ -99,26 +99,26 @@ extrajs:
 
 # UnoCSS icons
 
-::: sample5
-::: sample6 { .i-ph-anchor-simple-thin }
+::: div
+::: div { .i-ph-anchor-simple-thin }
 :::
-::: sample7 { .i-mdi-alarm .text-orange-400 }
+::: div { .i-mdi-alarm .text-orange-400 }
 :::
-::: sample8 { .i-logos-vue .text-3xl }
+::: div { .i-logos-vue .text-3xl }
 :::
-::: sample9 { .i-carbon-sun .dark:i-carbon-moon }
+::: div { .i-carbon-sun .dark:i-carbon-moon }
 :::
-::: sample10 { .i-twemoji-grinning-face-with-smiling-eyes .hover:i-twemoji-face-with-tears-of-joy }
+::: div { .i-twemoji-grinning-face-with-smiling-eyes .hover:i-twemoji-face-with-tears-of-joy }
 :::
-::: sample11 { .i-flagpack:jp }
+::: div { .i-flagpack:jp }
 :::
-::: sample12 { .i-flagpack:us }
+::: div { .i-flagpack:us }
 :::
-::: sample13 { .i-tdesign:arrow-right-circle-filled }
+::: div { .i-tdesign:arrow-right-circle-filled }
 :::
 :::
-::: sample13 { style="color: red;" }
-::: sample14 { .i-fa6-solid:user }
+::: div { style="color: red;" }
+::: div { .i-fa6-solid:user }
 :::
 @@!{ .i-fa6-solid:user }@@!{ .i-fa6-regular:address-book }@@!{ .i-fa6-brands:github }
 :::
@@ -127,10 +127,10 @@ extrajs:
 
 # UnoCSS Rules(Attributes Mode)
 
-::: sample15 { .text-box-1 }
+::: div { .text-box-1 }
   This is a sample text with UnoCSS styles applied.
 :::
-::: sample16 { .text-box-2 }
+::: div { .text-box-2 }
   Sample 2.
 :::
 
@@ -138,10 +138,10 @@ extrajs:
 
 # UnoCSS(Tagify Mode: block)
 
-::: sample17 { .text-box-1 }
+::: div { .text-box-1 }
   This is a sample text with UnoCSS styles applied.
 :::
-::: sample18 { .text-box-2 }
+::: div { .text-box-2 }
   Sample 2.
 :::
 
@@ -178,7 +178,7 @@ Please proceed with caution as ==danger!!=={ .danger } zones can cause severe in
 
 # Mermaid(sequence)
 
-[[[ mermaid1 { .mermaid style="background-color: white;" }
+[[[ pre { .mermaid style="background-color: white;" }
 sequenceDiagram
     Alice->>John: Hello John, how are you?
     John-->>Alice: Great!
@@ -189,7 +189,7 @@ sequenceDiagram
 
 # Mermaid(flowchart: use ELK)
 
-[[[ mermaid2 { .mermaid style="background-color: white;" }
+[[[ pre { .mermaid style="background-color: white;" }
 %%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
 flowchart TD
   A[Enter Chart Definition] --> B(Preview)
@@ -205,7 +205,7 @@ flowchart TD
 
 # Mermaid(architecture: use icon)
 
-[[[ mermaid3 { .mermaid style="background-color: white;" }
+[[[ pre { .mermaid style="background-color: white;" }
 architecture-beta
     group api(logos:aws-lambda)[API]
 
@@ -239,9 +239,9 @@ $$
 
 # preflight
 
-::: sample19 { .preflight-g }
+::: div { .preflight-g }
 This text will turn green.
 :::
-::: sample20 { .preflight-y }
+::: div { .preflight-y }
 This text will turn yellow.
 :::
