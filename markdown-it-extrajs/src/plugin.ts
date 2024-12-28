@@ -16,14 +16,12 @@ export function extraJsPlugin(md: MarkdownIt, userOptions: ExtraJSOptions) {
     });
   }
 
-  md.parse = (markdown: string, env) => {
-    frontMatter = grayMatter(markdown).data.extrajs ?? {};
-    return parse.call(md, markdown, env);
+  md.parse = function (...args) {
+    frontMatter = grayMatter(args[0]).data.extrajs ?? {};
+    return parse.apply(md, args);
   };
 
-  md.renderer.render = function (
-    ...args
-  ) {
+  md.renderer.render = function (...args) {
     const options: ExtraJSOptions = {
       ...defaultOptions,
       ...userOptions,

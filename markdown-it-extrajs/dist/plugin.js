@@ -9,9 +9,9 @@ function extraJsPlugin(md, userOptions) {
     md.use(markdownItFrontMatter, (_fm) => {
     });
   }
-  md.parse = (markdown, env) => {
-    frontMatter = grayMatter(markdown).data.extrajs ?? {};
-    return parse.call(md, markdown, env);
+  md.parse = function(...args) {
+    frontMatter = grayMatter(args[0]).data.extrajs ?? {};
+    return parse.apply(md, args);
   };
   md.renderer.render = function(...args) {
     const options = {
