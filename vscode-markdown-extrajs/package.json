@@ -11,7 +11,7 @@
     "url": "https://github.com/morish000/markdown-it-extrajs.git"
   },
   "engines": {
-    "vscode": "^1.95.0"
+    "vscode": "^1.96.0"
   },
   "icon": "morish000_128x128.png",
   "keywords": [
@@ -260,6 +260,6 @@
     "markdown-it": "^14.1.0",
     "playwright-core": "^1.49.1",
     "puppeteer-core": "^23.11.1",
-    "@morish000/markdown-it-extrajs": "../markdown-it-extrajs"
+    "@morish000/markdown-it-extrajs": "^0.0.2"
   }
 }
