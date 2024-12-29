@@ -4,7 +4,7 @@
   "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
   "private": true,
   "type": "module",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "publisher": "morish000",
   "license": "MIT",
   "repository": {
@@ -40,6 +40,11 @@
       },
       {
         "category": "Markdown ExtraJS",
+        "command": "extension.markdown-extrajs.export-html",
+        "title": "Export HTML File"
+      },
+      {
+        "category": "Markdown ExtraJS",
         "command": "extension.markdown-extrajs.export-pdf",
         "title": "Export PDF File(experimental)"
       },
@@ -54,6 +59,10 @@
         {
           "when": "resourceLangId == markdown && resourceExtname == .md",
           "command": "extension.markdown-extrajs.export"
+        },
+        {
+          "when": "resourceLangId == markdown && resourceExtname == .md",
+          "command": "extension.markdown-extrajs.export-html"
         },
         {
           "when": "resourceLangId == markdown && resourceExtname == .md",
