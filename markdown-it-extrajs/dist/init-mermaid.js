@@ -39,6 +39,10 @@ const initMermaid = async (options = {}, frontMatter = {}) => {
           return;
         }
         element.setAttribute("data-processed", "true");
+        const firstChild = element.firstChild;
+        if (firstChild && firstChild.nodeType !== Node.TEXT_NODE && firstChild.nodeType !== Node.CDATA_SECTION_NODE) {
+          return;
+        }
         const graphDefinition = element.innerHTML;
         element.querySelectorAll("svg").forEach((svg) => svg.remove());
         if (graphDefinition) {
