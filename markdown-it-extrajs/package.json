@@ -1,6 +1,6 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Markdown-it plugin for generating script tags to execute UnoCSS, Mermaid.js, and FontAwesome.",
   "type": "module",
   "exports": {
