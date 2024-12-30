@@ -10,7 +10,7 @@ const createGlobalOptions = (context: vscode.ExtensionContext) => {
   const globalStorageUri = context.globalStorageUri;
   const storedOptions: ExtraJSOptions = {};
   return {
-    globalStorageUri: globalStorageUri,
+    globalStorageUri,
     update: () => {
       const config = vscode.workspace.getConfiguration('markdownExtraJS');
 

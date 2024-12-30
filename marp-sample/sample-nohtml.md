@@ -3,12 +3,6 @@ marp: true
 style: |
   pre.mermaid {
     all: unset;
-    max-height: 100% !important;
-    max-width: 100% !important;
-  },
-  .mermaid svg {
-    max-height: 100% !important;
-    max-width: 100% !important;
   }
 extrajs:
   useMermaid: true
@@ -74,6 +68,15 @@ extrajs:
     div.preflight-y {
       color: yellow;
     }
+    pre.mermaid {
+      background-color: white !important;
+      max-height: 100% !important;
+      max-width: 100% !important;
+    }
+    .mermaid svg {
+      max-height: 100% !important;
+      max-width: 100% !important;
+    }
 ---
 
 # Title
@@ -83,16 +86,16 @@ extrajs:
 # UnoCSS Attributes Mode
 
 ::: div { .text-blue-500 }
-  ==This text will only be visible in blue color.=={ .p-25px-sample }
+[[This text will only be visible in blue color.]]{ .p-25px-sample }
 :::
 ::: div { .text-red-500 }
-  ==This text will only be visible in red color.=={ .m-50px-sample }
+  [[This text will only be visible in red color.]]{ .m-50px-sample }
 :::
 ::: div { .text-green-500 }
-  ==This text will only be visible in geen color.=={ .p-50px-sample .m-50px-sample }
+  [[This text will only be visible in geen color.]]{ .p-50px-sample .m-50px-sample }
 :::
 ::: div { .text-yellow-500 }
-  ==This text will only be visible in yellow color.=={ .p-50m-50px }
+  [[This text will only be visible in yellow color.]]{ .p-50m-50px }
 :::
 
 ---
@@ -149,7 +152,7 @@ extrajs:
 
 # UnoCSS(Tagify Mode: inline)
 
-Please proceed with caution as ==danger!!=={ .danger } zones can cause severe injuries. Make sure to follow the instructions carefully to avoid any ==warning!=={ .warning } signs. Areas marked with ==color red=={ .red } indicate critical errors, while ==color blue=={ .blue } denotes informational content.
+Please proceed with caution as [[danger!!]]{ .danger } zones can cause severe injuries. Make sure to follow the instructions carefully to avoid any [[warning!]]{ .warning } signs. Areas marked with [[color red]]{ .red } indicate critical errors, while [[color blue]]{ .blue } denotes informational content.
 
 ---
 
@@ -178,7 +181,7 @@ Please proceed with caution as ==danger!!=={ .danger } zones can cause severe in
 
 # Mermaid(sequence)
 
-[[[ pre { .mermaid style="background-color: white;" }
+[[[ pre { .mermaid }
 sequenceDiagram
     Alice->>John: Hello John, how are you?
     John-->>Alice: Great!
@@ -189,7 +192,7 @@ sequenceDiagram
 
 # Mermaid(flowchart: use ELK)
 
-[[[ pre { .mermaid style="background-color: white;" }
+[[[ pre { .mermaid }
 %%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
 flowchart TD
   A[Enter Chart Definition] --> B(Preview)
@@ -205,7 +208,7 @@ flowchart TD
 
 # Mermaid(architecture: use icon)
 
-[[[ pre { .mermaid style="background-color: white;" }
+[[[ pre { .mermaid }
 architecture-beta
     group api(logos:aws-lambda)[API]
 

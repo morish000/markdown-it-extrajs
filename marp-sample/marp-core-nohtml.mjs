@@ -16,8 +16,8 @@ marp.use(blockTagPlugin, "div", { tag: "div", marker: ":", markerCount: 3 })
   })
   .use(inlineTagPlugin, "span", {
     tag: "span",
-    marker: "=",
-    endMarker: "=",
+    marker: "[",
+    endMarker: "]",
     markerCount: 2,
   })
   .use(voidTagPlugin, "i", {

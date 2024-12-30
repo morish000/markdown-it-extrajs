@@ -5,7 +5,7 @@ style: |
     all: unset;
     max-height: 100% !important;
     max-width: 100% !important;
-  },
+  }
   .mermaid svg {
     max-height: 100% !important;
     max-width: 100% !important;

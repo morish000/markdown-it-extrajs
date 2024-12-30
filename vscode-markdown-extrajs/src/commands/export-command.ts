@@ -45,6 +45,7 @@ export const create = (globalOptions: GlobalOptions): [string, () => Promise<voi
         grayMatterFile.content ?? "") :
       await createHTMLExportContent(
         globalOptions.update(),
+        config.get<boolean>('featuer.useNoHTML', false),
         config.get<string>('export.htmlLang', ""),
         path.basename(filePath, '.md') ?? "",
         document.getText(),

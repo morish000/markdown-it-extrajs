@@ -5,6 +5,7 @@ import { createScriptTag } from "@morish000/markdown-it-extrajs/create-tags";
 import grayMatter from "gray-matter";
 import { Marp } from "@marp-team/marp-core";
 import { createHtml } from "./export-html.js";
+import { noHTMLPluginForMarp } from "../no-html-feature.js";
 
 export const createMarpExportContent = (
   options: ExtraJSOptions,
@@ -62,6 +63,7 @@ const loadThemes = async (marp: Marp) => {
 
 export const createMarpHtmlExportContent = async (
   options: ExtraJSOptions,
+  useNoHTMLFeatuer: boolean,
   lang: string,
   sourceFileName: string,
   source: string,
@@ -69,10 +71,11 @@ export const createMarpHtmlExportContent = async (
     estrajs: ExtraJSFrontMatter;[key: string]: any
   }) => {
   const marp = new Marp({ html: true });
-  marp.use(extraJsPlugin, {
-    ...options,
-    outputScriptTag: true
-  });
+  (useNoHTMLFeatuer ? noHTMLPluginForMarp(marp) : marp)
+    .use(extraJsPlugin, {
+      ...options,
+      outputScriptTag: true
+    });
   await loadThemes(marp);
 
   const { html, css } = marp.render(source);
@@ -89,6 +92,7 @@ export const createMarpHtmlExportContent = async (
 
 export const createMarpSlideHtmlExportContent = async (
   options: ExtraJSOptions,
+  useNoHTMLFeatuer: boolean,
   lang: string,
   sourceFileName: string,
   source: string,
@@ -96,10 +100,11 @@ export const createMarpSlideHtmlExportContent = async (
     estrajs: ExtraJSFrontMatter;[key: string]: any
   }) => {
   const marp = new Marp({ html: true });
-  marp.use(extraJsPlugin, {
-    ...options,
-    outputScriptTag: true
-  });
+  (useNoHTMLFeatuer ? noHTMLPluginForMarp(marp) : marp)
+    .use(extraJsPlugin, {
+      ...options,
+      outputScriptTag: true
+    });
   await loadThemes(marp);
 
   const { html, css } = marp.render(source);

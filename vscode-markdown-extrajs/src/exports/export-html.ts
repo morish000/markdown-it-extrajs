@@ -4,9 +4,11 @@ import MarkdownIt from "markdown-it";
 import { escapeForHTML } from "@morish000/markdown-it-extrajs/create-tags";
 import css from "css";
 import markdownKatex from "@vscode/markdown-it-katex";
+import { noHTMLPluginForMarkdownIt } from "../no-html-feature.js";
 
 export const createHTMLExportContent = async (
   options: ExtraJSOptions,
+  useNoHTMLFeatuer: boolean,
   lang: string,
   sourceFileName: string,
   source: string,
@@ -17,7 +19,7 @@ export const createHTMLExportContent = async (
   return createHtml({
     lang,
     title: frontMatter.title ? frontMatter.title : sourceFileName,
-    body: convertMarkdownToHtml(options, source),
+    body: convertMarkdownToHtml(options, useNoHTMLFeatuer, source),
     ...(await createCss())
   });
 };
@@ -44,15 +46,16 @@ export const createHtml = ({
 </body>
 </html>`;
 
-const convertMarkdownToHtml = (options: ExtraJSOptions, markdown: string) => {
+const convertMarkdownToHtml = (options: ExtraJSOptions, useNoHTMLFeatuer: boolean, markdown: string) => {
   const md = new MarkdownIt({ html: true });
-  md.use(extraJsPlugin, {
-    ...options,
-    ...{
-      discardFrontMatter: true,
-      outputScriptTag: true
-    }
-  });
+  (useNoHTMLFeatuer ? noHTMLPluginForMarkdownIt(md) : md)
+    .use(extraJsPlugin, {
+      ...options,
+      ...{
+        discardFrontMatter: true,
+        outputScriptTag: true
+      }
+    });
   if (vscode.workspace.getConfiguration('markdown').get('math.enabled', true)) {
     md.use(markdownKatex.default);
   }

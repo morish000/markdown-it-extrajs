@@ -14,8 +14,8 @@ export default ({ marp }) => {
     })
     .use(inlineTagPlugin, "span", {
       tag: "span",
-      marker: "=",
-      endMarker: "=",
+      marker: "[",
+      endMarker: "]",
       markerCount: 2,
     })
     .use(voidTagPlugin, "i", {
