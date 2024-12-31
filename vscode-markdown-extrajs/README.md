@@ -23,6 +23,14 @@ A simple working example is
   [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode).
 - If you set `"marp: true"` to `false`, you can preview it as regular Markdown.
 
+> **Security**  
+> This extension runs JavaScript in Markdown Preview.  
+> There is a setting to enable the extension only in trusted workspaces:  
+> > `markdownExtraJS.feature.requireTrustedWorkspace`  
+>
+> The default setting is `false` (the extension works in untrusted workspaces).  
+> By setting it to `true`, you can restrict the extension to run only in trusted workspaces.
+
 # Front Matter
 
 ```yaml
@@ -123,6 +131,10 @@ With the Markdown file opened in an active editor, select the following from the
 > Markdown ExtraJS: Export HTML File
 ```
 
+> **HTML `lang` Attribute**  
+> By setting `markdownExtraJS.export.htmlLang` in the VSCode settings, you can specify the `lang` attribute for the exported HTML tags.  
+> The default setting is unset (null).
+
 ### For non-Marp (if "marp: true" is not set in the Front Matter)
 
 It is the same as a Script-Embedded File.
@@ -218,6 +230,78 @@ preflights: [
   },
 ]
 ```
+
+# Options for Not Using HTML Tags
+
+There are times when you may not want to use HTML tags in Markdown.
+This extension includes a Markdown-it plugin for outputting frequently used HTML tags.
+This feature is disabled by default due to potential conflicts with other Markdown extensions.
+To enable it, change the following setting to `true`.
+
+> `markdownExtraJS.feature.useNoHTML`
+
+When this option is set to `true`, you can write in the following way:
+- Specify style classes using [markdown-it-attrs](https://www.npmjs.com/package/markdown-it-attrs).
+- The `<p>` tag is created by Markdown-it by default.
+
+## `div` Tag
+
+```markdown
+::: div { .class1 .class2 }
+sample
+:::
+```
+
+```html
+<div data-block-tag-name="div" class="class1 class2">
+  <p>sample</p>
+</div>
+```
+
+## `pre` Tag
+
+Can be used with Mermaid.js.
+
+```markdown
+[[[ pre { .mermaid .class1 }
+sample
+]]]
+```
+
+```html
+<pre data-block-tag-name="pre" class="mermaid class1">
+sample
+</pre>
+```
+
+## `span` Tag
+
+```markdown
+this is [[sample]]{ .class1 .class2 }.
+```
+
+```html
+<p>this is <span data-inline-tag-name="span" class="class1 class2="">sample</span>.</p>
+```
+
+## `i` Tag
+
+Can be used for icons.
+
+```markdown
+@@!{ .class1 .class2 }
+```
+
+```html
+<p><i data-void-tag-name="i" class="class1 class2"></i></p>
+```
+
+## Note
+
+If you want to export Markdown documents using these features, you need to use this extension.
+The Markdown-it extensions used in this extension are registered in the npm registry, so it is possible to create your own export program.
+
+- [@morish000/markdown-it-extrajs](https://www.npmjs.com/package/@morish000/markdown-it-extrajs)
 
 # Export PDF (Experimental)
 
