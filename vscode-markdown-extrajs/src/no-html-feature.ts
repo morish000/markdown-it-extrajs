@@ -63,19 +63,19 @@ export const noHTMLPluginForMarpVSCode = function (md: MarkdownIt): MarkdownIt {
   };
 
   const { renderer: { render }, parse } = md;
-  md.parse = function (...args) {
+  md.parse = function (...args: [src: string, env: any]): Token[] {
     (md as any)[parseArgsKey] = args;
     return parse.apply(md, args);
   };
-  md.renderer.render = function (...args) {
+  md.renderer.render = function (...args: [tokens: Token[], options: Options, env: any]): string {
     let marpVSCode = getSymbolProperty(md, 'marp-vscode') as Marp;
-    const parseArgs = (md as any)[parseArgsKey] as [tokens: Token[], options: Options, env: any];
+    const parseArgs = (md as any)[parseArgsKey] as [src: string, env: any];
     if (marpVSCode?.markdown && parseArgs) {
       marpVSCode = noHTMLPluginForMarp(marpVSCode);
       return render.apply(
         md.renderer,
-        [marpVSCode.markdown.parse.apply(marpVSCode.markdown, parseArgs) as Token[],
-        ...parseArgs.slice(1)] as [tokens: Token[], options: Options, env: any]);
+        [marpVSCode.markdown.parse.apply(marpVSCode.markdown, parseArgs),
+        ...(args.slice(1) as [options: Options, env: any])]);
     } else {
       return render.apply(md.renderer, args);
     }
