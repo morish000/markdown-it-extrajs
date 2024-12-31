@@ -9,6 +9,11 @@ import * as installPuppeteerChromium from "./commands/install-puppeteer-chromium
 import { noHTMLPluginForMarkdownIt, noHTMLPluginForMarpVSCode } from "./no-html-feature.js";
 
 export function activate(context: vscode.ExtensionContext) {
+  const config = vscode.workspace.getConfiguration('markdownExtraJS');
+  if (config.get<boolean>('featuer.requireTrustedWorkspace', false) && !vscode.workspace.isTrusted) {
+    return;
+  };
+
   const globalOptions = createGlobalOptions(context);
   context.subscriptions.push(vscode.commands.registerCommand(...exportCommand.create(globalOptions)));
   context.subscriptions.push(vscode.commands.registerCommand(...htmlExportCommand.create(globalOptions)));
@@ -23,7 +28,6 @@ export function activate(context: vscode.ExtensionContext) {
 
   return {
     extendMarkdownIt(md: MarkdownIt) {
-      const config = vscode.workspace.getConfiguration('markdownExtraJS');
       const useNoHTMLFeatuer = config.get<boolean>('featuer.useNoHTML', false);
       const newMarkdownIt = (useNoHTMLFeatuer ? noHTMLPluginForMarkdownIt(md) : md)
         .use(extraJsPlugin, globalOptions.update());

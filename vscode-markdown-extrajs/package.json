@@ -123,6 +123,11 @@
           "default": "https://esm.sh",
           "description": "CDN URL for UnoCSS preset icons."
         },
+        "markdownExtraJS.featuer.requireTrustedWorkspace": {
+          "type": "boolean",
+          "default": false,
+          "description": "Requires a trusted workspace to enable all features. Changes will take effect after restarting VSCode."
+        },
         "markdownExtraJS.featuer.useNoHTML": {
           "type": "boolean",
           "default": false,
