@@ -8,6 +8,6 @@ export const getIcons = async (
   );
 
 export const createIconLoader =
-  (iconifyJsonCDN: string = defaultOptions.iconifyJsonCDN) =>
+  (iconifyJsonCDN: string = defaultOptions.iconifyJsonCDN, iconifyJsonCDNParams: string = defaultOptions.iconifyJsonCDNParams) =>
     (key: string) =>
-      () => import(`${iconifyJsonCDN}/@iconify-json/${key}`).then((i) => i.icons);
+      () => import(`${iconifyJsonCDN}/@iconify-json/${key}${iconifyJsonCDNParams ? "?" + iconifyJsonCDNParams : ""}`).then((i) => i.icons);

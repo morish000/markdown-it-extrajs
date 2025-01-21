@@ -4,11 +4,12 @@ const defaultOptions = {
   useMermaid: false,
   useFontAwesome: false,
   useUnoCSS: false,
-  mermaidUrl: "https://esm.sh/mermaid",
-  mermaidElkUrl: "https://esm.sh/@mermaid-js/layout-elk",
+  mermaidUrl: "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs",
+  mermaidElkUrl: "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs",
   fontAwesomeUrl: "https://esm.sh/@fortawesome",
   unoCSSUrl: "https://esm.sh/@unocss",
-  iconifyJsonCDN: "https://esm.sh"
+  iconifyJsonCDN: "https://esm.sh",
+  iconifyJsonCDNParams: "bundle=true"
 };
 export {
   defaultOptions

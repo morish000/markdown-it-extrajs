@@ -28,7 +28,7 @@ export const initMermaid: InitFunctionType = async (
       mermaid.registerLayoutLoaders(elkLayouts);
     }
 
-    const iconLoader = createIconLoader(options.iconifyJsonCDN);
+    const iconLoader = createIconLoader(options.iconifyJsonCDN, options.iconifyJsonCDNParams);
     const icons = await getIcons(options.unoCSSUrl);
     const createMermaidIconLoaders = () => {
       const loaders: { name: string; loader: () => Promise<IconifyJSON> }[] =

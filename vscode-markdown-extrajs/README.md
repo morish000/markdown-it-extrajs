@@ -83,18 +83,19 @@ Other UnoCSS settings will not activate their presets if they are not set.
 
 # VSCode Settings
 
-| name               | default                                 |
-| ------------------ | --------------------------------------- |
-| discardFrontMatter | false (usually no need to change)       |
-| outputScriptTag    | false (usually no need to change)       |
-| useMermaid         | true                                    |
-| useFontAwesome     | true                                    |
-| useUnoCSS          | true                                    |
-| mermaidUrl         | "https://esm.sh/mermaid"                |
-| mermaidElkUrl      | "https://esm.sh/@mermaid-js/layout-elk" |
-| fontAwesomeUrl     | "https://esm.sh/@fortawesome"           |
-| unoCSSUrl          | "https://esm.sh/@unocss"                |
-| iconifyJsonCDN     | "https://esm.sh"                        |
+| name                 | default                                                                                   |
+| -------------------- | ----------------------------------------------------------------------------------------- |
+| discardFrontMatter   | false (usually no need to change)                                                         |
+| outputScriptTag      | false (usually no need to change)                                                         |
+| useMermaid           | true                                                                                      |
+| useFontAwesome       | true                                                                                      |
+| useUnoCSS            | true                                                                                      |
+| mermaidUrl           | "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs"                           |
+| mermaidElkUrl        | "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs" |
+| fontAwesomeUrl       | "https://esm.sh/@fortawesome"                                                             |
+| unoCSSUrl            | "https://esm.sh/@unocss"                                                                  |
+| iconifyJsonCDN       | "https://esm.sh"                                                                          |
+| iconifyJsonCDNParams | "bundle=true"                                                                             |
 
 `useMermaid`, `useFontAwesome`, and `useUnoCSS` will only be enabled if both the
 VSCode setting and the Front Matter setting are set to true.

@@ -33,7 +33,7 @@ const initUnoCSS = async (options = {}, frontMatter = {}) => {
   }
   if (frontMatter.presetIcons) {
     const presetIcons = { ...frontMatter.presetIcons };
-    const iconLoader = createIconLoader(options.iconifyJsonCDN);
+    const iconLoader = createIconLoader(options.iconifyJsonCDN, options.iconifyJsonCDNParams);
     const icons = await getIcons(options.unoCSSUrl);
     const iconCollections = () => {
       const collections = {};

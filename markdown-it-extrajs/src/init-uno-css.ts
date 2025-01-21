@@ -66,7 +66,7 @@ export const initUnoCSS: InitFunctionType = async (
   if (frontMatter.presetIcons) {
     const presetIcons = { ...frontMatter.presetIcons };
 
-    const iconLoader = createIconLoader(options.iconifyJsonCDN);
+    const iconLoader = createIconLoader(options.iconifyJsonCDN, options.iconifyJsonCDNParams);
     const icons = await getIcons(options.unoCSSUrl);
 
     const iconCollections: () => Record<string, () => Promise<IconifyJSON>> =

@@ -40,6 +40,7 @@ export type ExtraJSOptions = ExtraJSUseOptions & {
     fontAwesomeUrl?: string;
     unoCSSUrl?: string;
     iconifyJsonCDN?: string;
+    iconifyJsonCDNParams?: string;
 };
 export type InitFunctionType = (options: ExtraJSOptions, frontMatter: ExtraJSFrontMatter) => Promise<void>;
 export declare const defaultOptions: {

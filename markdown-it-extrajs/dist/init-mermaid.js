@@ -14,7 +14,7 @@ const initMermaid = async (options = {}, frontMatter = {}) => {
       const { default: elkLayouts } = await import(options.mermaidElkUrl);
       mermaid.registerLayoutLoaders(elkLayouts);
     }
-    const iconLoader = createIconLoader(options.iconifyJsonCDN);
+    const iconLoader = createIconLoader(options.iconifyJsonCDN, options.iconifyJsonCDNParams);
     const icons = await getIcons(options.unoCSSUrl);
     const createMermaidIconLoaders = () => {
       const loaders = [];
