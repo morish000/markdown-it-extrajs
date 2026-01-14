@@ -4,14 +4,14 @@
   "description": "Add Mermaid.js, Font Awesome, and UnoCSS Runtime to Markdown and Marp.",
   "private": true,
   "type": "module",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "publisher": "morish000",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/morish000/markdown-it-extrajs.git"
   },
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.108.0"
   },
   "icon": "morish000_128x128.png",
   "keywords": [
@@ -258,25 +258,24 @@
   "devDependencies": {
     "@types/css": "^0.0.38",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^22.10.2",
-    "@types/vscode": "^1.96.0",
-    "@typescript-eslint/eslint-plugin": "^8.18.2",
-    "@typescript-eslint/parser": "^8.18.2",
-    "esbuild": "^0.24.2",
-    "eslint": "^9.17.0",
+    "@types/node": "^25.0.8",
+    "@types/vscode": "^1.108.0",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.7.2"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@marp-team/marp-core": "^4.0.1",
-    "@morish000/markdown-it-extrajs": "^0.0.4",
+    "@marp-team/marp-core": "^4.2.0",
     "@types/markdown-it-attrs": "^4.1.3",
-    "@vscode/markdown-it-katex": "^1.1.1",
+    "@vscode/markdown-it-katex": "^1.1.2",
     "css": "^3.0.0",
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.1.0",
     "markdown-it-attrs": "^4.3.1",
-    "playwright-core": "^1.49.1",
-    "puppeteer-core": "^23.11.1"
+    "playwright-core": "1.50.1",
+    "puppeteer-core": "^24.35.0"
   }
 }

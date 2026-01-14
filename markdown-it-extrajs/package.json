@@ -1,6 +1,6 @@
 {
   "name": "@morish000/markdown-it-extrajs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Markdown-it plugin for generating script tags to execute UnoCSS, Mermaid.js, and FontAwesome.",
   "type": "module",
   "exports": {
@@ -61,29 +61,29 @@
   ],
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^22.10.2",
-    "esbuild": "^0.24.2",
+    "@types/node": "^25.0.7",
+    "esbuild": "^0.27.2",
     "markdown-it-attrs": "^4.3.1",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@iconify/types": "^2.0.0",
-    "@unocss/core": "^0.65.3",
-    "@unocss/preset-attributify": "^0.65.3",
-    "@unocss/preset-icons": "^0.65.3",
-    "@unocss/preset-mini": "^0.65.3",
-    "@unocss/preset-tagify": "^0.65.3",
-    "@unocss/preset-typography": "^0.65.3",
-    "@unocss/preset-web-fonts": "^0.65.3",
-    "@unocss/preset-wind": "^0.65.3",
-    "@unocss/runtime": "^0.65.3",
+    "@unocss/core": "^66.5.12",
+    "@unocss/preset-attributify": "^66.5.12",
+    "@unocss/preset-icons": "^66.5.12",
+    "@unocss/preset-mini": "^66.5.12",
+    "@unocss/preset-tagify": "^66.5.12",
+    "@unocss/preset-typography": "^66.5.12",
+    "@unocss/preset-web-fonts": "^66.5.12",
+    "@unocss/preset-wind": "^66.5.12",
+    "@unocss/runtime": "^66.5.12",
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.1.0",
     "markdown-it-front-matter": "^0.2.4",
-    "mermaid": "^11.4.1",
-    "nanoid": "^5.0.9",
+    "mermaid": "^11.12.2",
+    "nanoid": "^5.1.6",
     "ts-dedent": "^2.2.0"
   }
 }

@@ -327,6 +327,15 @@ If Playwright is not installed, please run the following to install it:
 
 > Refer to the official site for more information: [Browsers](https://playwright.dev/docs/browsers)
 
+> Note:  
+> Due to the following issue, Playwright can only be upgraded up to version 1.50.1.  
+> [\[Regression\]: bundle with esbuild #35479](https://github.com/microsoft/playwright/issues/35479)  
+> If no solution is found, this feature may be removed.
+
+If the version of Playwright installed on your terminal differs from the version bundled with the extension, you may encounter an error like "pDFPlaywright: Executable doesn't exist at ...".  
+In that case, set the path to the Playwright-installed executable binary in the "Markdown Extra JS > Playwright: Executable Path".
+> Example: C:\Users\[foo]\AppData\Local\ms-playwright\chromium_headless_shell-1200\chrome-headless-shell-win64\chrome-headless-shell.exe
+
 ## Using Puppeteer
 
 The version of Chromium used by Puppeteer is automatically installed during the first export.  
